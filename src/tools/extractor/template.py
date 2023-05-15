@@ -1,59 +1,65 @@
-ENTITY_EXTRACT_TEMPLATE = """You will be given a paper summary. Your task is to extract key entities from the summary.
+ENTITY_EXTRACT_TEMPLATE = """You are provided with a research paper summary. Your task is to extract key entities from the summary that are related to a given topic. These entities should belong to one of the following categories:
 
-The entities should be fall into one of the following categories:
+- Conception: A concept or idea presented in the paper, e.g., "deep learning", "convolutional neural network", "attention mechanism".
+- Model: A specific model discussed in the paper, e.g., "BERT", "ResNet", "Transformer".
+- Dataset: A dataset used or referenced in the paper, e.g., "MNIST", "CIFAR-10", "ImageNet".
 
-- conception: a concept in the paper, e.g. "deep learning", "convolutional neural network", "attention mechanism", etc.
-- model: a specific model in the paper, e.g. "BERT", "ResNet", "Transformer", etc.
-- dataset: a dataset used in the paper, e.g. "MNIST", "CIFAR-10", "ImageNet", etc.
+Extract all relevant entities from the summary and return them as a list. Each entity should be represented in JSON format with these keys:
 
-You should extract all entities from the summary, and return a list of entities. Each entity should be in json format with the following keys:
+- type: The category of the entity (i.e., "conception", "model", "dataset").
+- name: The name of the entity.
+- description: A brief description of the entity, sourced from the summary.
+- general: A boolean indicating if the entity is a general concept within the given topic or unique to the specific paper. For example, "language model" is a general concept within the topic "Natural Language Processing", while "a dataset of 1000 images of cats" is specific to a particular paper.
 
-- type: the type of the entity, one of "conception", "model", "dataset"
-- name: the name of the entity, e.g. "BERT", "MNIST", etc.
-- description: the description of the entity, e.g. "BERT is a language model proposed by Google in 2018", "MNIST is a dataset of handwritten digits", etc.
 
-For example, if the summary is "BERT is a language model proposed by Google in 2018. It is based on the Transformer architecture.", then the output should be:
-{{"type": "model", "name": "BERT", "description": "BERT is a language model proposed by Google in 2018"}}
-{{"type": "conception", "name": "Transformer", "description": "Transformer is a neural network architecture proposed by Google in 2017"}}
-{{"type": "conception", "name": "language model", "description": "A language model is a model that can predict the next word given the previous words"}}
-{{"type": "conception", "name": "neural network", "description": "A neural network is a model that can learn from data"}}
+Here's an example. Given the summary "BERT is a language model proposed by Google in 2018. It is based on the Transformer architecture." and the topic "Natural Language Processing", the output should be:
 
-Note that the order of the entities does not matter. The descriptions of entities should all come from the summary, and should be as biref as possible. You are not allowed to use external resources to add new descriptions.
+[
+  {{"type": "model", "name": "BERT", "description": "BERT is a language model proposed by Google in 2018", "general": true}},
+  {{"type": "conception", "name": "Transformer", "description": "Transformer is a neural network architecture", "general": true}},
+  {{"type": "conception", "name": "language model", "description": "A language model predicts the next word given the previous words", "general": true}},
+  {{"type": "conception", "name": "neural network", "description": "A neural network is a model that learns from data", "general": true}}
+]
 
-Now, let's get started!
+Note: The order of entities does not matter. Do not use external resources for descriptions; all descriptions should be derived from the given summary.
 
-The input summary is
+Now, proceed with the following inputs:
 
+Topic:
+{topic}
+
+Summary:
 {summary}
 
-The output entities are
+Output Entities:
+
 """
 
-RELATION_EXTRACT_TEMPLATE = """given a paper summary and entities in the summary, your task is to extract the relations between the relations in the summary.
+RELATION_EXTRACT_TEMPLATE = """Given a research paper summary and a list of entities within the summary, your task is to extract and identify the relations between these entities.
 
-The relations should be fall into one of the following categories:
-- alias: two models are aliases of each other, e.g. "BERT is also known as Bidirectional Encoder Representations from Transformers", "ResNet is also known as Residual Network", etc.
-- is superior to: refers to a higher-level, more abstract or more general concept. In a knowledge graph or ontology, a superior concept may have one or more subordinate concepts that are more specific or concrete. For example, "language model" is superior to "BERT", "Transformer", etc.
+The relations should fall into one of these categories:
 
-The output should be a list of triple: (entity1, relation, entity2), where entity1 and entity2 are entities I provide, and relation is a DIRECTED relation between the two entities.
+- alias: Indicates that two entities are essentially the same, e.g., "BERT" and "Bidirectional Encoder Representations from Transformers".
+- is superior to: Indicates a hierarchical relationship where one concept is more abstract or general than the other. For example, "language model" is superior to "BERT".
+- based on: Indicates that one entity is based on another. For example, "BERT" is based on "Transformer".
 
-For example, if the summary is 
-"BERT is a language model proposed by Google in 2018. It is based on the Transformer architecture.", 
-and the entities are 
-{{"type": "model", "name": "BERT", "description": "BERT is a language model proposed by Google in 2018"}}
-{{"type": "model", "name": "Transformer", "description": "Transformer is a neural network architecture proposed by Google in 2017"}}
-{{"type": "model", "name": "transformer", "description": "Transformer is a neural network architecture proposed by Google in 2017"}}
-{{"type": "conception", "name": "language model", "description": "A language model is a model that can predict the next word given the previous words"}}
+The output should consist of triples: (entity1, relation, entity2), where entity1 and entity2 come from the provided entities, and relation represents a DIRECTED relationship between the two.
+
+For instance, if the summary reads:
+"BERT, also known as Bidirectional Encoder Representations from Transformers, is a language model proposed by Google in 2018. It is based on the Transformer architecture.",
+and the entities are:
+[
+  {{"type": "model", "name": "BERT", "description": "BERT is a language model proposed by Google in 2018", "general": true}},
+  {{"type": "model", "name": "Transformer", "description": "Transformer is a neural network architecture proposed by Google in 2017", "general": true}},
+  {{"type": "conception", "name": "language model", "description": "A language model is a model that can predict the next word given the previous words", "general": true}},
+]
 
 then the output should be:
-(BERT, based_on, Transformer)
-(Transformer, alias, transformer)
+(BERT, alias, Bidirectional Encoder Representations from Transformers)
+(BERT, based on, Transformer)
 (language model, is superior to, BERT)
-(network science, is superior to, small-world networks)
 
-Note that the descriptions of relations should all come from the summary, and should be as biref as possible. You are not allowed to use external resources to add new descriptions. The DIRECTION of the relations matters! For example, (BERT, based_on, Transformer) is correct, but (Transformer, based_on, BERT) is wrong.
-
-After generate the relations, you should check whether the relations are correct. If the relations are not correct, you should correct them and return the correct relations. If the relations are correct, you should return the relations directly.
+Note: The description of relations should come directly from the summary and be as concise as possible. Do not use external resources. The DIRECTION of the relations is critical.
 
 Now let's get started!
 
