@@ -86,3 +86,36 @@ The required relations are
 
 The output triple relations are
 """
+
+ONLY_RELATION_EXTRACT_TEMPLATE = """For this task, you are given a text description. Your goal is to identify relationships between the entities mentiondon the description.
+
+Here's how to do it:
+
+1. Read the text carefully.
+2. Look for the entities that are either the 'subject' or the 'object' in a possible relationship pair. A 'subject' is the entity from which a relationship originates and an 'object' is the entity towards which the relationship is directed.
+2. Look for direct relationships between pairs of entities in the list. A relationship is considered 'direct' if it's explicitly mentioned in the text.
+3. Represent each identified relationship as a triple: (entity1, relation, entity2), where 'entity1' and 'entity2' are entities from the list and 'relation' represents the relationship between them.
+
+For instance, if the description reads:
+`{example_input}`,
+
+the required relations are:
+`{example_required_relations}`
+
+then the output triples should be:
+`{example_output}`
+
+Note: The description of relations should come directly from the description and be as concise as possible. Do not use external resources. The DIRECTION of the relations is critical. All candidate relation types are required, you should list each of them at least once! 
+
+Now let's get started!
+
+The input description is
+
+`{description}`
+
+The required relations are
+
+`{required_relations}`
+
+The output triple relations are
+"""
