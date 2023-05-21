@@ -4,6 +4,7 @@
 https://tianchi.aliyun.com/home/activity?spm=a2c22.12281920.0.0.5cff3f74u2038Q
 
 ## basic_idea
+place holder
 
 ### tool
 - case database
