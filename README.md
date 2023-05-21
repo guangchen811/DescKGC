@@ -10,6 +10,6 @@ place holder
 - case database
   - training data as a database. agent can access this database to align its behavior.
 - self_ask
-  - 
+  - place holder
 - entity_extractor
   - with an extra entity extractor, agent can construct more accurate triples.
