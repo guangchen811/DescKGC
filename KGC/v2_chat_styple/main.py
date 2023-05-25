@@ -46,7 +46,7 @@ valid1_lines, idx_type_dict, type_idx_dict = load_json(valid1_path)
 
 with get_openai_callback() as cb:
     example_idxs = [0, 1]
-    input_idx = 10
+    input_idx = 15
 
     few_shot_human_example_prompt = [
         human_example_prompt.format(
@@ -78,6 +78,8 @@ with get_openai_callback() as cb:
         description = train_lines[input_idx]['input'],
         required_relations = train_lines[input_idx]['required_relations'],
     )
+    print("="*10, 'input_summary', "="*10)
+    print("description:\n", train_lines[input_idx]['input'])
     print("predict triples:\n", response)
     print("real triples:\n", train_lines[input_idx]['output'])
 
