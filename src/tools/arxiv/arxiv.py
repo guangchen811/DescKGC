@@ -22,5 +22,6 @@ def write_json(res):
     with open('./data/arxiv_network_science.json', 'w') as f:
         json.dump(res, f)
 
-res = search_res_to_json(search)
-write_json(res)
+if __name__ == "__main__":
+    res = search_res_to_json(search)
+    write_json(res)
