@@ -24,10 +24,10 @@ def dump_to_json(res, dir_path, file_name):
     
 
 if __name__ == '__main__':
-    query = "network science"
+    query = "complex network"
     search = arxiv.Search(
         query = query,
-        max_results = 10,
+        max_results = 1000,
         sort_by = arxiv.SortCriterion.Relevance,
         sort_order = arxiv.SortOrder.Descending
     )
