@@ -1,5 +1,3 @@
-import json
-from langchain.llms import OpenAI
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from .template import ENTITY_EXTRACT_TEMPLATE, RELATION_EXTRACT_TEMPLATE
@@ -41,11 +39,8 @@ def init_extract_chain(llm):
     return extract_chain
 
 if __name__ == '__main__':
-    from template import ENTITY_EXTRACT_TEMPLATE
-    llm = OpenAI()
-    prompt = PromptTemplate(
-        input_variables=['summary'],
-        template=ENTITY_EXTRACT_TEMPLATE
-    )
-    chain = LLMChain(llm=llm, prompt=prompt)
-    print(chain.run())
+    from langchain.chat_models import ChatOpenAI
+    llm = ChatOpenAI(temperature=0.3)
+    extract_chain = init_extract_chain(llm)
+    summary = "Complex networks have attracted a great deal of research interest in the last two decades."
+    res = extract_chain({"summary":summary, "topic": "network science"})

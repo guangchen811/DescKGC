@@ -12,10 +12,11 @@ for idx, a_res in enumerate(res):
     if idx >=1:
         break
     summary = a_res['summary']
-    print("summary:", ">"*10)
-    print(summary)
-    res = extract_chain({"summary":summary, "topic": "network science"})
-    print("entities", "-"*10)
-    print(res['entities'])
-    print("relations", "-"*10)
-    print(res['relations'])
+    
+    # print("summary:", ">"*10)
+    # print(summary)
+    # res = extract_chain({"summary":summary, "topic": "network science"})
+    # print("entities", "-"*10)
+    # print(res['entities'])
+    # print("relations", "-"*10)
+    # print(res['relations'])
