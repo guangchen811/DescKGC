@@ -9,16 +9,6 @@ extract_chain = init_extract_chain(llm)
 db_manager = Neo4jManager()
 # print(db_manager.graph_schema)
 
-summary_1 = db_manager.graph.query(
-    "MATCH (n:Paper) WHERE n.doi=$doi RETURN n.summary as summary",
-    params={"doi": '10.1103/PhysRevE.96.042304'}
-)
-
-summary_2 = db_manager.graph.query(
-    "MATCH (n:Paper) WHERE n.doi=$doi RETURN n.summary as summary",
-    params={"doi": '10.1016/j.physleta.2014.02.010'}
-)
-
 def extract_entities_from_paper(doi):
     summary = db_manager.graph.query(
         "MATCH (n:Paper) WHERE n.doi=$doi RETURN n.summary as summary",
