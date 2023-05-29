@@ -6,7 +6,7 @@ ENTITY_EXTRACT_TEMPLATE = """You are provided with a research paper summary. You
 
 Extract all relevant entities from the summary and return them as a list. Each entity should be represented in JSON format with these keys:
 
-- type: The category of the entity (i.e., "conception", "model", "dataset").
+- type: The category of the entity (i.e., "Conception", "Model", "Dataset").
 - name: The name of the entity.
 - description: A brief description of the entity, sourced from the summary.
 - general: A boolean indicating if the entity is a general concept within the given topic or unique to the specific paper. For example, "language model" is a general concept within the topic "Natural Language Processing", while "a dataset of 1000 images of cats" is specific to a particular paper.
@@ -15,10 +15,10 @@ Extract all relevant entities from the summary and return them as a list. Each e
 Here's an example. Given the summary "BERT is a language model proposed by Google in 2018. It is based on the Transformer architecture." and the topic "Natural Language Processing", the output should be:
 
 [
-  {{"type": "model", "name": "BERT", "description": "BERT is a language model proposed by Google in 2018", "general": true}},
-  {{"type": "conception", "name": "Transformer", "description": "Transformer is a neural network architecture", "general": true}},
-  {{"type": "conception", "name": "language model", "description": "A language model predicts the next word given the previous words", "general": true}},
-  {{"type": "conception", "name": "neural network", "description": "A neural network is a model that learns from data", "general": true}}
+  {{"type": "Model", "name": "BERT", "description": "BERT is a language model proposed by Google in 2018", "general": true}},
+  {{"type": "Conception", "name": "Transformer", "description": "Transformer is a neural network architecture", "general": true}},
+  {{"type": "Conception", "name": "language model", "description": "A language model predicts the next word given the previous words", "general": true}},
+  {{"type": "Conception", "name": "neural network", "description": "A neural network is a model that learns from data", "general": true}}
 ]
 
 Note: The order of entities does not matter. Do not use external resources for descriptions; all descriptions should be derived from the given summary.
@@ -49,9 +49,9 @@ For instance, if the summary reads:
 "BERT, also known as Bidirectional Encoder Representations from Transformers, is a language model proposed by Google in 2018. It is based on the Transformer architecture.",
 and the entities are:
 [
-  {{"type": "model", "name": "BERT", "description": "BERT is a language model proposed by Google in 2018", "general": true}},
-  {{"type": "model", "name": "Transformer", "description": "Transformer is a neural network architecture proposed by Google in 2017", "general": true}},
-  {{"type": "conception", "name": "language model", "description": "A language model is a model that can predict the next word given the previous words", "general": true}},
+  {{"type": "Model", "name": "BERT", "description": "BERT is a language model proposed by Google in 2018", "general": true}},
+  {{"type": "Model", "name": "Transformer", "description": "Transformer is a neural network architecture proposed by Google in 2017", "general": true}},
+  {{"type": "Conception", "name": "language model", "description": "A language model is a model that can predict the next word given the previous words", "general": true}},
 ]
 
 then the output should be:
