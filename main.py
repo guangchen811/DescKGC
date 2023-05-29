@@ -1,7 +1,7 @@
 import json
 from langchain.chat_models import ChatOpenAI
-from src.tools.extractor.base import init_extract_chain
 from src.tools.neo4j.base import Neo4jManager
+from src.tools.extractor.base import init_extract_chain
 from src.procedure.extract_and_insert.base import extract_entities_from_paper
 
 llm = ChatOpenAI(temperature=0.3)
