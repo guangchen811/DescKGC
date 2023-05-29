@@ -1,6 +1,7 @@
 from .cypher_template import (
     ARXIV_PAPER_INSERT_INSTRUCTION,
-    DELETE_NODES_INSTRUCTION
+    DELETE_NODES_INSTRUCTION,
+    DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
 )
 from .utils import response_to_json, join_if_list
 
@@ -15,8 +16,7 @@ class Neo4jManager():
             password="123./\.abc"
         )
         self.graph_schema = self.graph.get_schema
-        self.arxiv_paper_insert_instruction = ARXIV_PAPER_INSERT_INSTRUCTION
-        self.delete_nodes_instruction = DELETE_NODES_INSTRUCTION
+    
     def add_from_arxiv(self, arxiv_res):
         cypher_insturction_list = [
             self._arxiv_res_to_cypher(res)
@@ -25,15 +25,22 @@ class Neo4jManager():
         for cypher_insturction in cypher_insturction_list:
             try:
                 self.graph.query(cypher_insturction)
-            except Exception:
-                print(f"arxiv paper insert error: {Exception}")
+            except Exception as e:
+                print(f"arxiv paper insert error: {str(e)}")
+        self._devide_author_from_arxiv_nodes()
+        self.update_schema()
+
+    def _devide_author_from_arxiv_nodes(self) -> None:
+        """ extract author nodes from arxiv nodes in neo4j database """
+        cypher_insturction = DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
+        self.graph.query(cypher_insturction)
         self.update_schema()
     
     def _arxiv_res_to_cypher(self, arxiv_dict: dict) -> str:
         """ input: an arxiv res dict return from response_to_json
             output: a cypher CREATE instruction
         """
-        cypher_insturction = self.arxiv_paper_insert_instruction.format(
+        cypher_insturction = ARXIV_PAPER_INSERT_INSTRUCTION.format(
             title=join_if_list(arxiv_dict["title"]),
             authors=join_if_list(arxiv_dict["authors"]),
             published=join_if_list(arxiv_dict["published"]),
@@ -55,7 +62,7 @@ class Neo4jManager():
         delete all nodes of a type.
         TODO: implement delete by attribute
         """
-        cypher_insturction = self.delete_nodes_instruction.format(
+        cypher_insturction = DELETE_NODES_INSTRUCTION.format(
             type=type
         )
         self.graph.query(cypher_insturction)
