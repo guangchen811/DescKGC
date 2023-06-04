@@ -15,7 +15,7 @@ class Neo4jManager():
             username="neo4j",
             password="123./\.abc"
         )
-        self.graph_schema = self.graph.get_schema
+        self.update_schema()
     
     def add_from_arxiv(self, arxiv_res):
         cypher_insturction_list = [
