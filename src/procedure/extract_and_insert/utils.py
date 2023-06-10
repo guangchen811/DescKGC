@@ -14,12 +14,13 @@ def convert_to_triples(input_string):
     
     return triples
 
-def entity_relation_format(doi, db_manager, extract_chain):
+def entity_relation_format(id_type, id_value, db_manager, extract_chain):
+    "Return a list of entities and a list of relations"
     summary = db_manager.graph.query(
-        "MATCH (n:Paper) WHERE n.doi=$doi RETURN n.summary as summary",
-        params={"doi": doi}
+        f"MATCH (n:Paper) WHERE n.{id_type}=$id_value RETURN n.summary as summary",
+        params={"id_value": id_value}
     )
-    res = extract_chain({"topic":"network science", "summary":summary})
+    res = extract_chain({"topic": "network science", "summary": summary})
     try:
         entity_list = json.loads(res['entities'])
     except json.decoder.JSONDecodeError as e:
@@ -29,27 +30,33 @@ def entity_relation_format(doi, db_manager, extract_chain):
     except Exception as e:
         print(f"Failed to decode triples from relations: {str(e)}")
     return entity_list, relation_list
-def add_one_entity(db_manager, doi, type, name, description, general):
+
+
+def add_one_entity(db_manager, id_type, id_value, type, name, description, general):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
     response = db_manager.graph.query(
             f"""
-            MATCH (p:Paper) WHERE p.doi=$doi
+            MATCH (p:Paper) WHERE p.{id_type}=$id_value
             WITH p
             MERGE (c:{type} {{name:$name, description:$description, general:$general}})
             MERGE (c)-[r:EXTRACTED_FROM {{timestep:$timestep}}]->(p)
             RETURN elementid(c) AS elementid
             """,
-            params={"doi": doi, "name": name, "description": description, "general": general, "timestep": time_str}
+            params={"id_value": id_value, "name": name, "description": description, "general": general, "timestep": time_str}
         )
     return response[0]['elementid']
+
+
 def add_one_relation(db_manager, relation_triple, id_dict):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
     try:
         src_id, dst_id = id_dict[relation_triple[0]], id_dict[relation_triple[2]]
     except Exception as e:
-        print(f"entities in relation triples have not been added as a node: {str(e)}")
+        print(f"Error: Inconsistent Entity Extraction - {str(e)}")
+        print("Details: The entities present in the relation triples were not previously added as nodes during the entity extraction phase.")
+        print("Suggestion: Ensure that the Language Model maintains consistency between the entity extraction and relation extraction steps.")
         return
     relation_name = relation_triple[1].upper().replace(' ', '_')
     db_manager.graph.query(

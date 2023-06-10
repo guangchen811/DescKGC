@@ -10,5 +10,8 @@ extract_chain = init_extract_chain(llm)
 db_manager = Neo4jManager()
 # print(db_manager.graph_schema)
 
-doi = '10.1109/TPWRS.2014.2337284'
-extract_entities_from_paper(doi, db_manager, extract_chain)
+doi = '10.1209/epl/i2005-10441-3'
+pdf_url = 'http://arxiv.org/pdf/1501.06042v1'
+title = 'Communicability Graph and Community Structures in Complex Networks'
+
+extract_entities_from_paper(id_type='title', id_value=title, db_manager=db_manager, extract_chain=extract_chain)
