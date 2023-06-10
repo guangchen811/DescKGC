@@ -19,7 +19,7 @@ I would like to summarize the workflow of this project as follows:
    2. The processing process are divided into two parts: paper preprocess and triple extraction.
    3. For paper preprocess, you can use `process/add_from_arxiv.py` to preprocess papers from arxiv saved in `data/**.json`. The result would be written into neo4j database.
    4. For triple extraction, you can use `mian.py` to extract triples from arxiv saved in the neo4j database.
-
+# Recent Updates
 ### 2023-05-29
 
 1. devide author entities from arxiv entities.
