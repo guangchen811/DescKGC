@@ -6,19 +6,18 @@ def read_json_cases(file_path):
     return id_pair_list
 
 def parse_paper_id_piars(paper_id_pairs, db_manager):
+    paper_shorten = 'p'
+    paper_conditions = " or ".join([f"{paper_shorten}.{k}='{v}'" for paper_id_pair in paper_id_pairs for k, v in paper_id_pair.items()])
     "input: id_pair which is a list of pairs of (paper_id_type, paper_id_value)"
     "output: a list of entities"
-    res = db_manager.graph.query("""MATCH (n:Paper)
-        WHERE
-            n.title='Communicability Graph and Community Structures in Complex Networks'
-            OR
-            n.title='Transforming complex network to the acyclic one'
-        MATCH (n)-[:EXTRACTED_FROM]-(other)
-        RETURN n as paper, collect(other) as entities
+    res = db_manager.graph.query(f"""MATCH ({paper_shorten}:Paper)
+    WHERE {paper_conditions}
+    MATCH ({paper_shorten})-[:EXTRACTED_FROM]-(other)
+    RETURN {paper_shorten} as paper, collect(other) as entities
     """)
-    print(res[0]['paper'])
-    print(len(res[0]['entities']))
-    print(res[1]['paper'])
-    print(len(res[1]['entities']))
+    for i in range(len(res)):
+        print(res[i]['paper'])
+        print(len(res[i]['entities']))
+    return res
 def align_two_subgraphs(subgraph1, subgraph2):
     ...
