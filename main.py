@@ -10,5 +10,5 @@ extract_chain = init_extract_chain(llm)
 db_manager = Neo4jManager()
 # print(db_manager.graph_schema)
 
-doi = '10.1088/1742-5468/2009/03/P03034'
+doi = '10.1109/TPWRS.2014.2337284'
 extract_entities_from_paper(doi, db_manager, extract_chain)

@@ -24,10 +24,10 @@ def dump_to_json(res, dir_path, file_name):
     
 
 if __name__ == '__main__':
-    query = "complex network"
+    query = "cascade failure"
     search = arxiv.Search(
         query = query,
-        max_results = 1000,
+        max_results = 100,
         sort_by = arxiv.SortCriterion.Relevance,
         sort_order = arxiv.SortOrder.Descending
     )
