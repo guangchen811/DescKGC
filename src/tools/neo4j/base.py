@@ -4,8 +4,8 @@ from .cypher_template import (
     DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
 )
 from .utils import response_to_json, join_if_list
+from .neo4j_graph import Neo4jGraph
 
-from langchain.graphs import Neo4jGraph
 from tqdm import tqdm
 
 class Neo4jManager():
