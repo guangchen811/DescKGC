@@ -67,3 +67,52 @@ class Neo4jManager():
         )
         self.graph.query(cypher_insturction)
         self.update_schema()
+    
+    def _get_entity_types_with_unique_prop(self, prop_name: str) -> list:
+        """ return a list of entity types that have unique prop_name """
+        SEARCH_INSTURCTION = f"""MATCH (n)
+        WHERE n.{prop_name} is not NULL
+        RETURN DISTINCT labels(n) AS labels"""
+        entity_types = self.graph.query(SEARCH_INSTURCTION)
+        entity_types = [entity_type['labels'][0] for entity_type in entity_types]
+        return entity_types
+
+    def _show_current_index(self) -> list:
+        """ return a list of index names """
+        cypher_insturction = """SHOW INDEXES"""
+        index_list = self.graph.query(cypher_insturction)
+        index_list = [index['name'] for index in index_list]
+        return index_list
+
+
+    def create_or_update_index_on_unique_property(self, property_name: str) -> None:
+        """ update index for a given attribute """
+        if f'{property_name}_index' in self._show_current_index():
+            cypher_drop_insturction = f"""DROP INDEX {property_name}_index"""
+            self.graph.query(cypher_drop_insturction)
+        entity_types = self._get_entity_types_with_unique_prop(property_name)
+        str_entity_types = " | ".join(entity_types)
+        cypher_insturction = f"""CREATE FULLTEXT INDEX {property_name}_index
+        FOR (n:{str_entity_types})
+        ON EACH [n.{property_name}]"""
+        self.graph.query(cypher_insturction)
+
+    def search_by_index(self, property_name: str, search_string: str) -> list:
+        """ search by index """
+        cypher_insturction = f"""CALL db.index.fulltext.queryNodes("{property_name}_index", "{search_string}")
+        YIELD node, score
+        RETURN node.title, score"""
+        res = self.graph.query(cypher_insturction)
+        # convert to list of pairs
+        res = [(pair['node.title'], pair['score']) for pair in res]
+        print(res)
+        return res
+
+if __name__ == '__main__':
+    import os
+    from src.tools.neo4j.base import Neo4jManager
+    
+    db_manager = Neo4jManager()
+    # db_manager.create_or_update_index_on_unique_property('description')
+    # db_manager.create_or_update_index_on_unique_property('summary')
+    db_manager.search_by_index('summary', 'machine learning')
