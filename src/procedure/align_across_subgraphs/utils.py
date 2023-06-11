@@ -5,7 +5,7 @@ def read_json_cases(file_path):
         id_pair_list = json.load(f)
     return id_pair_list
 
-def parse_paper_id_piars(paper_id_pairs, db_manager):
+def parse_paper_id_pairs(paper_id_pairs, db_manager):
     paper_shorten = 'p'
     paper_conditions = " or ".join([f"{paper_shorten}.{k}='{v}'" for paper_id_pair in paper_id_pairs for k, v in paper_id_pair.items()])
     "input: id_pair which is a list of pairs of (paper_id_type, paper_id_value)"
