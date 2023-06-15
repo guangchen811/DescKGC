@@ -20,6 +20,7 @@ def entity_relation_format(id_type, id_value, db_manager, extract_chain):
         f"MATCH (n:Paper) WHERE n.{id_type}=$id_value RETURN n.summary as summary",
         params={"id_value": id_value}
     )
+    # TODO: topic should be extracted from the paper
     res = extract_chain({"topic": "network science", "summary": summary})
     try:
         entity_list = json.loads(res['entities'])

@@ -17,6 +17,9 @@ class Neo4jManager():
         )
         self.update_schema()
     
+    def close_driver(self):
+        self.graph._driver.close()
+
     def add_from_arxiv(self, arxiv_res):
         cypher_insturction_list = [
             self._arxiv_res_to_cypher(res)
