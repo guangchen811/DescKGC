@@ -32,7 +32,6 @@ def entity_relation_format(id_type, id_value, db_manager, extract_chain):
         print(f"Failed to decode triples from relations: {str(e)}")
     return entity_list, relation_list
 
-
 def add_one_entity(db_manager, id_type, id_value, type, name, description, general):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
@@ -47,7 +46,6 @@ def add_one_entity(db_manager, id_type, id_value, type, name, description, gener
             params={"id_value": id_value, "name": name, "description": description, "general": general, "timestep": time_str}
         )
     return response[0]['elementid']
-
 
 def add_one_relation(db_manager, relation_triple, id_dict):
     current_time = time.localtime()

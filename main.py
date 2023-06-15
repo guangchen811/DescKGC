@@ -12,4 +12,3 @@ db_manager = Neo4jManager()
 
 # title = 'Product of two staircase rank one transformations that is not loosely Bernoulli'
 # extract_entities_from_paper(id_type='title', id_value=title, db_manager=db_manager, extract_chain=extract_chain)
-
