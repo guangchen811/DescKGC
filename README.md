@@ -21,6 +21,6 @@ I would like to summarize the workflow of this project as follows:
    4. For triple extraction, you can use `mian.py` to extract triples from arxiv saved in the neo4j database.
 # Recent Updates
 ### 2023-06-15
-
+The following updates can be test by `python -m src.procedure.<procedure_name>.base`:
 1. add a new procedure `align_across_subgraphs` to align different subgraphs.
 2. add a new procedure `embedding_gen` to generate embeddings based on text. Currently, we use `bert-base-uncased` to generate embeddings.
