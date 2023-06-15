@@ -1,6 +1,7 @@
 import json
 import time
 from ..embedding_gen.utils import cos_sim_between_sentences_sets
+from typing import List
 
 def read_json_cases(file_path):
     with open(file_path, 'r') as f:
@@ -28,7 +29,7 @@ def parse_paper_id_pairs(paper_id_pairs, db_manager):
     #     # print(len(res[i]['entities']))
     return papers, entities
 
-def cos_metric_between_sent_sets(set1: list[dict], set2: list[dict], tokenizer, model, **kwargs) -> None:
+def cos_metric_between_sent_sets(set1: List[dict], set2: List[dict], tokenizer, model, **kwargs) -> None:
     """Align two subgraphs by adding relations between entities in the two subgraphs."""
     sentences_set1 = [entity['entity']['description'] for entity in set1]
     sentences_set2 = [entity['entity']['description'] for entity in set2]
