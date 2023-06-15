@@ -10,5 +10,5 @@ extract_chain = init_extract_chain(llm)
 db_manager = Neo4jManager()
 # print(db_manager.graph_schema)
 
-doi = '10.1088/1742-5468/2009/03/P03034'
-extract_entities_from_paper(doi, db_manager, extract_chain)
+# title = 'Product of two staircase rank one transformations that is not loosely Bernoulli'
+# extract_entities_from_paper(id_type='title', id_value=title, db_manager=db_manager, extract_chain=extract_chain)
