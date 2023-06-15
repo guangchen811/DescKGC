@@ -20,13 +20,7 @@ I would like to summarize the workflow of this project as follows:
    3. For paper preprocess, you can use `process/add_from_arxiv.py` to preprocess papers from arxiv saved in `data/**.json`. The result would be written into neo4j database.
    4. For triple extraction, you can use `mian.py` to extract triples from arxiv saved in the neo4j database.
 # Recent Updates
-### 2023-05-29
+### 2023-06-15
 
-1. devide author entities from arxiv entities.
-2. add clean function into neo4j module.
-3. extract conceptions from arxiv.
-4. idea: to verify a conception is general or not, different sources should be used. For example, stright output of LLM, common degree...
-
-### 2023-05-25
-1. basic arxiv requirement module has been finished.
-2. thinking about how to build a minimal dataset for entity alignment.
+1. add a new procedure `align_across_subgraphs` to align different subgraphs.
+2. add a new procedure `embedding_gen` to generate embeddings based on text. Currently, we use `bert-base-uncased` to generate embeddings.
