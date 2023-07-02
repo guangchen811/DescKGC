@@ -21,15 +21,3 @@ def dump_to_json(res, dir_path, file_name):
     file_path = dir_path + file_name + '.json'
     with open(file_path, 'w') as f:
         json.dump(res, f)
-    
-
-if __name__ == '__main__':
-    query = "cascade failure"
-    search = arxiv.Search(
-        query = query,
-        max_results = 100,
-        sort_by = arxiv.SortCriterion.Relevance,
-        sort_order = arxiv.SortOrder.Descending
-    )
-    res = response_to_json(search)
-    dump_to_json(res, './data/', query.replace(' ', '_'))

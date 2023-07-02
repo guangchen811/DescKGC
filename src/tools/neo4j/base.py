@@ -111,6 +111,15 @@ class Neo4jManager():
         print(res)
         return res
 
+    def get_node_labels(self):
+        cypher_insturction = """CALL apoc.meta.data()
+        YIELD label, other, elementType, type, property
+        WHERE NOT type = "RELATIONSHIP" AND elementType = "node"
+        WITH label AS nodeLabels, collect({property:property, type:type}) AS properties
+        RETURN {labels: nodeLabels} AS output"""
+        res = self.graph.query(cypher_insturction)
+        return [label['output']['labels'] for label in res]
+
 if __name__ == '__main__':
     import os
     from src.tools.neo4j.base import Neo4jManager
