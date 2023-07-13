@@ -13,14 +13,14 @@ def convert_to_triples(input_string):
         triples.append(tuple(triple))
     return triples
 
-def entity_relation_format(id_type, id_value, db_manager, extract_chain):
+def entity_relation_format(id_type, id_value, topic, db_manager, extract_chain):
     "Return a list of entities and a list of relations"
     summary = db_manager.graph.query(
         f"MATCH (n:Paper) WHERE n.{id_type}=$id_value RETURN n.summary as summary",
         params={"id_value": id_value}
     )
     # TODO: topic should be extracted from the paper
-    res = extract_chain({"topic": "network science", "summary": summary})
+    res = extract_chain({"topic": topic, "summary": summary})
     try:
         entity_list = json.loads(res['entities'])
     except json.decoder.JSONDecodeError as e:

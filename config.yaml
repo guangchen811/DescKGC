@@ -1,3 +1,5 @@
+topic: network science
+
 neo4jdb:
   url: bolt://localhost:7687
   username: neo4j

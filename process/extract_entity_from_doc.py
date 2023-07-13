@@ -19,7 +19,7 @@ db_manager = Neo4jManager()
 
 # print(db_manager.graph_schema)
 # title = 'The Sharing Economy for the Smart Grid'
-# extract_entities_from_paper(id_type='title', id_value=title, db_manager=db_manager, extract_chain=extract_chain)
+# extract_entities_from_paper(id_type='title', id_value=title, topic=config['topic'], db_manager=db_manager, extract_chain=extract_chain)
 res = get_paper_title_by_filed(db_manager, 'doi')
 for title in res:
-    extract_entities_from_paper(id_type='title', id_value=title, db_manager=db_manager, extract_chain=extract_chain)
+    extract_entities_from_paper(id_type='title', id_value=title, topic=config['topic'], db_manager=db_manager, extract_chain=extract_chain)
