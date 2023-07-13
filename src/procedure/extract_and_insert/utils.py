@@ -1,6 +1,7 @@
 import re
 import json
 import time
+import uuid
 
 def convert_to_triples(input_string):
     # Use regular expressions to find all substrings that look like '( ... )'
@@ -29,19 +30,19 @@ def entity_relation_format(id_type, id_value, topic, db_manager, extract_chain):
         print(f"Failed to decode triples from relations: {str(e)}")
     return entity_list, relation_list
 
-def add_one_entity(db_manager, id_type, id_value, type, name, description, general):
+def add_one_entity(db_manager, id_type, id_value, type, name, description, general, shortning):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
+    unique_id = f"{shortning}-{uuid.uuid4()}"
     response = db_manager.graph.query(
-        #TODO: add uuid
             f"""
             MATCH (p:Paper) WHERE p.{id_type}=$id_value
             WITH p
-            MERGE (c:{type} {{name:$name, description:$description, general:$general}})
+            MERGE (c:{type} {{name:$name, description:$description, general:$general, uuid:$uuid}})
             MERGE (c)-[r:EXTRACTED_FROM {{timestep:$timestep}}]->(p)
             RETURN elementid(c) AS elementid
             """,
-            params={"id_value": id_value, "name": name, "description": description, "general": general, "timestep": time_str}
+            params={"id_value": id_value, "name": name, "description": description, "general": general, "timestep": time_str, "uuid": unique_id}
         )
     return response[0]['elementid']
 

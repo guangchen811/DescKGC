@@ -26,4 +26,4 @@ with open(file_path, 'r') as f:
 db_manager = Neo4jManager()
 # This function will add papers from arxiv to neo4j and extract authors from the paper.
 # The author nodes will be connected to the paper nodes by "WROTE" relationship with a timestamp attribute.
-db_manager.add_from_arxiv(res)
+db_manager.add_from_arxiv(res, arxiv_prefix=config['shortenings']['Paper'])

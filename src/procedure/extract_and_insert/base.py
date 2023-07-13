@@ -4,18 +4,19 @@ from .utils import (
     add_one_relation
 )
 
-def extract_entities_from_paper(id_type, id_value, topic, db_manager, extract_chain):
-    entity_list, relation_list = entity_relation_format(id_type, id_value, topic, db_manager, extract_chain)
+def extract_entities_from_paper(id_type, id_value, topic, shortenings, db_manager, extract_chain):
+    entity_list, relation_triple_list = entity_relation_format(id_type, id_value, topic, db_manager, extract_chain)
     id_dict = {}
     for entity in entity_list:
-        elementid = add_one_entity(db_manager, id_type, id_value, entity['type'], entity['name'], entity['description'], entity['general'])
+        entity_shortning = shortenings[entity['type']]
+        elementid = add_one_entity(db_manager, id_type, id_value, entity['type'], entity['name'], entity['description'], entity['general'], entity_shortning)
         id_dict[entity['name']] = elementid
-    for relation_triple in relation_list:
+    for relation_triple in relation_triple_list:
         add_one_relation(db_manager, relation_triple, id_dict)
 
-def extract_entities_from_papers(id_type, id_value_list, topic, db_manager, extract_chain):
+def extract_entities_from_papers(id_type, id_value_list, topic, shortenings, db_manager, extract_chain):
     for id_value in id_value_list:
-        extract_entities_from_paper(id_type, id_value, topic, db_manager, extract_chain)
+        extract_entities_from_paper(id_type, id_value, topic, shortenings, db_manager, extract_chain)
 
 def get_paper_title_by_filed(db_manager, field_name):
     # return paper titles who have field_name

@@ -5,6 +5,7 @@ from .cypher_template import (
 )
 from .utils import response_to_json, join_if_list
 from .neo4j_graph import Neo4jGraph
+import uuid
 
 from tqdm import tqdm
 
@@ -23,9 +24,9 @@ class Neo4jManager():
     def close_driver(self):
         self.graph._driver.close()
 
-    def add_from_arxiv(self, arxiv_res):
+    def add_from_arxiv(self, arxiv_res, arxiv_prefix):
         cypher_insturction_list = [
-            self._arxiv_res_to_cypher(res)
+            self._arxiv_res_to_cypher(res, arxiv_prefix)
             for res in arxiv_res
         ]
         for cypher_insturction in cypher_insturction_list:
@@ -42,7 +43,7 @@ class Neo4jManager():
         self.graph.query(cypher_insturction)
         self.update_schema()
     
-    def _arxiv_res_to_cypher(self, arxiv_dict: dict) -> str:
+    def _arxiv_res_to_cypher(self, arxiv_dict: dict, arxiv_prefix: str) -> str:
         """ input: an arxiv res dict return from response_to_json
             output: a cypher CREATE instruction
         """
@@ -55,8 +56,8 @@ class Neo4jManager():
             doi=join_if_list(arxiv_dict["doi"]),
             primary_category=join_if_list(arxiv_dict["primary_category"]),
             categories=join_if_list(arxiv_dict["categories"]),
-            pdf_url=join_if_list(arxiv_dict["pdf_url"])
-            # TODO: add uuid
+            pdf_url=join_if_list(arxiv_dict["pdf_url"]),
+            uuid=f"{arxiv_prefix}-{uuid.uuid4()}"
         )
         return cypher_insturction
         

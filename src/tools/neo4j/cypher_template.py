@@ -1,5 +1,4 @@
-ARXIV_PAPER_INSERT_INSTRUCTION = """MERGE (:Paper {{title: "{title}", authors: "{authors}", published: "{published}", updatedDate: "{updatedDate}", summary: "{summary}", doi: "{doi}", primary_category: "{primary_category}", categories: "{categories}", pdf_url: "{pdf_url}"}})
-"""
+ARXIV_PAPER_INSERT_INSTRUCTION = """MERGE (:Paper {{title: "{title}", authors: "{authors}", published: "{published}", updatedDate: "{updatedDate}", summary: "{summary}", doi: "{doi}", primary_category: "{primary_category}", categories: "{categories}", pdf_url: "{pdf_url}", uuid: "{uuid}"}})"""
 
 DELETE_NODES_INSTRUCTION = """MATCH (n:{type})
 DETACH DELETE n"""
