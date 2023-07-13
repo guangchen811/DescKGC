@@ -1,12 +1,16 @@
+import json, yaml
 import arxiv
-import json
-from src.tools.arxiv.base import response_to_json, dump_to_json
 import argparse
+from src.tools.arxiv.base import response_to_json, dump_to_json
+
+with open('./config.yaml', 'r') as f:
+    config = yaml.load(f, Loader=yaml.FullLoader)
 
 # convert query as a argument
 parser = argparse.ArgumentParser()
 parser.add_argument('--query', type=str, required=True)
 parser.add_argument('--max-results', type=int, default=10)
+parser.add_argument('--data-path', type=str, default=config['extractor']['arxiv']['data_path'])
 args = parser.parse_args()
 
 query = args.query
@@ -17,4 +21,4 @@ search = arxiv.Search(
     sort_order = arxiv.SortOrder.Descending
 )
 res = response_to_json(search)
-dump_to_json(res, './data/', query.replace(' ', '_'))
+dump_to_json(res, args.data_path, query.replace(' ', '_').replace('-', '_'))

@@ -9,11 +9,14 @@ from .neo4j_graph import Neo4jGraph
 from tqdm import tqdm
 
 class Neo4jManager():
-    def __init__(self):
+    def __init__(self,
+                 url="bolt://localhost:7687",
+                 username="neo4j",
+                 password="123./\.abc"):
         self.graph = Neo4jGraph(
-            url="bolt://localhost:7687",
-            username="neo4j",
-            password="123./\.abc"
+            url=url,
+            username=username,
+            password=password
         )
         self.update_schema()
     

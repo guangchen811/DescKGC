@@ -1,6 +1,7 @@
 # 
 data/*.json
 data/chroma/*
+data/arxiv/*
 KGC/data/*
 
 # Byte-compiled / optimized / DLL files
