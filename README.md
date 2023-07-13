@@ -13,12 +13,13 @@ I would like to summarize the workflow of this project as follows:
 1. paper crawling
    1. currently, we only support arxiv crawling.
    2. For arxiv, you can use `src/tools/arxiv/base.py` to crawl papers from arxiv.
-   3. The crawled papers will be stored in `data/**.json` which can be used for further processing.
+   3. The crawled papers will be stored in `data/<source type>/**.json` which can be used for further processing.
 2. paper processing
    1. currently, we only support arxiv processing.
    2. The processing process are divided into two parts: paper preprocess and triple extraction.
-   3. For paper preprocess, you can use `process/add_from_arxiv.py` to preprocess papers from arxiv saved in `data/**.json`. The result would be written into neo4j database.
-   4. For triple extraction, you can use `mian.py` to extract triples from arxiv saved in the neo4j database.
+   3. For paper preprocess, you can use `process/add_from_arxiv.py` to preprocess papers from arxiv saved in `data/<source type>/**.json`. The result would be written into neo4j database.
+   4. For triple extraction, you can use `main.py` to extract triples from arxiv saved in the neo4j database.
+
 # Recent Updates
 ### 2023-06-15
 The following updates can be test by `python -m src.procedure.<procedure_name>.base`:
