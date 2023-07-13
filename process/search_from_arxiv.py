@@ -9,7 +9,7 @@ with open('./config.yaml', 'r') as f:
 # convert query as a argument
 parser = argparse.ArgumentParser()
 parser.add_argument('--query', type=str, required=True)
-parser.add_argument('--max-results', type=int, default=10)
+parser.add_argument('--max-results', type=int, default=4)
 parser.add_argument('--data-path', type=str, default=config['extractor']['arxiv']['data_path'])
 args = parser.parse_args()
 

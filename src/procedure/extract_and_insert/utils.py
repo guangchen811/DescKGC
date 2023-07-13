@@ -11,7 +11,6 @@ def convert_to_triples(input_string):
         # Split by ', ' and append as a tuple
         triple = string.split(', ')
         triples.append(tuple(triple))
-    
     return triples
 
 def entity_relation_format(id_type, id_value, db_manager, extract_chain):
