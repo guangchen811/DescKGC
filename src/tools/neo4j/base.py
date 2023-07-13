@@ -56,6 +56,7 @@ class Neo4jManager():
             primary_category=join_if_list(arxiv_dict["primary_category"]),
             categories=join_if_list(arxiv_dict["categories"]),
             pdf_url=join_if_list(arxiv_dict["pdf_url"])
+            # TODO: add uuid
         )
         return cypher_insturction
         

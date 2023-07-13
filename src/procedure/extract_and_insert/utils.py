@@ -5,7 +5,6 @@ import time
 def convert_to_triples(input_string):
     # Use regular expressions to find all substrings that look like '( ... )'
     triple_strings = re.findall(r'\((.*?)\)', input_string)
-    
     triples = []
     for string in triple_strings:
         # Split by ', ' and append as a tuple
@@ -19,7 +18,6 @@ def entity_relation_format(id_type, id_value, topic, db_manager, extract_chain):
         f"MATCH (n:Paper) WHERE n.{id_type}=$id_value RETURN n.summary as summary",
         params={"id_value": id_value}
     )
-    # TODO: topic should be extracted from the paper
     res = extract_chain({"topic": topic, "summary": summary})
     try:
         entity_list = json.loads(res['entities'])
@@ -35,6 +33,7 @@ def add_one_entity(db_manager, id_type, id_value, type, name, description, gener
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
     response = db_manager.graph.query(
+        #TODO: add uuid
             f"""
             MATCH (p:Paper) WHERE p.{id_type}=$id_value
             WITH p
