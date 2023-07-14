@@ -1,6 +1,6 @@
 import re
 import argparse
-from src.tools.neo4j.base import DBManager
+from src.tools.db_manager.base import DBManager
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--delete-by-type', action='store_true')

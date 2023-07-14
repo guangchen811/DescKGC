@@ -1,10 +1,10 @@
-from .cypher_template import (
+from ..neo4j.cypher_template import (
     ARXIV_PAPER_INSERT_INSTRUCTION,
     DELETE_NODES_INSTRUCTION,
     DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
 )
-from .utils import response_to_json, join_if_list
-from .neo4j_graph import Neo4jGraph
+from ..neo4j.utils import response_to_json, join_if_list
+from ..neo4j.neo4j_graph import Neo4jGraph
 import uuid
 
 from tqdm import tqdm
@@ -146,7 +146,7 @@ class DBManager():
 
 if __name__ == '__main__':
     import os
-    from src.tools.neo4j.base import DBManager
+    from tools.db_manager.base import DBManager
     
     db_manager = DBManager()
     # db_manager.create_or_update_index_on_unique_property('description')

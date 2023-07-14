@@ -9,7 +9,7 @@ if __name__ == '__main__':
     import os
     from transformers import logging
     logging.set_verbosity_error()
-    from src.tools.neo4j.base import DBManager
+    from src.tools.db_manager.base import DBManager
     from transformers import BertTokenizer, BertModel
 
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')

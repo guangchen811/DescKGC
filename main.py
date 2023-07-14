@@ -1,6 +1,6 @@
 import json, yaml
 from langchain.chat_models import ChatOpenAI
-from src.tools.neo4j.base import DBManager
+from src.tools.db_manager.base import DBManager
 from src.tools.extractor.base import init_extract_chain
 from src.procedure.extract_and_insert.base import extract_entities_from_paper
 
