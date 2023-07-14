@@ -8,6 +8,7 @@ neo4jdb:
 chromadb:
   chroma_db_impl: duckdb+parquet
   persist_directory: ./data/chroma/
+  collection_name: arxiv
 
 extractor:
   arxiv:

@@ -4,20 +4,34 @@ from ..neo4j.cypher_template import (
     DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
 )
 from ..neo4j.utils import response_to_json, join_if_list
-from ..neo4j.neo4j_graph import Neo4jGraph
+from ..neo4j.base import Neo4jGraph
+from ..chroma.base import ChromaVectorStore
 import uuid
 
 from tqdm import tqdm
 
 class DBManager():
     def __init__(self,
-                 url="bolt://localhost:7687",
-                 username="neo4j",
-                 password="123./\.abc"):
+                    url="bolt://localhost:7687",
+                    username="neo4j",
+                    password="123./\.abc",
+                    chroma_db_impl="duckdb+parquet",
+                    persist_directory="../data/chroma/",
+                    collection_name="arxiv",
+                    **kwargs
+                 ):
+        print(url, username, password, chroma_db_impl, persist_directory, collection_name)
         self.graph = Neo4jGraph(
             url=url,
             username=username,
-            password=password
+            password=password,
+            **kwargs
+        )
+        self.vector_store = ChromaVectorStore(
+            chroma_db_impl=chroma_db_impl,
+            persist_directory=persist_directory,
+            collection_name=collection_name,
+            **kwargs
         )
         self.update_schema()
     

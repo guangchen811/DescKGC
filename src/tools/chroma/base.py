@@ -5,9 +5,10 @@ from typing import List
 class ChromaVectorStore:
     def __init__(
         self,
-        chroma_db_impl="duckdb+parquet",
-        persist_directory="../data/chroma/",
-        collection_name="",
+        chroma_db_impl,
+        persist_directory,
+        collection_name,
+        **kwargs
     ) -> None:
         self.client = chromadb.Client(
             Settings(

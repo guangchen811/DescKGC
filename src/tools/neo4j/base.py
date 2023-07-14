@@ -28,7 +28,9 @@ class Neo4jGraph:
     """Neo4j wrapper for graph operations."""
 
     def __init__(
-        self, url: str, username: str, password: str, database: str = "neo4j"
+        self,
+        url: str, username: str, password: str, database: str = "neo4j",
+        **kwargs
     ) -> None:
         """Create a new Neo4j graph wrapper instance."""
         try:

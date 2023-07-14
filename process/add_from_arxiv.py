@@ -18,12 +18,11 @@ args = parser.parse_args()
 data_path = Path(args.data_path)
 file_path = data_path / f"{args.file_name}.json"
 
-print(f"adding data from {file_path}")
-
-with open(file_path, 'r') as f:
-    res = json.load(f)
 # Initiate a neo4j manager
 db_manager = DBManager()
 # This function will add papers from arxiv to neo4j and extract authors from the paper.
 # The author nodes will be connected to the paper nodes by "WROTE" relationship with a timestamp attribute.
+print(f"adding data from {file_path}")
+with open(file_path, 'r') as f:
+    res = json.load(f)
 db_manager.add_from_arxiv(res, arxiv_prefix=config['shortenings']['Paper'])
