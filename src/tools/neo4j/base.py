@@ -60,10 +60,29 @@ class Neo4jManager():
             uuid=f"{arxiv_prefix}-{uuid.uuid4()}"
         )
         return cypher_insturction
-        
+    
+    def show_schema(self) -> None:
+        import json
+        self.graph.refresh_schema()
+        # print(self.graph_schema)
+        print("Node properties are the following:")
+        for node in self.node_properties:
+            print(json.dumps(node, indent=4))
+            
+        print("\nRelationship properties are the following:")
+        for relationship in self.rel_properties:
+            print(json.dumps(relationship, indent=4))
+
+        print("\nThe relationships are the following:")
+        for rel in self.relationships:
+            print(rel)
+
     def update_schema(self) -> None:
         self.graph.refresh_schema()
         self.graph_schema = self.graph.get_schema
+        self.node_properties = self.graph.get_node_properties
+        self.rel_properties = self.graph.get_rel_properties
+        self.relationships = self.graph.get_relationships
 
     def delete_by_type(self, type: str) -> None:
         """ 

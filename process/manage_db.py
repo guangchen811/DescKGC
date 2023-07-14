@@ -8,9 +8,6 @@ parser.add_argument('--delete-all', action='store_true')
 parser.add_argument('--show-schema', action='store_true')
 args = parser.parse_args()
 
-# if sum(args.__dict__.values()) > 1:
-#     raise ValueError('Only one argument can be True')
-
 db_manager = Neo4jManager()
 node_labels = db_manager.get_node_labels()
 
@@ -33,3 +30,6 @@ if args.delete_all:
                 db_manager.delete_by_type(node_label)
         else:
             print('Delete aborted.')
+
+if args.show_schema:
+    db_manager.show_schema()
