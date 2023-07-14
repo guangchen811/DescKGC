@@ -38,15 +38,19 @@ class DBManager():
     def close_driver(self):
         self.graph._driver.close()
 
-    def add_from_arxiv(self, arxiv_res, arxiv_prefix):
+    def add_from_arxiv(self, arxiv_papers, arxiv_prefix):
         cypher_insturction_list = [
-            self._arxiv_res_to_cypher(res, arxiv_prefix)
-            for res in arxiv_res
+            self._arxiv_paper_to_cypher(paper, arxiv_prefix)
+            for paper in arxiv_papers
         ]
-        for cypher_insturction in cypher_insturction_list:
+        for cypher_insturction, paper in zip(cypher_insturction_list, arxiv_papers):
             try:
                 self.graph.query(cypher_insturction)
+                # print(cypher_insturction)
+                # print(paper)
+                # print("====================================")
             except Exception as e:
+                # TODO: make this Exception more specific
                 print(f"arxiv paper insert error: {str(e)}")
         self._devide_author_from_arxiv_nodes()
         self.update_schema()
@@ -57,7 +61,7 @@ class DBManager():
         self.graph.query(cypher_insturction)
         self.update_schema()
     
-    def _arxiv_res_to_cypher(self, arxiv_dict: dict, arxiv_prefix: str) -> str:
+    def _arxiv_paper_to_cypher(self, arxiv_dict: dict, arxiv_prefix: str) -> str:
         """ input: an arxiv res dict return from response_to_json
             output: a cypher CREATE instruction
         """

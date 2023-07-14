@@ -24,5 +24,5 @@ db_manager = DBManager()
 # The author nodes will be connected to the paper nodes by "WROTE" relationship with a timestamp attribute.
 print(f"adding data from {file_path}")
 with open(file_path, 'r') as f:
-    res = json.load(f)
-db_manager.add_from_arxiv(res, arxiv_prefix=config['shortenings']['Paper'])
+    arxiv_papers = json.load(f)
+db_manager.add_from_arxiv(arxiv_papers, arxiv_prefix=config['shortenings']['Paper'])
