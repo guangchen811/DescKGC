@@ -19,10 +19,14 @@ data_path = Path(args.data_path)
 file_path = data_path / f"{args.file_name}.json"
 
 # Initiate a neo4j manager
-db_manager = DBManager()
+db_manager = DBManager(**config['neo4jdb'], **config['chromadb'])
 # This function will add papers from arxiv to neo4j and extract authors from the paper.
 # The author nodes will be connected to the paper nodes by "WROTE" relationship with a timestamp attribute.
 print(f"adding data from {file_path}")
 with open(file_path, 'r') as f:
     arxiv_papers = json.load(f)
-db_manager.add_from_arxiv(arxiv_papers, arxiv_prefix=config['shortenings']['Paper'], vs_key_info=config['extractor']['arxiv']['vs_key_info'])
+db_manager.add_from_arxiv(
+                        arxiv_papers,
+                        arxiv_prefix=config['shortenings']['Paper'],
+                        vs_key_info=config['extractor']['arxiv']['vs_key_info']
+                        )

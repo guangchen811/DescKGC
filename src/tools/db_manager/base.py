@@ -7,8 +7,8 @@ from ..neo4j.utils import response_to_json, join_if_list
 from ..neo4j.base import Neo4jGraph
 from ..chroma.base import ChromaVectorStore
 import uuid
-
 from tqdm import tqdm
+from typing import Tuple
 
 class DBManager():
     def __init__(self,
@@ -42,18 +42,25 @@ class DBManager():
         metadata_keys = vs_key_info["metadata_keys"]
         paper_keys = arxiv_papers[0].keys()
         assert all(key in paper_keys for key in [embedding_key, *metadata_keys]), "KeyError: some keys are not in the paper dict. Please check the vs_key_info in config.yaml"
-        cypher_insturction_list = [
+        cypher_insturction_and_uuid_list = [
             self._arxiv_paper_to_cypher(paper, arxiv_prefix)
             for paper in arxiv_papers
         ]
-        for cypher_insturction, paper in zip(cypher_insturction_list, arxiv_papers):
+        for (cypher_insturction, uuid_), paper in zip(cypher_insturction_and_uuid_list, arxiv_papers):
             try:
                 # self.graph.query(cypher_insturction)
-                print(cypher_insturction)
-                print(paper)
-                # TODO: implement vs part paper insert.
-                self.vector_store.add
-                print("====================================")
+                # print(cypher_insturction)
+                # print(uuid_)
+                # print(embedding_key, paper[embedding_key])
+                # for metadata_key in metadata_keys:
+                #     print(metadata_key, paper[metadata_key])
+                metadata = {metadata_key: paper[metadata_key] for metadata_key in metadata_keys}
+                metadata['embedding_source'] = embedding_key
+                self.vector_store.add(
+                    documents=[paper[embedding_key]],
+                    metadatas=[metadata],
+                    ids=[uuid_]
+                )
             except Exception as e:
                 # TODO: make this Exception more specific
                 print(f"arxiv paper insert error: {str(e)}")
@@ -66,10 +73,11 @@ class DBManager():
         self.graph.query(cypher_insturction)
         self.update_schema()
     
-    def _arxiv_paper_to_cypher(self, arxiv_dict: dict, arxiv_prefix: str) -> str:
+    def _arxiv_paper_to_cypher(self, arxiv_dict: dict, arxiv_prefix: str) -> Tuple[str, str]:
         """ input: an arxiv res dict return from response_to_json
             output: a cypher CREATE instruction
         """
+        uuid_ = f"{arxiv_prefix}-{uuid.uuid4()}"
         cypher_insturction = ARXIV_PAPER_INSERT_INSTRUCTION.format(
             title=join_if_list(arxiv_dict["title"]),
             authors=join_if_list(arxiv_dict["authors"]),
@@ -80,9 +88,9 @@ class DBManager():
             primary_category=join_if_list(arxiv_dict["primary_category"]),
             categories=join_if_list(arxiv_dict["categories"]),
             pdf_url=join_if_list(arxiv_dict["pdf_url"]),
-            uuid=f"{arxiv_prefix}-{uuid.uuid4()}"
+            uuid=uuid_
         )
-        return cypher_insturction
+        return cypher_insturction, uuid_
     
     def show_schema(self) -> None:
         import json

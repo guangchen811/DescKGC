@@ -1,5 +1,6 @@
 import chromadb
 from chromadb.config import Settings
+from chromadb.utils import embedding_functions
 from typing import List
 
 class ChromaVectorStore:
@@ -17,15 +18,18 @@ class ChromaVectorStore:
             )
         )
         self.collection_name = collection_name
-        self.collection = self.client.get_or_create_collection(collection_name)
+        print(self.collection_name)
+        self.collection = self.client.get_or_create_collection(
+            name=self.collection_name,
+            embedding_function=embedding_functions.DefaultEmbeddingFunction())
         self.client.persist()
     
     def clear_collection(self):
         self.client.delete_collection(name=self.collection_name)
         self.client.persist()
 
-    def add(self, documents, metadata, ids):
-        self.collection.add(documents=documents, metadatas=metadata, ids=ids)
+    def add(self, documents, metadatas, ids):
+        self.collection.add(documents=documents, metadatas=metadatas, ids=ids)
         self.client.persist()
 
     def query(self, query_texts, n_results):
