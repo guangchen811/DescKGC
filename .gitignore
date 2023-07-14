@@ -3,7 +3,7 @@ data/*.json
 data/chroma/*
 data/arxiv/*
 KGC/data/*
-
+.vscode
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
