@@ -25,4 +25,4 @@ db_manager = DBManager()
 print(f"adding data from {file_path}")
 with open(file_path, 'r') as f:
     arxiv_papers = json.load(f)
-db_manager.add_from_arxiv(arxiv_papers, arxiv_prefix=config['shortenings']['Paper'])
+db_manager.add_from_arxiv(arxiv_papers, arxiv_prefix=config['shortenings']['Paper'], vs_key_info=config['extractor']['arxiv']['vs_key_info'])

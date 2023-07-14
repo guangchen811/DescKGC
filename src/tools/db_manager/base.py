@@ -20,7 +20,6 @@ class DBManager():
                     collection_name="arxiv",
                     **kwargs
                  ):
-        print(url, username, password, chroma_db_impl, persist_directory, collection_name)
         self.graph = Neo4jGraph(
             url=url,
             username=username,
@@ -38,22 +37,28 @@ class DBManager():
     def close_driver(self):
         self.graph._driver.close()
 
-    def add_from_arxiv(self, arxiv_papers, arxiv_prefix):
+    def add_from_arxiv(self, arxiv_papers, arxiv_prefix, vs_key_info):
+        embedding_key = vs_key_info["embedding_key"]
+        metadata_keys = vs_key_info["metadata_keys"]
+        paper_keys = arxiv_papers[0].keys()
+        assert all(key in paper_keys for key in [embedding_key, *metadata_keys]), "KeyError: some keys are not in the paper dict. Please check the vs_key_info in config.yaml"
         cypher_insturction_list = [
             self._arxiv_paper_to_cypher(paper, arxiv_prefix)
             for paper in arxiv_papers
         ]
         for cypher_insturction, paper in zip(cypher_insturction_list, arxiv_papers):
             try:
-                self.graph.query(cypher_insturction)
-                # print(cypher_insturction)
-                # print(paper)
-                # print("====================================")
+                # self.graph.query(cypher_insturction)
+                print(cypher_insturction)
+                print(paper)
+                # TODO: implement vs part paper insert.
+                self.vector_store.add
+                print("====================================")
             except Exception as e:
                 # TODO: make this Exception more specific
                 print(f"arxiv paper insert error: {str(e)}")
-        self._devide_author_from_arxiv_nodes()
-        self.update_schema()
+        # self._devide_author_from_arxiv_nodes()
+        # self.update_schema()
 
     def _devide_author_from_arxiv_nodes(self) -> None:
         """ extract author nodes from arxiv nodes in neo4j database """
