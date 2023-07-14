@@ -1,6 +1,6 @@
 import re
 import argparse
-from src.tools.neo4j.base import Neo4jManager
+from src.tools.neo4j.base import DBManager
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--delete-by-type', action='store_true')
@@ -8,7 +8,7 @@ parser.add_argument('--delete-all', action='store_true')
 parser.add_argument('--show-schema', action='store_true')
 args = parser.parse_args()
 
-db_manager = Neo4jManager()
+db_manager = DBManager()
 node_labels = db_manager.get_node_labels()
 
 

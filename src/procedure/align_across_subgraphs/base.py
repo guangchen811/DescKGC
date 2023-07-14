@@ -9,13 +9,13 @@ if __name__ == '__main__':
     import os
     from transformers import logging
     logging.set_verbosity_error()
-    from src.tools.neo4j.base import Neo4jManager
+    from src.tools.neo4j.base import DBManager
     from transformers import BertTokenizer, BertModel
 
     tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
     model = BertModel.from_pretrained("bert-base-uncased")
 
-    db_manager = Neo4jManager()
+    db_manager = DBManager()
     cur_path = os.path.dirname(__file__)
     id_pair_list = read_json_cases(f'{cur_path}/example_papers.json')
     papers_list, entities_list = parse_paper_id_pairs(id_pair_list, db_manager)

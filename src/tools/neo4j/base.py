@@ -9,7 +9,7 @@ import uuid
 
 from tqdm import tqdm
 
-class Neo4jManager():
+class DBManager():
     def __init__(self,
                  url="bolt://localhost:7687",
                  username="neo4j",
@@ -146,9 +146,9 @@ class Neo4jManager():
 
 if __name__ == '__main__':
     import os
-    from src.tools.neo4j.base import Neo4jManager
+    from src.tools.neo4j.base import DBManager
     
-    db_manager = Neo4jManager()
+    db_manager = DBManager()
     # db_manager.create_or_update_index_on_unique_property('description')
     # db_manager.create_or_update_index_on_unique_property('summary')
     db_manager.search_by_index('summary', 'machine learning')
