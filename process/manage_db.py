@@ -1,6 +1,9 @@
-import re
+import re, yaml
 import argparse
 from src.tools.db_manager.base import DBManager
+
+with open('./config.yaml', 'r') as f:
+    config = yaml.load(f, Loader=yaml.FullLoader)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--delete-by-type', action='store_true')
@@ -8,7 +11,7 @@ parser.add_argument('--delete-all', action='store_true')
 parser.add_argument('--show-schema', action='store_true')
 args = parser.parse_args()
 
-db_manager = DBManager()
+db_manager = DBManager(**config['neo4jdb'], **config['chromadb'])
 node_labels = db_manager.get_node_labels()
 
 

@@ -18,7 +18,6 @@ class ChromaVectorStore:
             )
         )
         self.collection_name = collection_name
-        print(self.collection_name)
         self.collection = self.client.get_or_create_collection(
             name=self.collection_name,
             embedding_function=embedding_functions.DefaultEmbeddingFunction())

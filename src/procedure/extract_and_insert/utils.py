@@ -46,11 +46,11 @@ def add_one_entity(db_manager, id_type, id_value, entity, shortning):
         )
     return uuid_
 
-def add_one_relation(db_manager, relation_triple, entity_id_dict):
+def add_one_relation(db_manager, relation_triple, entity_uuid_dict):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
     try:
-        src_id, dst_id = entity_id_dict[relation_triple[0]], entity_id_dict[relation_triple[2]]
+        src_uuid, dst_uuid = entity_uuid_dict[relation_triple[0]], entity_uuid_dict[relation_triple[2]]
     except Exception as e:
         print(f"Error: Inconsistent Entity Extraction - {str(e)}")
         print("Details: The entities present in the relation triples were not previously added as nodes during the entity extraction phase.")
@@ -59,9 +59,9 @@ def add_one_relation(db_manager, relation_triple, entity_id_dict):
     relation_name = relation_triple[1].upper().replace(' ', '_')
     db_manager.graph.query(
             f"""
-            MATCH (src) WHERE elementID(src)=$src_id
-            MATCH (dst) WHERE elementID(dst)=$dst_id
+            MATCH (src) WHERE src.uuid=$src_uuid
+            MATCH (dst) WHERE dst.uuid=$dst_uuid
             MERGE (src)-[rel: {relation_name} {{timestep: $timestep}}]->(dst)
             """,
-            params={'src_id': src_id, 'dst_id': dst_id, 'timestep': time_str}
+            params={'src_uuid': src_uuid, 'dst_uuid': dst_uuid, 'timestep': time_str}
         )

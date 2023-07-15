@@ -16,7 +16,6 @@ def extract_entities_from_paper(paper_id_type, paper_id_value, topic, shortening
         entity_uuid = add_one_entity(db_manager, paper_id_type, paper_id_value, entity, entity_shortning)
         entity_id_dict[entity['name']] = entity_uuid
         metadata = {metadata_key: entity[metadata_key] for metadata_key in metadata_keys}
-        print(entity_uuid, entity[embedding_key], metadata)
         db_manager.vector_store.add(
             documents=[entity[embedding_key]],
             metadatas=[metadata],
