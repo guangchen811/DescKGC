@@ -15,18 +15,16 @@ args = parser.parse_args()
 
 llm = ChatOpenAI(temperature=args.temperature)
 extract_chain = init_extract_chain(llm)
-db_manager = DBManager()
+db_manager = DBManager(**config['neo4jdb'], **config['chromadb'])
 
-# print(db_manager.graph_schema)
-# title = 'The Sharing Economy for the Smart Grid'
-# extract_entities_from_paper(id_type='title', id_value=title, topic=config['topic'], db_manager=db_manager, extract_chain=extract_chain)
 res = get_paper_title_by_filed(db_manager, 'doi')
 for title in res:
     extract_entities_from_paper(
-        id_type='title',
-        id_value=title,
+        paper_id_type='title',
+        paper_id_value=title,
         topic=config['topic'],
+        shortenings=config['shortenings'],
+        vs_key_info=config['extractor']['entity']['vs_key_info'],
         db_manager=db_manager,
         extract_chain=extract_chain,
-        config=config
     )

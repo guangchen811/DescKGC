@@ -7,17 +7,17 @@ from ..neo4j.utils import response_to_json, join_if_list
 from ..neo4j.base import Neo4jGraph
 from ..chroma.base import ChromaVectorStore
 import uuid
-from tqdm import tqdm
+
 from typing import Tuple
 
 class DBManager():
     def __init__(self,
-                    url="bolt://localhost:7687",
-                    username="neo4j",
-                    password="123./\.abc",
-                    chroma_db_impl="duckdb+parquet",
-                    persist_directory="../data/chroma/",
-                    collection_name="arxiv",
+                    url,
+                    username,
+                    password,
+                    chroma_db_impl,
+                    persist_directory,
+                    collection_name,
                     **kwargs
                  ):
         self.graph = Neo4jGraph(
@@ -171,12 +171,3 @@ class DBManager():
         RETURN {labels: nodeLabels} AS output"""
         res = self.graph.query(cypher_insturction)
         return [label['output']['labels'] for label in res]
-
-if __name__ == '__main__':
-    import os
-    from tools.db_manager.base import DBManager
-    
-    db_manager = DBManager()
-    # db_manager.create_or_update_index_on_unique_property('description')
-    # db_manager.create_or_update_index_on_unique_property('summary')
-    db_manager.search_by_index('summary', 'machine learning')

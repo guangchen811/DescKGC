@@ -8,7 +8,7 @@ neo4jdb:
 chromadb:
   chroma_db_impl: duckdb+parquet
   persist_directory: ./data/chroma/
-  collection_name: arxiv
+  collection_name: arxiv1
 
 extractor:
   arxiv:
@@ -18,9 +18,10 @@ extractor:
       # id_key: uuid
       metadata_keys: [title]
   entity:
-    embedding_key: description
-    # id_key: uuid
-    metadata_keys: [name, general, type]
+    vs_key_info:
+      embedding_key: description
+      # id_key: uuid
+      metadata_keys: [name, general, type]
 
 llm:
   model_name: gpt-3.5-turbo

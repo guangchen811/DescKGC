@@ -10,4 +10,4 @@ with open('./config.yaml', 'r') as f:
 llm = ChatOpenAI(temperature=config['llm']['temperature'])
 extract_chain = init_extract_chain(llm)
 
-db_manager = DBManager()
+db_manager = DBManager(**config['neo4jdb'], **config['chromadb'])

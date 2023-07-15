@@ -29,4 +29,4 @@ db_manager.add_from_arxiv(
                         arxiv_papers,
                         arxiv_prefix=config['shortenings']['Paper'],
                         vs_key_info=config['extractor']['arxiv']['vs_key_info']
-                        )
+                    )
