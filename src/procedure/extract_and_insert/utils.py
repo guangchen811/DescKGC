@@ -30,27 +30,27 @@ def entity_relation_format(id_type, id_value, topic, db_manager, extract_chain):
         print(f"Failed to decode triples from relations: {str(e)}")
     return entity_list, relation_list
 
-def add_one_entity(db_manager, id_type, id_value, type, name, description, general, shortning):
+def add_one_entity(db_manager, id_type, id_value, entity, shortning):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
-    unique_id = f"{shortning}-{uuid.uuid4()}"
+    uuid_ = f"{shortning}-{uuid.uuid4()}"
     response = db_manager.graph.query(
             f"""
             MATCH (p:Paper) WHERE p.{id_type}=$id_value
             WITH p
-            MERGE (c:{type} {{name:$name, description:$description, general:$general, uuid:$uuid}})
+            MERGE (c:{entity['type']} {{name:$name, description:$description, general:$general, uuid:$uuid}})
             MERGE (c)-[r:EXTRACTED_FROM {{timestep:$timestep}}]->(p)
             RETURN elementid(c) AS elementid
             """,
-            params={"id_value": id_value, "name": name, "description": description, "general": general, "timestep": time_str, "uuid": unique_id}
+            params={"id_value": id_value, "name": entity['name'], "description": entity['description'], "general": entity['general'], "timestep": time_str, "uuid": uuid_}
         )
     return response[0]['elementid']
 
-def add_one_relation(db_manager, relation_triple, id_dict):
+def add_one_relation(db_manager, relation_triple, entity_id_dict):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
     try:
-        src_id, dst_id = id_dict[relation_triple[0]], id_dict[relation_triple[2]]
+        src_id, dst_id = entity_id_dict[relation_triple[0]], entity_id_dict[relation_triple[2]]
     except Exception as e:
         print(f"Error: Inconsistent Entity Extraction - {str(e)}")
         print("Details: The entities present in the relation triples were not previously added as nodes during the entity extraction phase.")
