@@ -34,7 +34,7 @@ def add_one_entity(db_manager, id_type, id_value, entity, shortning):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
     uuid_ = f"{shortning}-{uuid.uuid4()}"
-    response = db_manager.graph.query(
+    _ = db_manager.graph.query(
             f"""
             MATCH (p:Paper) WHERE p.{id_type}=$id_value
             WITH p
@@ -44,7 +44,7 @@ def add_one_entity(db_manager, id_type, id_value, entity, shortning):
             """,
             params={"id_value": id_value, "name": entity['name'], "description": entity['description'], "general": entity['general'], "timestep": time_str, "uuid": uuid_}
         )
-    return response[0]['elementid']
+    return uuid_
 
 def add_one_relation(db_manager, relation_triple, entity_id_dict):
     current_time = time.localtime()

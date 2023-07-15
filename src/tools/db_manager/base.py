@@ -48,6 +48,7 @@ class DBManager():
         ]
         for (cypher_insturction, uuid_), paper in zip(cypher_insturction_and_uuid_list, arxiv_papers):
             try:
+                # TODO: uncommnet this line after debug
                 # self.graph.query(cypher_insturction)
                 # print(cypher_insturction)
                 # print(uuid_)

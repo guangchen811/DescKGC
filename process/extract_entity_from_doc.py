@@ -22,4 +22,11 @@ db_manager = DBManager()
 # extract_entities_from_paper(id_type='title', id_value=title, topic=config['topic'], db_manager=db_manager, extract_chain=extract_chain)
 res = get_paper_title_by_filed(db_manager, 'doi')
 for title in res:
-    extract_entities_from_paper(id_type='title', id_value=title, topic=config['topic'], shortenings=config['shortenings'], db_manager=db_manager, extract_chain=extract_chain)
+    extract_entities_from_paper(
+        id_type='title',
+        id_value=title,
+        topic=config['topic'],
+        db_manager=db_manager,
+        extract_chain=extract_chain,
+        config=config
+    )
