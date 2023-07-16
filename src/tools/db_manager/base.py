@@ -56,6 +56,7 @@ class DBManager():
                 metadata = {metadata_key: paper[metadata_key]
                             for metadata_key in metadata_keys}
                 metadata['embedding_source'] = embedding_key
+                metadata['type'] = 'arxiv'
                 self.vector_store.add(
                     documents=[paper[embedding_key]],
                     metadatas=[metadata],
