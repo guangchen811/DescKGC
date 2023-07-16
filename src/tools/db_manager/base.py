@@ -10,15 +10,16 @@ import uuid
 
 from typing import Tuple
 
+
 class DBManager():
     def __init__(self,
-                    url,
-                    username,
-                    password,
-                    chroma_db_impl,
-                    persist_directory,
-                    collection_name,
-                    **kwargs
+                 url,
+                 username,
+                 password,
+                 chroma_db_impl,
+                 persist_directory,
+                 collection_name,
+                 **kwargs
                  ):
         self.graph = Neo4jGraph(
             url=url,
@@ -33,7 +34,7 @@ class DBManager():
             **kwargs
         )
         self.update_schema()
-    
+
     def close_driver(self):
         self.graph._driver.close()
 
@@ -41,7 +42,8 @@ class DBManager():
         embedding_key = vs_key_info["embedding_key"]
         metadata_keys = vs_key_info["metadata_keys"]
         paper_keys = arxiv_papers[0].keys()
-        assert all(key in paper_keys for key in [embedding_key, *metadata_keys]), "KeyError: some keys are not in the paper dict. Please check the vs_key_info in config.yaml"
+        assert all(key in paper_keys for key in [
+                   embedding_key, *metadata_keys]), "KeyError: some keys are not in the paper dict. Please check the vs_key_info in config.yaml"
         cypher_insturction_and_uuid_list = [
             self._arxiv_paper_to_cypher(paper, arxiv_prefix)
             for paper in arxiv_papers
@@ -51,7 +53,8 @@ class DBManager():
                 # TODO: uncommnet this line after debug
                 self.graph.query(cypher_insturction)
                 # print(cypher_insturction)
-                metadata = {metadata_key: paper[metadata_key] for metadata_key in metadata_keys}
+                metadata = {metadata_key: paper[metadata_key]
+                            for metadata_key in metadata_keys}
                 metadata['embedding_source'] = embedding_key
                 self.vector_store.add(
                     documents=[paper[embedding_key]],
@@ -69,7 +72,7 @@ class DBManager():
         cypher_insturction = DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
         self.graph.query(cypher_insturction)
         self.update_schema()
-    
+
     def _arxiv_paper_to_cypher(self, arxiv_dict: dict, arxiv_prefix: str) -> Tuple[str, str]:
         """ input: an arxiv res dict return from response_to_json
             output: a cypher CREATE instruction
@@ -88,7 +91,7 @@ class DBManager():
             uuid=uuid_
         )
         return cypher_insturction, uuid_
-    
+
     def show_schema(self) -> None:
         import json
         self.graph.refresh_schema()
@@ -96,7 +99,7 @@ class DBManager():
         print("Node properties are the following:")
         for node in self.node_properties:
             print(json.dumps(node, indent=4))
-            
+
         print("\nRelationship properties are the following:")
         for relationship in self.rel_properties:
             print(json.dumps(relationship, indent=4))
@@ -122,14 +125,15 @@ class DBManager():
         )
         self.graph.query(cypher_insturction)
         self.update_schema()
-    
+
     def _get_entity_types_with_unique_prop(self, prop_name: str) -> list:
         """ return a list of entity types that have unique prop_name """
         SEARCH_INSTURCTION = f"""MATCH (n)
         WHERE n.{prop_name} is not NULL
         RETURN DISTINCT labels(n) AS labels"""
         entity_types = self.graph.query(SEARCH_INSTURCTION)
-        entity_types = [entity_type['labels'][0] for entity_type in entity_types]
+        entity_types = [entity_type['labels'][0]
+                        for entity_type in entity_types]
         return entity_types
 
     def _show_current_index(self) -> list:
@@ -138,7 +142,6 @@ class DBManager():
         index_list = self.graph.query(cypher_insturction)
         index_list = [index['name'] for index in index_list]
         return index_list
-
 
     def create_or_update_index_on_unique_property(self, property_name: str) -> None:
         """ update index for a given attribute """

@@ -1,4 +1,5 @@
-import json, yaml
+import json
+import yaml
 import argparse
 from langchain.chat_models import ChatOpenAI
 from src.tools.db_manager.base import DBManager
@@ -10,7 +11,8 @@ with open('./config.yaml', 'r') as f:
 parser = argparse.ArgumentParser()
 parser.add_argument('--id_type', type=str)
 parser.add_argument('--id_value', type=str)
-parser.add_argument('--temperature', type=float, default=config['llm']['temperature'])
+parser.add_argument('--temperature', type=float,
+                    default=config['llm']['temperature'])
 args = parser.parse_args()
 
 llm = ChatOpenAI(temperature=args.temperature)

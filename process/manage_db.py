@@ -1,4 +1,5 @@
-import re, yaml
+import re
+import yaml
 import argparse
 from src.tools.db_manager.base import DBManager
 
@@ -19,7 +20,8 @@ if args.delete_by_type:
     if len(node_labels) == 0:
         print('No data in the database.')
     else:
-        type_name = input('The available types are: [' + ', '.join(node_labels) + '].' + '\nPlease input the type name: \n')
+        type_name = input('The available types are: [' + ', '.join(
+            node_labels) + '].' + '\nPlease input the type name: \n')
         db_manager.delete_by_type(type_name)
         print(f'Delete all nodes with type {type_name}.')
 

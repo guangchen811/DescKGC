@@ -3,14 +3,17 @@ import time
 from ..embedding_gen.utils import cos_sim_between_sentences_sets
 from typing import List
 
+
 def read_json_cases(file_path):
     with open(file_path, 'r') as f:
         id_pair_list = json.load(f)
     return id_pair_list
 
+
 def parse_paper_id_pairs(paper_id_pairs, db_manager):
     paper_shorten = 'p'
-    paper_conditions = " or ".join([f"{paper_shorten}.{k}='{v}'" for paper_id_pair in paper_id_pairs for k, v in paper_id_pair.items()])
+    paper_conditions = " or ".join(
+        [f"{paper_shorten}.{k}='{v}'" for paper_id_pair in paper_id_pairs for k, v in paper_id_pair.items()])
 
     res = db_manager.graph.query(f"""MATCH ({paper_shorten}:Paper)
     WHERE {paper_conditions}
@@ -20,7 +23,8 @@ def parse_paper_id_pairs(paper_id_pairs, db_manager):
     """)
     papers = [r['paper'] for r in res]
     entities = [r['entities'] for r in res]
-    assert len(papers) == len(entities), f"len(papers)={len(papers)} != len(entities)={len(entities)}"
+    assert len(papers) == len(
+        entities), f"len(papers)={len(papers)} != len(entities)={len(entities)}"
 
     # for i in range(len(res)):
     #     print(res[i]['paper'])
@@ -29,13 +33,15 @@ def parse_paper_id_pairs(paper_id_pairs, db_manager):
     #     # print(len(res[i]['entities']))
     return papers, entities
 
+
 def cos_metric_between_sent_sets(set1: List[dict], set2: List[dict], tokenizer, model, **kwargs) -> None:
     """Align two subgraphs by adding relations between entities in the two subgraphs."""
     sentences_set1 = [entity['entity']['description'] for entity in set1]
     sentences_set2 = [entity['entity']['description'] for entity in set2]
-    sim_metrics = cos_sim_between_sentences_sets(sentences_set1, sentences_set2, 
-    tokenizer, model, **kwargs)
+    sim_metrics = cos_sim_between_sentences_sets(sentences_set1, sentences_set2,
+                                                 tokenizer, model, **kwargs)
     return sim_metrics
+
 
 def add_sim_metric_to_db(db_manager, cos_metric, set1, set2):
     current_time = time.localtime()

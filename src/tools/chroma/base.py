@@ -3,6 +3,7 @@ from chromadb.config import Settings
 from chromadb.utils import embedding_functions
 from typing import List
 
+
 class ChromaVectorStore:
     def __init__(
         self,
@@ -22,7 +23,7 @@ class ChromaVectorStore:
             name=self.collection_name,
             embedding_function=embedding_functions.DefaultEmbeddingFunction())
         self.client.persist()
-    
+
     def clear_collection(self):
         self.client.delete_collection(name=self.collection_name)
         self.client.persist()

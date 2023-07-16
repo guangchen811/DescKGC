@@ -1,5 +1,6 @@
 from typing import List, Union
 
+
 def response_to_json(search_res):
     res = []
     for result in search_res.results():
@@ -16,8 +17,9 @@ def response_to_json(search_res):
         })
     return res
 
+
 def join_if_list(input: Union[List[str], str, int]) -> str:
-        if isinstance(input, list):
-            return "||".join(input)
-        else:
-            return str(input)
+    if isinstance(input, list):
+        return "||".join(input)
+    else:
+        return str(input)

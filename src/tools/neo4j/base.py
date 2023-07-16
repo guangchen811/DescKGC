@@ -41,7 +41,8 @@ class Neo4jGraph:
                 "Please install it with `pip install neo4j`."
             )
 
-        self._driver = neo4j.GraphDatabase.driver(url, auth=(username, password))
+        self._driver = neo4j.GraphDatabase.driver(
+            url, auth=(username, password))
         self._database = database
         self.schema = ""
         self.node_properties = {}
@@ -64,12 +65,12 @@ class Neo4jGraph:
     def get_node_properties(self) -> List[Dict[str, Any]]:
         """Returns the node properties of the Neo4j database"""
         return self.node_properties
-    
+
     @property
     def get_rel_properties(self) -> List[Dict[str, Any]]:
         """Returns the relationship properties of the Neo4j database"""
         return self.rel_properties
-    
+
     @property
     def get_relationships(self) -> List[str]:
         """Returns the relationships of the Neo4j database"""
@@ -84,7 +85,8 @@ class Neo4jGraph:
                 data = session.run(query, params)
                 return [r.data() for r in data]
             except CypherSyntaxError as e:
-                raise ValueError("Generated Cypher Statement is not valid\n" f"{e}")
+                raise ValueError(
+                    "Generated Cypher Statement is not valid\n" f"{e}")
 
     def refresh_schema(self) -> None:
         """

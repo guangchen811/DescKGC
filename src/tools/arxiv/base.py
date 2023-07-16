@@ -2,6 +2,7 @@
 import arxiv
 import json
 
+
 def response_to_json(search_res):
     res = []
     for result in search_res.results():
@@ -17,6 +18,8 @@ def response_to_json(search_res):
             "pdf_url": result.pdf_url,
         })
     return res
+
+
 def dump_to_json(res, dir_path, file_name):
     file_path = dir_path + file_name + '.json'
     with open(file_path, 'w') as f:
