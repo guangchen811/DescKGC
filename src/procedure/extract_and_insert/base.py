@@ -30,7 +30,7 @@ def extract_entities_from_papers(id_type, id_value_list, topic, db_manager, extr
     for id_value in id_value_list:
         extract_entities_from_paper(id_type, id_value, topic, shortenings, vs_key_info, db_manager, extract_chain)
 
-def get_paper_title_by_filed(db_manager, field_name):
+def get_paper_title_by_field(db_manager, field_name):
     # return paper titles who have field_name
     query = "MATCH (p:Paper) WHERE p.{} IS NOT NULL RETURN p.title AS titles".format(field_name)
     res = db_manager.graph.query(query)
