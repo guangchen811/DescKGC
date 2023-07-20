@@ -50,12 +50,11 @@ class DBManager():
         ]
         for (cypher_insturction, uuid_), paper in zip(cypher_insturction_and_uuid_list, arxiv_papers):
             try:
-                # TODO: uncommnet this line after debug
                 self.graph.query(cypher_insturction)
-                # print(cypher_insturction)
                 metadata = {metadata_key: paper[metadata_key]
                             for metadata_key in metadata_keys}
                 metadata['embedding_source'] = embedding_key
+                metadata['doc_source_type'] = 'provided'
                 metadata['type'] = 'arxiv'
                 self.vector_store.add(
                     documents=[paper[embedding_key]],
