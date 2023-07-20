@@ -33,3 +33,6 @@ shortenings:
   Concept: c
   Model: m
   Dataset: d
+
+entity_alignment:
+  entity_types: [Concept, Model, Dataset]
