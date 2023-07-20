@@ -1,4 +1,4 @@
-topic: network science
+topic: network science # should be changed for new topic
 
 neo4jdb:
   url: bolt://localhost:7687
@@ -8,7 +8,7 @@ neo4jdb:
 chromadb:
   chroma_db_impl: duckdb+parquet
   persist_directory: ./data/chroma/
-  collection_name: relationship_banking
+  collection_name: network science # should be changed for new topic
 
 extractor:
   arxiv:
