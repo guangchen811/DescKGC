@@ -10,6 +10,7 @@ class ChromaVectorStore:
         chroma_db_impl,
         persist_directory,
         collection_name,
+        distance_function,
         **kwargs
     ) -> None:
         self.client = chromadb.Client(
@@ -19,9 +20,12 @@ class ChromaVectorStore:
             )
         )
         self.collection_name = collection_name
+        assert distance_function in ["cosine", "l2", "ip"], "distance function should be one of cosine, l2, ip"
         self.collection = self.client.get_or_create_collection(
             name=self.collection_name,
-            embedding_function=embedding_functions.DefaultEmbeddingFunction())
+            embedding_function=embedding_functions.DefaultEmbeddingFunction(),
+            metadata={"hnsw:space": distance_function})
+            # hnsw doc can be seen at https://github.com/nmslib/hnswlib/tree/master#python-bindings.
         self.client.persist()
 
     def clear_collection(self):
