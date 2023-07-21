@@ -36,6 +36,11 @@ class ChromaVectorStore:
         self.collection.add(documents=documents, metadatas=metadatas, ids=ids)
         self.client.persist()
 
+    def get_by_uuid(self, uuid):
+        return self.collection.get(
+            ids=uuid,
+        )
+
     def get_from_specific_source(self, source):
         if source == "provided":
             embedding_source = "summary" 
@@ -44,6 +49,10 @@ class ChromaVectorStore:
         else:
             raise ValueError("embedding source should be either provided or generated")
         return self.collection.get(where={'embedding_source': embedding_source})
+    
+    def get_specific_type_nodes_uuid(self, node_type):
+        nodes = self.collection.get(where={'type': node_type})
+        return nodes["ids"]
 
     def query(self, query_texts, n_results, **kwargs):
         results = self.collection.query(
@@ -65,6 +74,16 @@ class ChromaVectorStore:
             query_texts=query_texts,
             n_results=n_results,
             where={'embedding_source': embedding_source},
+            **kwargs
+        )
+        return results
+    
+    def query_from_specific_type(self, entity_type, query_texts, n_results, **kwargs):
+        results = self.collection.query(
+            query_texts=query_texts,
+            n_results=n_results,
+            where={'type': entity_type[0]},
+            # TODO: make this `where` clause able to receive a list by `or` operation.
             **kwargs
         )
         return results
