@@ -1,8 +1,6 @@
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from .template import ENTITY_EXTRACT_TEMPLATE, RELATION_EXTRACT_TEMPLATE
-from langchain.prompts import PromptTemplate
-from langchain.chains import LLMChain
 from langchain.chains import SequentialChain
 from langchain.prompts.chat import (
     ChatPromptTemplate,
@@ -31,6 +29,7 @@ def init_extract_chain(llm):
 
     entity_extract_chain = LLMChain(
         llm=llm, prompt=entity_chat_prompt_template, output_key="entities")
+
     relation_extract_chain = LLMChain(
         llm=llm, prompt=relation_chat_prompt_template, output_key="relations")
 
