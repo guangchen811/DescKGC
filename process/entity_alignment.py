@@ -8,6 +8,7 @@ from src.procedure.align_across_subgraphs.base import (
     query_from_specific_type_uuids,
     select_candidate_entities_uuids
 )
+from src.tools.align.parser import AlignOutputParser
 from src.tools.align.base import init_align_chain
 with open('./config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
@@ -19,7 +20,7 @@ args = parser.parse_args()
 db_manager = DBManager(**config['neo4jdb'], **config['chromadb'])
 llm = ChatOpenAI(temperature=config['llm']['temperature'])
 align_chain = init_align_chain(llm = llm)
-
+align_parser = AlignOutputParser()
 entity_type_uuids_dict = get_entity_type_uuids(db_manager, args.entity_types)
 
 for entity_type, uuids in entity_type_uuids_dict.items():
@@ -36,5 +37,9 @@ for entity_type, uuids in entity_type_uuids_dict.items():
                 "source_entity": source_entity_pair_fmt,
                 "candidate_entities": target_entity_pairs_fmt
             })
-            print(res['entities'])
+            entities = align_parser.parse(res['entities'])
+            for entity in entities:
+                print(entity)
+                # todo: complete the following function
+                # db_manager.create_alignment_relationship(uuid, entity[0], entity[1])
     break
