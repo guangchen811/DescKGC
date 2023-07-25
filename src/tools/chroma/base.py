@@ -40,6 +40,16 @@ class ChromaVectorStore:
         return self.collection.get(
             ids=uuid,
         )
+    
+    def get_name_description_by_uuid(self, uuid):
+        results = self.collection.get(
+            ids=uuid,
+        )
+        names = [metadata['name'] for metadata in results['metadatas']]
+        descriptions = results['documents']
+        assert len(names) == len(descriptions)
+        pairs = list(zip(names, descriptions))
+        return pairs
 
     def get_from_specific_source(self, source):
         if source == "provided":
