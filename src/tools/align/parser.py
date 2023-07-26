@@ -1,5 +1,6 @@
-from langchain.schema import BaseOutputParser
 from typing import List
+
+from langchain.schema import BaseOutputParser
 
 
 class AlignOutputParser(BaseOutputParser):

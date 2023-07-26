@@ -1,8 +1,10 @@
-import json
-import yaml
-import arxiv
 import argparse
-from src.tools.arxiv.base import response_to_json, dump_to_json
+import json
+
+import arxiv
+import yaml
+
+from src.tools.arxiv.base import dump_to_json, response_to_json
 
 with open('./config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)

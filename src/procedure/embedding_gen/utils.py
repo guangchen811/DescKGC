@@ -1,6 +1,8 @@
 import json
+
 import torch
 import torch.nn as nn
+
 
 def tokenize_and_encode(sentences, tokenizer, model, max_batch_size=64, padding_length=128):
     """
