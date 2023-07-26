@@ -1,5 +1,6 @@
 from ...tools.db_manager.type import DBManagerType
 
+
 def get_entity_type_uuids(db_manager: DBManagerType, entity_types: list) -> dict:
     assert isinstance(entity_types, list), "entity_types should be a list"
     entity_type_uuids = {node_type: [] for node_type in entity_types}

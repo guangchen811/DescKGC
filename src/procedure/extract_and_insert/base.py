@@ -1,8 +1,4 @@
-from .utils import (
-    entity_relation_format,
-    add_one_entity,
-    add_one_relation
-)
+from .utils import add_one_entity, add_one_relation, entity_relation_format
 
 
 def extract_entities_from_paper(paper_id_type, paper_id_value, topic, shortenings, vs_key_info, db_manager, extract_chain):

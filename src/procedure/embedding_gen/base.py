@@ -1,13 +1,12 @@
 import torch
 import torch.nn as nn
 from transformers import logging
+
 logging.set_verbosity_error()
-from transformers import BertTokenizer, BertModel
-from .utils import (
-    tokenize_and_encode,
-    cos_sim_between_sentences,
-    read_json_cases
-)
+from transformers import BertModel, BertTokenizer
+
+from .utils import (cos_sim_between_sentences, read_json_cases,
+                    tokenize_and_encode)
 
 tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 model = BertModel.from_pretrained("bert-base-uncased")

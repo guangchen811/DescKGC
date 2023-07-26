@@ -1,7 +1,6 @@
 import chromadb
 from chromadb.config import Settings
 from chromadb.utils import embedding_functions
-from typing import List
 
 
 class ChromaVectorStore:

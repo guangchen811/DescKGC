@@ -1,6 +1,8 @@
-import re
-import yaml
 import argparse
+import re
+
+import yaml
+
 from src.tools.db_manager.base import DBManager
 
 with open('./config.yaml', 'r') as f:

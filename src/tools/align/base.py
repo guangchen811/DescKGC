@@ -1,15 +1,10 @@
-from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    HumanMessagePromptTemplate,
-    SystemMessagePromptTemplate
-)
+from langchain.prompts import PromptTemplate
+from langchain.prompts.chat import (ChatPromptTemplate,
+                                    HumanMessagePromptTemplate,
+                                    SystemMessagePromptTemplate)
 
-from .template import (
-    ALIGN_TASK_FORMAT_TEMPLATE,
-    ALIGN_INPUT_TEMPLATE
-)
+from .template import ALIGN_INPUT_TEMPLATE, ALIGN_TASK_FORMAT_TEMPLATE
 
 
 def init_align_chain(llm):
@@ -41,6 +36,7 @@ def init_align_chain(llm):
 
 if __name__ == '__main__':
     from langchain.chat_models import ChatOpenAI
+
     from src.tools.align.utils import entities_warpper
     llm = ChatOpenAI(temperature=0.3)
     align_chain = init_align_chain(llm)

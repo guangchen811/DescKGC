@@ -1,10 +1,14 @@
-import json
-import yaml
 import argparse
+import json
+
+import yaml
 from langchain.chat_models import ChatOpenAI
+
+from src.procedure.extract_and_insert.base import (extract_entities_from_paper,
+                                                   get_paper_title_by_field)
 from src.tools.db_manager.base import DBManager
 from src.tools.extractor.base import init_extract_chain
-from src.procedure.extract_and_insert.base import extract_entities_from_paper, get_paper_title_by_field
+
 with open('./config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 

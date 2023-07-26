@@ -1,14 +1,12 @@
-from ..neo4j.cypher_template import (
-    ARXIV_PAPER_INSERT_INSTRUCTION,
-    DELETE_NODES_INSTRUCTION,
-    DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
-)
-from ..neo4j.utils import response_to_json, join_if_list
-from ..neo4j.base import Neo4jGraph
-from ..chroma.base import ChromaVectorStore
 import uuid
-
 from typing import Tuple
+
+from ..chroma.base import ChromaVectorStore
+from ..neo4j.base import Neo4jGraph
+from ..neo4j.cypher_template import (ARXIV_PAPER_INSERT_INSTRUCTION,
+                                     DELETE_NODES_INSTRUCTION,
+                                     DETACH_AUTHOR_FROM_PAPER_INSTRUCTION)
+from ..neo4j.utils import join_if_list, response_to_json
 
 
 class DBManager():

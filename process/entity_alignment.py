@@ -1,17 +1,15 @@
-import yaml
 import argparse
 
+import yaml
 from langchain.chat_models import ChatOpenAI
 
-from src.tools.db_manager.base import DBManager
-from src.tools.align.utils import entities_warpper
 from src.procedure.align_across_subgraphs.base import (
-    get_entity_type_uuids,
-    query_from_specific_type_uuids,
-    select_candidate_entities_uuids
-)
-from src.tools.align.parser import AlignOutputParser
+    get_entity_type_uuids, query_from_specific_type_uuids,
+    select_candidate_entities_uuids)
 from src.tools.align.base import init_align_chain
+from src.tools.align.parser import AlignOutputParser
+from src.tools.align.utils import entities_warpper
+from src.tools.db_manager.base import DBManager
 
 with open('./config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
