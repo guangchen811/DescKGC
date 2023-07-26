@@ -5,10 +5,12 @@ from langchain.prompts.chat import (
     HumanMessagePromptTemplate,
     SystemMessagePromptTemplate
 )
+
 from .template import (
     ALIGN_TASK_FORMAT_TEMPLATE,
     ALIGN_INPUT_TEMPLATE
 )
+
 
 def init_align_chain(llm):
     system_message_prompt = SystemMessagePromptTemplate(
@@ -35,6 +37,7 @@ def init_align_chain(llm):
         output_key="entities"
     )
     return align_chain
+
 
 if __name__ == '__main__':
     from langchain.chat_models import ChatOpenAI

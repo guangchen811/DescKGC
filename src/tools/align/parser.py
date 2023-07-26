@@ -1,5 +1,7 @@
 from langchain.schema import BaseOutputParser
 from typing import List
+
+
 class AlignOutputParser(BaseOutputParser):
     """Parse out comma separated lists."""
 
@@ -17,5 +19,6 @@ class AlignOutputParser(BaseOutputParser):
         entity_pair_list = []
         if text != "[]":
             entity_list = text[1:-1].strip().split(", ")
-            entity_pair_list = [(int(entity.split(" ")[0]), " ".join(entity.split(" ")[1:])) for entity in entity_list]
+            entity_pair_list = [(int(entity.split(" ")[0]), " ".join(
+                entity.split(" ")[1:])) for entity in entity_list]
         return entity_pair_list
