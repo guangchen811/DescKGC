@@ -1,28 +1,29 @@
 from typing import Any, Dict, List
+from neo4j import Query
 
-node_properties_query = """
+node_properties_query = Query("""
 CALL apoc.meta.data()
 YIELD label, other, elementType, type, property
 WHERE NOT type = "RELATIONSHIP" AND elementType = "node"
 WITH label AS nodeLabels, collect({property:property, type:type}) AS properties
 RETURN {labels: nodeLabels, properties: properties} AS output
-"""
+""")
 
-rel_properties_query = """
+rel_properties_query = Query("""
 CALL apoc.meta.data()
 YIELD label, other, elementType, type, property
 WHERE NOT type = "RELATIONSHIP" AND elementType = "relationship"
 WITH label AS nodeLabels, collect({property:property, type:type}) AS properties
 RETURN {type: nodeLabels, properties: properties} AS output
-"""
+""")
 
-relationships_query = """
+relationships_query = Query("""
 CALL apoc.meta.data()
 YIELD label, other, elementType, type, property
 WHERE type = "RELATIONSHIP" AND elementType = "node"
 RETURN "(:" + label + ")-[:" + property + "]->(:" + toString(other[0]) + ")"
 AS output
-"""
+""")
 
 
 class Neo4jGraph:
@@ -81,7 +82,7 @@ class Neo4jGraph:
         """Returns the relationships of the Neo4j database"""
         return self.relationships
 
-    def query(self, query: str, params: dict = {}) -> List[Dict[str, Any]]:
+    def query(self, query: Query, params: dict = {}) -> List[Dict[str, Any]]:
         """Query Neo4j database."""
         from neo4j.exceptions import CypherSyntaxError
 
