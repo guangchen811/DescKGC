@@ -22,9 +22,7 @@ class DBManager:
         collection_name,
         **kwargs,
     ):
-        self.graph_db = Neo4jGraph(
-            url=url, username=username, password=password, **kwargs
-        )
+        self.graph_db = Neo4jGraph(url=url, username=username, password=password, **kwargs)
         self.vector_db = ChromaVectorStore(
             chroma_db_impl=chroma_db_impl,
             persist_directory=persist_directory,
@@ -44,22 +42,11 @@ class DBManager:
             key in paper_keys for key in [embedding_key, *metadata_keys]
         ), """KeyError: some keys are not in the paper dict.
         Please check the vs_key_info in config.yaml"""
-        cypher_insturction_and_uuid_list = [
-            self._arxiv_paper_to_cypher(
-                paper,
-                arxiv_prefix
-            )
-            for paper in arxiv_papers
-        ]
-        for (cypher_insturction, uuid_), paper in zip(
-            cypher_insturction_and_uuid_list, arxiv_papers
-        ):
+        cypher_insturction_and_uuid_list = [self._arxiv_paper_to_cypher(paper, arxiv_prefix) for paper in arxiv_papers]
+        for (cypher_insturction, uuid_), paper in zip(cypher_insturction_and_uuid_list, arxiv_papers):
             try:
                 self.graph_db.query(cypher_insturction)
-                metadata = {
-                    metadata_key: paper[metadata_key]
-                    for metadata_key in metadata_keys
-                }
+                metadata = {metadata_key: paper[metadata_key] for metadata_key in metadata_keys}
                 metadata["embedding_source"] = embedding_key
                 metadata["doc_source_type"] = "provided"
                 metadata["type"] = "arxiv"
@@ -80,9 +67,7 @@ class DBManager:
         self.graph_db.query(cypher_insturction)
         self.update_schema()
 
-    def _arxiv_paper_to_cypher(
-        self, arxiv_dict: dict, arxiv_prefix: str
-    ) -> Tuple[str, str]:
+    def _arxiv_paper_to_cypher(self, arxiv_dict: dict, arxiv_prefix: str) -> Tuple[str, str]:
         """
         input: an arxiv res dict return from response_to_json
         output: a cypher CREATE instruction
@@ -141,9 +126,7 @@ class DBManager:
         WHERE n.{prop_name} is not NULL
         RETURN DISTINCT labels(n) AS labels"""
         entity_types = self.graph_db.query(SEARCH_INSTURCTION)
-        entity_types = [
-            entity_type["labels"][0] for entity_type in entity_types
-        ]
+        entity_types = [entity_type["labels"][0] for entity_type in entity_types]
         return entity_types
 
     def _show_current_index(self) -> list:
@@ -153,9 +136,7 @@ class DBManager:
         index_list = [index["name"] for index in index_list]
         return index_list
 
-    def create_or_update_index_on_unique_property(
-        self, property_name: str
-    ) -> None:
+    def create_or_update_index_on_unique_property(self, property_name: str) -> None:
         """update index for a given attribute"""
         if f"{property_name}_index" in self._show_current_index():
             cypher_drop_insturction = f"""DROP INDEX {property_name}_index"""
