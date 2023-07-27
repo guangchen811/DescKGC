@@ -4,6 +4,8 @@ def entities_warpper(candidate_entities: list[tuple], is_candiate=True) -> str:
         prefix = ""
         suffix = ""
     else:
+        if len(candidate_entities) == 0:
+            return "[]"
         prefix = "[\n"
         suffix = "\n]"
     content = ""
