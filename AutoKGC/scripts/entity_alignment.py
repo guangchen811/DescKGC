@@ -5,11 +5,11 @@ from langchain.chat_models import ChatOpenAI
 from AutoKGC.procedure.align_across_subgraphs.base import (
     get_entity_type_uuids, query_from_specific_type_uuids,
     select_candidate_entities_uuids)
+from AutoKGC.procedure.load_config import load_config
 from AutoKGC.tools.align.base import init_align_chain
 from AutoKGC.tools.align.parser import AlignOutputParser
 from AutoKGC.tools.align.utils import entities_warpper
 from AutoKGC.tools.db_manager.base import DBManager
-from AutoKGC.procedure.load_config import load_config
 
 config = load_config()
 

@@ -10,7 +10,8 @@ def load_config():
             config = yaml.safe_load(f)
         return config
     else:
-        raise FileNotFoundError(f"Configuration file '{config_file}' not found. Please ensure the file exists.")
+        raise FileNotFoundError(
+            f"Configuration file '{config_file}' not found. Please ensure the file exists.")
 
 
 if __name__ == "__main__":
