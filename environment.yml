@@ -24,7 +24,7 @@ dependencies:
   - libffi=3.4.2
   - libsodium=1.0.18
   - matplotlib-inline=0.1.6
-  - ncurses=6.4=hcec6c5f_0
+  - ncurses=6.4
   - nest-asyncio=1.5.6
   - openssl=1.1.1t
   - packaging=23.1
