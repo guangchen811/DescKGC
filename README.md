@@ -1,6 +1,6 @@
 # KG auto construction
 [![lint](https://github.com/guangchen811/ComplexKG/actions/workflows/lint.yml/badge.svg)](https://github.com/guangchen811/ComplexKG/blob/main/.github/workflows/lint.yml)
-[![unit test](https://github.com/guangchen811/ComplexKG/actions/workflows/test.yml/badge.svg)(https://github.com/guangchen811/ComplexKG/blob/main/.github/workflows/test.yml)]
+[![unit test](https://github.com/guangchen811/ComplexKG/actions/workflows/test.yml/badge.svg)](https://github.com/guangchen811/ComplexKG/blob/main/.github/workflows/test.yml)
 
 This is a package for KG auto construction. To run this project, you should install neo4j==5.7.0 and python>=3.8.
 
