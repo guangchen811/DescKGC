@@ -1,6 +1,5 @@
 import argparse
 
-import yaml
 from langchain.chat_models import ChatOpenAI
 
 from AutoKGC.procedure.align_across_subgraphs.base import (

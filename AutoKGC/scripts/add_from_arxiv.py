@@ -4,8 +4,6 @@ import argparse
 import json
 from pathlib import Path
 
-import yaml
-
 from AutoKGC.tools.db_manager.base import DBManager
 from AutoKGC.procedure.load_config import load_config
 

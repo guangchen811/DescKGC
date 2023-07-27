@@ -1,8 +1,6 @@
 import argparse
-import json
 
 import arxiv
-import yaml
 
 from AutoKGC.tools.arxiv.base import dump_to_json, response_to_json
 from AutoKGC.procedure.load_config import load_config

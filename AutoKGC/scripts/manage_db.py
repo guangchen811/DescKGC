@@ -1,12 +1,9 @@
 # scripts/manage_db.py
 
 import argparse
-import re
 
-import yaml
-
-from AutoKGC.tools.db_manager.base import DBManager
 from AutoKGC.procedure.load_config import load_config
+from AutoKGC.tools.db_manager.base import DBManager
 
 
 def main(args):

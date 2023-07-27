@@ -15,6 +15,7 @@ def test_load_config_success(tmp_path):
     os.chdir(tmp_path)  # change working directory to tmp_path
     assert load_config() == config_data
 
+
 def test_load_config_failure(tmp_path):
     os.chdir(tmp_path)  # change working directory to tmp_path
 

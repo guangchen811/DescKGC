@@ -1,14 +1,12 @@
 import argparse
-import json
 
-import yaml
 from langchain.chat_models import ChatOpenAI
 
-from AutoKGC.procedure.extract_and_insert.base import (extract_entities_from_paper,
-                                                   get_paper_title_by_field)
+from AutoKGC.procedure.extract_and_insert.base import (
+    extract_entities_from_paper, get_paper_title_by_field)
+from AutoKGC.procedure.load_config import load_config
 from AutoKGC.tools.db_manager.base import DBManager
 from AutoKGC.tools.extractor.base import init_extract_chain
-from AutoKGC.procedure.load_config import load_config
 
 config = load_config()
 
