@@ -11,7 +11,7 @@ from AutoKGC.tools.align.parser import AlignOutputParser
 from AutoKGC.tools.align.utils import entities_warpper
 from AutoKGC.tools.db_manager.base import DBManager
 
-with open('./config.yaml', 'r') as f:
+with open('../config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
 parser = argparse.ArgumentParser()

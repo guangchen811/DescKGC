@@ -51,7 +51,7 @@ def delete_by_type(db_manager, node_labels):
 
 
 if __name__ == "__main__":
-    with open('./config.yaml', 'r') as f:
+    with open('../config.yaml', 'r') as f:
         config = yaml.load(f, Loader=yaml.FullLoader)
 
     parser = argparse.ArgumentParser()

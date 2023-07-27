@@ -9,7 +9,7 @@ from AutoKGC.procedure.extract_and_insert.base import (extract_entities_from_pap
 from AutoKGC.tools.db_manager.base import DBManager
 from AutoKGC.tools.extractor.base import init_extract_chain
 
-with open('./config.yaml', 'r') as f:
+with open('../config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
 parser = argparse.ArgumentParser()

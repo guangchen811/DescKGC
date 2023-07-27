@@ -6,7 +6,7 @@ import yaml
 
 from AutoKGC.tools.arxiv.base import dump_to_json, response_to_json
 
-with open('./config.yaml', 'r') as f:
+with open('../config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)
 
 # convert query as a argument
