@@ -12,7 +12,12 @@ class AlignOutputParser(BaseOutputParser):
 
     def get_format_instructions(self) -> str:
         return (
-            "If you think the candidate entity 1 and 3 describe the same concept as the source entity, you should return `[1 <name of entity 1>,3 <name of entity 3>]`. If you think none of the candidate entities describe the same concept as the source entity, you should return `[]`"
+            "If you think the candidate entity 1 and 3 describe "
+            "the same concept as the source entity, you should "
+            "return `[1 <name of entity 1>,3 <name of entity 3>]`. "
+            "If you think none of the candidate entities describe "
+            "the same concept as the source entity, you should "
+            "return `[]`"
         )
 
     def parse(self, text: str) -> List[tuple]:

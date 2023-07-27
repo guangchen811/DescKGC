@@ -1,2 +1,2 @@
 [flake8]
-exclude = */template.py
+exclude = */template.py, */cypher_template.py
