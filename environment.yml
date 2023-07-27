@@ -90,7 +90,6 @@ dependencies:
     - contourpy==1.0.7
     - cryptography==40.0.2
     - cycler==0.11.0
-    - dataclasses-json==0.5.7
     - dbmanagertool==0.1
     - deprecated==1.2.13
     - dill==0.3.6
