@@ -33,7 +33,7 @@ def extract_entities_from_paper(
         }
         metadata["embedding_source"] = "description"
         metadata["doc_source_type"] = "generated"
-        db_manager.vector_store.add(
+        db_manager.vector_db.add(
             documents=[entity[embedding_key]],
             metadatas=[metadata],
             ids=[entity_uuid],
@@ -66,5 +66,5 @@ def get_paper_title_by_field(db_manager, field_name):
     RETURN p.title AS titles""".format(
         field_name
     )
-    res = db_manager.graph.query(query)
+    res = db_manager.graph_db.query(query)
     return [r["titles"] for r in res]

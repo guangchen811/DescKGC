@@ -39,13 +39,13 @@ for entity_type, uuids in entity_type_uuids_dict.items():
         )
         if len(candidate_uuids) > 0:
             source_entity_pair = (
-                db_manager.vector_store.get_name_description_by_uuid(uuid)
+                db_manager.vector_db.get_name_description_by_uuid(uuid)
             )
             source_entity_pair_fmt = entities_warpper(
                 source_entity_pair, is_candiate=False
             )
             target_entity_pairs = (
-                db_manager.vector_store.get_name_description_by_uuid(
+                db_manager.vector_db.get_name_description_by_uuid(
                     candidate_uuids
                 )
             )

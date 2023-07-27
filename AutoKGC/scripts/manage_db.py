@@ -30,7 +30,7 @@ def delete_all(db_manager, node_labels):
         if confirmation == "y":
             for node_label in node_labels:
                 db_manager.delete_by_type(node_label)
-            db_manager.vector_store.client.reset()
+            db_manager.vector_db.client.reset()
         else:
             print("Delete aborted.")
 

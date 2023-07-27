@@ -19,7 +19,7 @@ def entity_relation_format(
     id_type, id_value, topic, db_manager, extract_chain
 ):
     "Return a list of entities and a list of relations"
-    summary = db_manager.graph.query(
+    summary = db_manager.graph_db.query(
         f"""MATCH (n:Paper) WHERE n.{id_type}=$id_value
         RETURN n.summary as summary""",
         params={"id_value": id_value},
@@ -40,7 +40,7 @@ def add_one_entity(db_manager, id_type, id_value, entity, shortning):
     current_time = time.localtime()
     time_str = time.strftime("%Y-%m-%d %H:%M:%S", current_time)
     uuid_ = f"{shortning}-{uuid.uuid4()}"
-    _ = db_manager.graph.query(
+    _ = db_manager.graph_db.query(
         f"""
             MATCH (p:Paper) WHERE p.{id_type}=$id_value
             WITH p
@@ -81,7 +81,7 @@ def add_one_relation(db_manager, relation_triple, entity_uuid_dict):
         )
         return
     relation_name = relation_triple[1].upper().replace(" ", "_")
-    db_manager.graph.query(
+    db_manager.graph_db.query(
         f"""
             MATCH (src) WHERE src.uuid=$src_uuid
             MATCH (dst) WHERE dst.uuid=$dst_uuid
