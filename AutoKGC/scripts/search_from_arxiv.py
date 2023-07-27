@@ -4,7 +4,7 @@ import json
 import arxiv
 import yaml
 
-from src.tools.arxiv.base import dump_to_json, response_to_json
+from AutoKGC.tools.arxiv.base import dump_to_json, response_to_json
 
 with open('./config.yaml', 'r') as f:
     config = yaml.load(f, Loader=yaml.FullLoader)

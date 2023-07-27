@@ -4,6 +4,8 @@ setup(
     name='AutoKGC',
     version='0.0.1',
     packages=find_packages(),
+    readme = "README.md",
+    description='Automatic Knowledge Graph Construction',
     include_package_data=True,
     install_requires=[
         'argparse',
@@ -11,7 +13,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'manage-db=scripts.manage_db:main',
+            'manage-db=src.scripts.manage_db:main',
         ],
     },
 )

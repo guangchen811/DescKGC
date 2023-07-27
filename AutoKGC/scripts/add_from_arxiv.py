@@ -6,7 +6,7 @@ from pathlib import Path
 
 import yaml
 
-from src.tools.db_manager.base import DBManager
+from AutoKGC.tools.db_manager.base import DBManager
 
 
 def main(data_path, file_name):

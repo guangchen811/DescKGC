@@ -5,7 +5,7 @@ import re
 
 import yaml
 
-from src.tools.db_manager.base import DBManager
+from AutoKGC.tools.db_manager.base import DBManager
 
 
 def main(args):

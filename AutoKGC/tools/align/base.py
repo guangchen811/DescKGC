@@ -37,7 +37,7 @@ def init_align_chain(llm):
 if __name__ == '__main__':
     from langchain.chat_models import ChatOpenAI
 
-    from src.tools.align.utils import entities_warpper
+    from AutoKGC.tools.align.utils import entities_warpper
     llm = ChatOpenAI(temperature=0.3)
     align_chain = init_align_chain(llm)
     src_entity = "Complex networks: have attracted a great deal of research interest in the last two decades."
