@@ -6,7 +6,6 @@ Cause this project is still under development, so there is no guarantee that it 
 
 This package provides the following functions:
 
-
 | Function | Arxiv | Wikipedia | Custom |
 | - | - | - | - |
 | **Web Crawler** | ✅ |  |  |

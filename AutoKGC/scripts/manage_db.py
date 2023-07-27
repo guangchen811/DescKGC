@@ -1,5 +1,3 @@
-# scripts/manage_db.py
-
 import argparse
 
 from AutoKGC.procedure.load_config import load_config

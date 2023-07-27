@@ -1,4 +1,4 @@
-from ...tools.db_manager.type import DBManagerType
+from AutoKGC.tools.db_manager.type import DBManagerType
 
 
 def get_entity_type_uuids(
