@@ -13,5 +13,5 @@ def entities_warpper(candidate_entities: list[tuple], is_candiate=True) -> str:
 
 
 if __name__ == "__main__":
-    formated = entities_warpper([('Q1', 'A'), ('Q2', 'B')])
+    formated = entities_warpper([("Q1", "A"), ("Q2", "B")])
     print(formated)

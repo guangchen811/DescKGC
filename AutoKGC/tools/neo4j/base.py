@@ -20,7 +20,8 @@ relationships_query = """
 CALL apoc.meta.data()
 YIELD label, other, elementType, type, property
 WHERE type = "RELATIONSHIP" AND elementType = "node"
-RETURN "(:" + label + ")-[:" + property + "]->(:" + toString(other[0]) + ")" AS output
+RETURN "(:" + label + ")-[:" + property + "]->(:" + toString(other[0]) + ")"
+AS output
 """
 
 
@@ -29,8 +30,11 @@ class Neo4jGraph:
 
     def __init__(
         self,
-        url: str, username: str, password: str, database: str = "neo4j",
-        **kwargs
+        url: str,
+        username: str,
+        password: str,
+        database: str = "neo4j",
+        **kwargs,
     ) -> None:
         """Create a new Neo4j graph wrapper instance."""
         try:
@@ -42,7 +46,8 @@ class Neo4jGraph:
             )
 
         self._driver = neo4j.GraphDatabase.driver(
-            url, auth=(username, password))
+            url, auth=(username, password)
+        )
         self._database = database
         self.schema = ""
         self.node_properties = {}
@@ -86,7 +91,8 @@ class Neo4jGraph:
                 return [r.data() for r in data]
             except CypherSyntaxError as e:
                 raise ValueError(
-                    "Generated Cypher Statement is not valid\n" f"{e}")
+                    "Generated Cypher Statement is not valid\n" f"{e}"
+                )
 
     def refresh_schema(self) -> None:
         """
@@ -104,6 +110,6 @@ class Neo4jGraph:
         The relationships are the following:
         {[el['output'] for el in relationships]}
         """
-        self.node_properties = [el['output'] for el in node_properties]
-        self.rel_properties = [el['output'] for el in relationships_properties]
-        self.relationships = [el['output'] for el in relationships]
+        self.node_properties = [el["output"] for el in node_properties]
+        self.rel_properties = [el["output"] for el in relationships_properties]
+        self.relationships = [el["output"] for el in relationships]

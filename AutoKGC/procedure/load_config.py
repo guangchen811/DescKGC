@@ -11,7 +11,8 @@ def load_config():
         return config
     else:
         raise FileNotFoundError(
-            f"Configuration file '{config_file}' not found. Please ensure the file exists.")
+            f"Configuration file '{config_file}' not found."
+            "Please ensure the file exists.")
 
 
 if __name__ == "__main__":
