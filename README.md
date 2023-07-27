@@ -8,7 +8,7 @@ This package provides the following functions:
 
 
 | Function | Arxiv | Wikipedia | Custom |
-| - | - | - | - | - |
+| - | - | - | - |
 | **Web Crawler** | ✅ |  |  |
 | **KG Construction** | ✅ |  |
 | **KG Alignment** | ✅ |  |
