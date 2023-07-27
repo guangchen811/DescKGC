@@ -1,4 +1,4 @@
-name: kg
+name: base
 channels:
   - conda-forge
   - defaults
