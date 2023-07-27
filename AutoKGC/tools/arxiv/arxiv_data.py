@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Type
 
 
 @dataclass
@@ -13,3 +13,6 @@ class AriXivData:
     primary_category: str
     categories: List[str]
     pdf_url: str
+
+
+AriXivDataType = Type[AriXivData]

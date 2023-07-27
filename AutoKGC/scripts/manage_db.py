@@ -4,7 +4,7 @@ from AutoKGC.procedures.load_config import load_config
 from AutoKGC.tools.db_manager.base import DBManager
 
 
-def main(args):
+def main(args, config):
     db_manager = DBManager(**config["neo4jdb"], **config["chromadb"])
     node_labels = db_manager.get_node_labels()
 
@@ -67,4 +67,4 @@ if __name__ == "__main__":
         help="Show the schema of the database.",
     )
     args = parser.parse_args()
-    main(args)
+    main(args, config)

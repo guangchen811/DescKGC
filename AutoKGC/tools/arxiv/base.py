@@ -1,11 +1,10 @@
-# should be format, but not yet.
 import dataclasses
 import json
 
-from .arxiv_data import AriXivData
+from .arxiv_data import AriXivData, AriXivDataType, List
 
 
-def response_to_json(search_res):
+def response_to_dataclass(search_res) -> List[AriXivDataType]:
     res = []
     for result in search_res.results():
         search_result = AriXivData(
@@ -23,7 +22,7 @@ def response_to_json(search_res):
     return res
 
 
-def dump_to_json(res, dir_path, file_name):
+def dump_to_json(res: List[AriXivDataType], dir_path: str, file_name: str):
     file_path = dir_path + file_name + ".json"
     with open(file_path, "w") as f:
         json.dump([dataclasses.asdict(item) for item in res], f)

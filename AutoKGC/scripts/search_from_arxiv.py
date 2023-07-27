@@ -3,7 +3,7 @@ import argparse
 import arxiv
 
 from AutoKGC.procedures.load_config import load_config
-from AutoKGC.tools.arxiv.base import dump_to_json, response_to_json
+from AutoKGC.tools.arxiv.base import dump_to_json, response_to_dataclass
 
 
 def main(query: str, max_results: int, data_path: str) -> None:
@@ -13,7 +13,7 @@ def main(query: str, max_results: int, data_path: str) -> None:
         sort_by=arxiv.SortCriterion.Relevance,
         sort_order=arxiv.SortOrder.Descending,
     )
-    res = response_to_json(search)
+    res = response_to_dataclass(search)
     dumped_file_name = query.replace(" ", "_").replace("-", "_")
     dump_to_json(res, data_path, dumped_file_name)
     print(f"dumped to {data_path} as {dumped_file_name}.json")
