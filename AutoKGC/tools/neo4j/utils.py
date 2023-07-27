@@ -8,7 +8,7 @@ def response_to_json(search_res):
             "title": result.title,
             "authors": [author.name for author in result.authors],
             "published": str(result.published),
-            "updatedDate": str(result.updated),
+            "updated_date": str(result.updated),
             "summary": result.summary,
             "doi": result.doi,
             "primary_category": result.primary_category,

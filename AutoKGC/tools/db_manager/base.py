@@ -91,7 +91,7 @@ class DBManager:
             title=join_if_list(arxiv_dict["title"]),
             authors=join_if_list(arxiv_dict["authors"]),
             published=join_if_list(arxiv_dict["published"]),
-            updatedDate=join_if_list(arxiv_dict["updatedDate"]),
+            updated_date=join_if_list(arxiv_dict["updated_date"]),
             summary=join_if_list(arxiv_dict["summary"].replace("\n", " ")),
             doi=join_if_list(arxiv_dict["doi"]),
             primary_category=join_if_list(arxiv_dict["primary_category"]),
