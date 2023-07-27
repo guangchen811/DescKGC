@@ -10,9 +10,9 @@ from AutoKGC.tools.align.base import init_align_chain
 from AutoKGC.tools.align.parser import AlignOutputParser
 from AutoKGC.tools.align.utils import entities_warpper
 from AutoKGC.tools.db_manager.base import DBManager
+from AutoKGC.procedure.load_config import load_config
 
-with open('../config.yaml', 'r') as f:
-    config = yaml.load(f, Loader=yaml.FullLoader)
+config = load_config()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--entity_types', type=list,

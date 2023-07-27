@@ -8,9 +8,9 @@ from AutoKGC.procedure.extract_and_insert.base import (extract_entities_from_pap
                                                    get_paper_title_by_field)
 from AutoKGC.tools.db_manager.base import DBManager
 from AutoKGC.tools.extractor.base import init_extract_chain
+from AutoKGC.procedure.load_config import load_config
 
-with open('../config.yaml', 'r') as f:
-    config = yaml.load(f, Loader=yaml.FullLoader)
+config = load_config()
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--id_type', type=str)

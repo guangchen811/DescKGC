@@ -7,6 +7,7 @@ from pathlib import Path
 import yaml
 
 from AutoKGC.tools.db_manager.base import DBManager
+from AutoKGC.procedure.load_config import load_config
 
 
 def main(data_path, file_name):
@@ -29,8 +30,7 @@ def main(data_path, file_name):
 
 
 if __name__ == "__main__":
-    with open('../config.yaml', 'r') as f:
-        config = yaml.load(f, Loader=yaml.FullLoader)
+    config = load_config()
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--data-path', type=str,

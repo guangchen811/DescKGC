@@ -6,6 +6,7 @@ import re
 import yaml
 
 from AutoKGC.tools.db_manager.base import DBManager
+from AutoKGC.procedure.load_config import load_config
 
 
 def main(args):
@@ -51,8 +52,7 @@ def delete_by_type(db_manager, node_labels):
 
 
 if __name__ == "__main__":
-    with open('../config.yaml', 'r') as f:
-        config = yaml.load(f, Loader=yaml.FullLoader)
+    config = load_config()
 
     parser = argparse.ArgumentParser()
     group = parser.add_mutually_exclusive_group(required=True)
