@@ -20,6 +20,7 @@ jobs:
         echo $CONDA/bin >> $GITHUB_PATH
     - name: Install dependencies
       run: |
+        conda config --set restore_free_channel true
         conda env update --file environment.yml --name kg
     - name: Lint with flake8
       run: |
