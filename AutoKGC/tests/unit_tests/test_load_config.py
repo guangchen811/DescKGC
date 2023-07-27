@@ -3,7 +3,7 @@ import os
 import pytest
 import yaml
 
-from AutoKGC.procedure.load_config import load_config
+from AutoKGC.procedures.load_config import load_config
 
 
 def test_load_config_success(tmp_path):
