@@ -1,12 +1,12 @@
 import uuid
 from typing import Tuple
 
-from ..chroma.base import ChromaVectorStore
-from ..neo4j.base import Neo4jGraph
-from ..neo4j.cypher_template import (ARXIV_PAPER_INSERT_INSTRUCTION,
-                                     DELETE_NODES_INSTRUCTION,
-                                     DETACH_AUTHOR_FROM_PAPER_INSTRUCTION)
-from ..neo4j.utils import join_if_list
+from AutoKGC.tools.chroma.base import ChromaVectorStore
+from AutoKGC.tools.neo4j.base import Neo4jGraph
+from AutoKGC.tools.neo4j.cypher_template import (
+    ARXIV_PAPER_INSERT_INSTRUCTION, DELETE_NODES_INSTRUCTION,
+    DETACH_AUTHOR_FROM_PAPER_INSTRUCTION)
+from AutoKGC.tools.neo4j.utils import join_if_list
 
 
 class DBManager:

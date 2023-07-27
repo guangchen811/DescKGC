@@ -1,9 +1,7 @@
 from langchain.chains import LLMChain, SequentialChain
 from langchain.prompts import PromptTemplate
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    HumanMessagePromptTemplate,
-)
+from langchain.prompts.chat import (ChatPromptTemplate,
+                                    HumanMessagePromptTemplate)
 
 from .template import ENTITY_EXTRACT_TEMPLATE, RELATION_EXTRACT_TEMPLATE
 
