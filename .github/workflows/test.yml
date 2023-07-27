@@ -22,6 +22,7 @@ jobs:
       run: |
         conda config --set restore_free_channel true
         conda env update --file environment.yml --name kg
+        conda init bash
         conda activate kg
     - name: Lint with flake8
       run: |
