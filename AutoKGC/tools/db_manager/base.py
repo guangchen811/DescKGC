@@ -6,7 +6,7 @@ from ..neo4j.base import Neo4jGraph
 from ..neo4j.cypher_template import (ARXIV_PAPER_INSERT_INSTRUCTION,
                                      DELETE_NODES_INSTRUCTION,
                                      DETACH_AUTHOR_FROM_PAPER_INSTRUCTION)
-from ..neo4j.utils import join_if_list, response_to_json
+from ..neo4j.utils import join_if_list
 
 
 class DBManager():
