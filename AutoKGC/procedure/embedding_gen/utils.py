@@ -13,7 +13,7 @@ def tokenize_and_encode(
     encoded = []
     for i in range(0, len(sentences), max_batch_size):
         encoded_batch = tokenizer.batch_encode_plus(
-            sentences[i : i + max_batch_size],
+            sentences[i: i + max_batch_size],
             padding="max_length",
             max_length=padding_length,
             truncation=True,
