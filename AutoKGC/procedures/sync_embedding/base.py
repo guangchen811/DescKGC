@@ -9,6 +9,7 @@ def generate_node_id(node_type):
 
 
 def get_node_prefix(node_type):
+    # TODO: import from configration file.
     prefixes = {
         "paper": "P",
         "concept": "C",

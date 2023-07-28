@@ -4,6 +4,11 @@ import yaml
 
 
 def load_config():
+    """Load configuration file from the current directory.
+    Currently, the configuration file is named as '.kgc_config.yaml'.
+
+    :raises FileNotFoundError: If the configuration file is not found.
+    """
     config_file = './.kgc_config.yaml'
     if os.path.exists(config_file):
         with open(config_file, 'r') as f:
