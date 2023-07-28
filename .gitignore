@@ -1,4 +1,5 @@
 # 
+docs/*
 data/*.json
 data/chroma/*
 data/arxiv/*
