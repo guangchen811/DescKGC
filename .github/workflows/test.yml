@@ -3,7 +3,7 @@ name: Unit Tests
 on: [push]
 
 jobs:
-  build-linux:
+  unit-test:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 5
