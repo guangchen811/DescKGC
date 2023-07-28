@@ -7,16 +7,6 @@ from AutoKGC.tools.db_manager.base import DBManager
 
 
 def main(data_path, file_name):
-    """[Summary]
-    :param [ParamName]: [ParamDescription], defaults to [DefaultParamVal]
-    :type [ParamName]: [ParamType](, optional)
-    ...
-    :raises [ErrorType]: [ErrorDescription]
-    ...
-    :return: [ReturnDescription]
-    :rtype: [ReturnType]
-    """
-
     # Load the json file
     data_path = Path(data_path)
     file_path = data_path / f"{file_name}.json"
