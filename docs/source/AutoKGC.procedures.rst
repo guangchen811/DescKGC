@@ -1,0 +1,31 @@
+AutoKGC.procedures package
+==========================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   AutoKGC.procedures.align_across_subgraphs
+   AutoKGC.procedures.extract_and_insert
+   AutoKGC.procedures.sync_embedding
+
+Submodules
+----------
+
+AutoKGC.procedures.load\_config module
+--------------------------------------
+
+.. automodule:: AutoKGC.procedures.load_config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: AutoKGC.procedures
+   :members:
+   :undoc-members:
+   :show-inheritance:
