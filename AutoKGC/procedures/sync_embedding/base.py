@@ -10,13 +10,13 @@ def generate_node_id(node_type):
 
 def get_node_prefix(node_type):
     prefixes = {
-        'paper': 'P',
-        'concept': 'C',
-        'dataset': 'D',
+        "paper": "P",
+        "concept": "C",
+        "dataset": "D",
     }
-    return prefixes.get(node_type.lower(), '')
+    return prefixes.get(node_type.lower(), "")
 
 
-# Example usage
-paper_node_id = generate_node_id('paper')
-print(paper_node_id)
+if __name__ == "__main__":
+    paper_node_id = generate_node_id("paper")
+    print(paper_node_id)

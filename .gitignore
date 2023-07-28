@@ -1,5 +1,6 @@
 # 
 */.DS_Store
+.DS_Store
 data/*.json
 data/chroma/*
 data/arxiv/*
