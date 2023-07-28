@@ -1,4 +1,4 @@
-from typing import List, Type
+from typing import List, Type, Tuple
 
 from langchain.chains import LLMChain
 from langchain.schema import BaseOutputParser
@@ -53,7 +53,21 @@ def align_source_and_candidates_with_chain(
     align_parser: Type[BaseOutputParser],
     uuid: str,
     candidate_uuids: List[str],
-):
+) -> List[Tuple(int, str)]:
+    """use the align_chain to align the source entity and the candidate entities.
+
+    Args:
+        topic (str): The topic of the conversation.
+        db_manager (DBManagerType): The database manager.
+        align_chain (Type[LLMChain]): The align chain.
+        align_parser (Type[BaseOutputParser]): The align parser.
+        uuid (str): The uuid of the source entity.
+        candidate_uuids (List[str]): The uuids of the candidate entities.
+
+    Returns:
+        List[Tuple(int, str)]: A list of tuples, each tuple contains the order of the
+        entity and the entity name. For example, [(0, "entity1"), (1, "entity2")].
+    """
     source_entity_pair = db_manager.vector_db.get_name_description_by_uuid(uuid)
     source_entity_pair_fmt = entities_warpper(source_entity_pair, is_candiate=False)
     target_entity_pairs = db_manager.vector_db.get_name_description_by_uuid(candidate_uuids)
