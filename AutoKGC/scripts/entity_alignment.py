@@ -3,11 +3,15 @@ import argparse
 from langchain.chat_models import ChatOpenAI
 
 from AutoKGC.procedures.align_across_subgraphs.base import (
-    align_source_and_candidates_with_chain, get_entity_type_uuids,
-    query_from_specific_type_uuids, select_candidate_entities_uuids)
+    align_source_and_candidates_with_chain,
+    get_entity_type_uuids,
+    query_from_specific_type_uuids,
+    select_candidate_entities_uuids,
+    merge_entities_with_chain,
+)
 from AutoKGC.procedures.load_config import load_config
-from AutoKGC.tools.align.base import init_align_chain
-from AutoKGC.tools.align.parser import EntityAlignOutputParser
+from AutoKGC.tools.align.base import init_align_chain, init_entity_merge_chain
+from AutoKGC.tools.align.parser import EntityAlignOutputParser, EntityMergeOutputParser
 from AutoKGC.tools.db_manager.base import DBManager
 
 
@@ -17,6 +21,8 @@ def main(entity_types):
     topic = config["topic"]
     align_chain = init_align_chain(llm=llm)
     align_parser = EntityAlignOutputParser()
+    merge_chain = init_entity_merge_chain(llm=llm)
+    merge_parser = EntityMergeOutputParser()
     entity_type_uuids_dict = get_entity_type_uuids(db_manager, entity_types)
 
     for entity_type, uuids in entity_type_uuids_dict.items():
@@ -28,17 +34,16 @@ def main(entity_types):
                 src_entity_uuid=uuid,
             )
             if len(candidate_uuids) > 0:
-                entities = align_source_and_candidates_with_chain(
+                selected_entities = align_source_and_candidates_with_chain(
                     topic, db_manager, align_chain, align_parser, uuid, candidate_uuids
                 )
-                for entity in entities:
-                    print(entity)
-                    
-                    # TODO: complete the following function
-                    # db_manager.create_alignment_relationship(
-                    #     uuid, entity[0], entity[1]
-                    # )
-                break
+                selected_entities_ids = [entity[0] - 1 for entity in selected_entities]
+                selected_candidate_uuids = [candidate_uuids[i] for i in selected_entities_ids]
+                new_entity = merge_entities_with_chain(
+                    db_manager, topic, merge_chain, merge_parser, uuid, selected_candidate_uuids
+                )
+                # todo: add new entity to the dbs
+            break
         break
 
 

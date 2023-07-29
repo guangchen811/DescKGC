@@ -117,3 +117,16 @@ def align_source_and_candidates_with_chain(
     )
     entities = align_parser.parse(res["entities"])
     return entities
+
+
+def merge_entities_with_chain(db_manager, topic, merge_chain, merge_parser, uuid, selected_candidate_uuids):
+    name_descriptions_to_merge = db_manager.vector_db.get_name_description_by_uuid(
+                    [uuid] + selected_candidate_uuids
+                )
+    target_entity_pairs_fmt = entities_warpper(name_descriptions_to_merge)
+    res = merge_chain({
+                    "topic": topic,
+                    "entities": target_entity_pairs_fmt,
+                })
+    new_entity = merge_parser.parse(res['new_entity'])
+    return new_entity
