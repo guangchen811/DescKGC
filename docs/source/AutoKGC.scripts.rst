@@ -1,6 +1,11 @@
 AutoKGC.scripts package
 =======================
 
+.. automodule:: AutoKGC.scripts
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -40,14 +45,6 @@ AutoKGC.scripts.search\_from\_arxiv module
 ------------------------------------------
 
 .. automodule:: AutoKGC.scripts.search_from_arxiv
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.scripts
    :members:
    :undoc-members:
    :show-inheritance:

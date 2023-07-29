@@ -20,9 +20,16 @@ release = 'v0.0.2'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = ['sphinx.ext.autodoc']
+autodoc_default_options = {
+    # 'members': None,  # don't include class members
+    # 'undoc-members': None,  # don't include members without docstrings
+}
+autodoc_member_order = 'groupwise'
+
 
 templates_path = ['_templates']
 exclude_patterns = []
+
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

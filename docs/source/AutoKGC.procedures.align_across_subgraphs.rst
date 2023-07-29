@@ -1,6 +1,11 @@
 AutoKGC.procedures.align\_across\_subgraphs package
 ===================================================
 
+.. automodule:: AutoKGC.procedures.align_across_subgraphs
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -12,10 +17,10 @@ AutoKGC.procedures.align\_across\_subgraphs.base module
    :undoc-members:
    :show-inheritance:
 
-Module contents
----------------
+AutoKGC.procedures.align\_across\_subgraphs.utils module
+--------------------------------------------------------
 
-.. automodule:: AutoKGC.procedures.align_across_subgraphs
+.. automodule:: AutoKGC.procedures.align_across_subgraphs.utils
    :members:
    :undoc-members:
    :show-inheritance:

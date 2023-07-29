@@ -1,6 +1,11 @@
 AutoKGC.tests package
 =====================
 
+.. automodule:: AutoKGC.tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -8,11 +13,3 @@ Subpackages
    :maxdepth: 4
 
    AutoKGC.tests.unit_tests
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.tests
-   :members:
-   :undoc-members:
-   :show-inheritance:

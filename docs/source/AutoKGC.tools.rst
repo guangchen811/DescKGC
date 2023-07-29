@@ -1,6 +1,11 @@
 AutoKGC.tools package
 =====================
 
+.. automodule:: AutoKGC.tools
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -13,11 +18,3 @@ Subpackages
    AutoKGC.tools.db_manager
    AutoKGC.tools.extractor
    AutoKGC.tools.neo4j
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.tools
-   :members:
-   :undoc-members:
-   :show-inheritance:

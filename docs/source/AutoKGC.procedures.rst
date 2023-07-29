@@ -1,6 +1,11 @@
 AutoKGC.procedures package
 ==========================
 
+.. automodule:: AutoKGC.procedures
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -18,14 +23,6 @@ AutoKGC.procedures.load\_config module
 --------------------------------------
 
 .. automodule:: AutoKGC.procedures.load_config
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.procedures
    :members:
    :undoc-members:
    :show-inheritance:

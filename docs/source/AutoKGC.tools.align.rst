@@ -1,6 +1,11 @@
 AutoKGC.tools.align package
 ===========================
 
+.. automodule:: AutoKGC.tools.align
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -32,14 +37,6 @@ AutoKGC.tools.align.utils module
 --------------------------------
 
 .. automodule:: AutoKGC.tools.align.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.tools.align
    :members:
    :undoc-members:
    :show-inheritance:

@@ -21,10 +21,11 @@ jobs:
         pip install furo
     - name: Generate docs
       run: |
-        sphinx-apidoc -f -o source ./AutoKGC
+        sphinx-apidoc --module-first -f -o source ./AutoKGC
     - name: Build docs
       run: |
         cd docs
+        make clean
         make html
         cd ..
     # would be deployed after the repo is public

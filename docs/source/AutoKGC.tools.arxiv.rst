@@ -1,6 +1,11 @@
 AutoKGC.tools.arxiv package
 ===========================
 
+.. automodule:: AutoKGC.tools.arxiv
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -16,14 +21,6 @@ AutoKGC.tools.arxiv.base module
 -------------------------------
 
 .. automodule:: AutoKGC.tools.arxiv.base
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.tools.arxiv
    :members:
    :undoc-members:
    :show-inheritance:

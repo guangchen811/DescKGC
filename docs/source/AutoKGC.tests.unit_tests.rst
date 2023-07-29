@@ -1,6 +1,11 @@
 AutoKGC.tests.unit\_tests package
 =================================
 
+.. automodule:: AutoKGC.tests.unit_tests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -17,14 +22,6 @@ AutoKGC.tests.unit\_tests.test\_load\_config module
 ---------------------------------------------------
 
 .. automodule:: AutoKGC.tests.unit_tests.test_load_config
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.tests.unit_tests
    :members:
    :undoc-members:
    :show-inheritance:

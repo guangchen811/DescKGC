@@ -1,6 +1,11 @@
 AutoKGC.tools.db\_manager package
 =================================
 
+.. automodule:: AutoKGC.tools.db_manager
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -16,14 +21,6 @@ AutoKGC.tools.db\_manager.type module
 -------------------------------------
 
 .. automodule:: AutoKGC.tools.db_manager.type
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.tools.db_manager
    :members:
    :undoc-members:
    :show-inheritance:

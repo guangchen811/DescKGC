@@ -5,7 +5,7 @@ import yaml
 
 def load_config():
     """Load configuration file from the current directory.
-    Currently, the configuration file is named as '.kgc_config.yaml'.
+    Currently, the configuration file is named as `.kgc_config.yaml`.
 
     :raises FileNotFoundError: If the configuration file is not found.
     """

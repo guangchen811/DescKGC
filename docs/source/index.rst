@@ -6,15 +6,19 @@
 Welcome to AutoKGC's documentation!
 ===================================
 
-.. toctree::
-   :maxdepth: 3
-   :caption: Contents:
+Here you can find the documentation for AutoKGC, a tool for automatic knowledge graph construction.
 
-   modules
+.. toctree:: 
+   :maxdepth: 2
+   :caption: Contents:
+   
+   Installation
+   Introduction
+   Usage
+   Source code </AutoKGC>
 
 Indices and tables
 ==================
 
 * :ref:`genindex`
 * :ref:`modindex`
-* :ref:`search`

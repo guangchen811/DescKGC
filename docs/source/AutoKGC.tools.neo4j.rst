@@ -1,6 +1,11 @@
 AutoKGC.tools.neo4j package
 ===========================
 
+.. automodule:: AutoKGC.tools.neo4j
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Submodules
 ----------
 
@@ -24,14 +29,6 @@ AutoKGC.tools.neo4j.utils module
 --------------------------------
 
 .. automodule:: AutoKGC.tools.neo4j.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: AutoKGC.tools.neo4j
    :members:
    :undoc-members:
    :show-inheritance:

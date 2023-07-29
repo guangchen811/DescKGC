@@ -1,6 +1,11 @@
 AutoKGC package
 ===============
 
+.. automodule:: AutoKGC
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -11,11 +16,3 @@ Subpackages
    AutoKGC.scripts
    AutoKGC.tests
    AutoKGC.tools
-
-Module contents
----------------
-
-.. automodule:: AutoKGC
-   :members:
-   :undoc-members:
-   :show-inheritance:
