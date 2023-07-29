@@ -8,9 +8,11 @@ Welcome to AutoKGC's documentation!
 
 Here you can find the documentation for AutoKGC, a tool for automatic knowledge graph construction.
 
+Contents
+--------
+
 .. toctree:: 
    :maxdepth: 2
-   :caption: Contents:
    
    Installation
    Introduction
