@@ -17,3 +17,10 @@ ALIGN_INPUT_TEMPLATE = """the source entity:
 the candidate entities:
 {candidate_entities}
 your answer:"""
+
+MERGE_TASK_FORMAT_TEMPLATE = """You are a researcher in the field of {topic}. During a knowledge graph construction process, you are asked to merge the entities with the same meaning to reduce the abandoned entities. Each entity contains the name and description in the format of `<name>: <description>`.
+Please read the entities carefully and write a new entity that describes the same concept as the entities you read. The result should be formatted as `<name>: <description>`."""
+
+MERGE_INPUT_TEMPLATE = """the entities:
+{entities}
+your answer:"""

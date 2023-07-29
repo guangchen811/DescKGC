@@ -1,4 +1,4 @@
-from typing import List, Type, Tuple
+from typing import List, Tuple, Type, Dict
 
 from langchain.chains import LLMChain
 from langchain.schema import BaseOutputParser
@@ -7,7 +7,16 @@ from AutoKGC.tools.align.utils import entities_warpper
 from AutoKGC.tools.db_manager.type import DBManagerType
 
 
-def get_entity_type_uuids(db_manager: DBManagerType, entity_types: list) -> dict:
+def get_entity_type_uuids(db_manager: DBManagerType, entity_types: list) -> Dict:
+    """Return a dictionary of entity types and their uuids.
+
+    :param db_manager: DBManager object
+    :type db_manager: DBManagerType
+    :param entity_types: list of entity types
+    :type entity_types: list
+    :return: dictionary of entity types and their uuids
+    :rtype: Dict
+    """
     assert isinstance(entity_types, list), "entity_types should be a list"
     entity_type_uuids = {node_type: [] for node_type in entity_types}
     for node_type in entity_types:
@@ -21,6 +30,18 @@ def query_from_specific_type_uuids(
     target_entity_types: list,
     query_entity_uuid: str,
 ) -> list:
+    """Return a list of similar entities from the target entity types.
+
+    given a query entity uuid.
+    :param db_manager: DBManager object
+    :type db_manager: DBManagerType
+    :param target_entity_types: list of target entity types
+    :type target_entity_types: list
+    :param query_entity_uuid: uuid of the query entity
+    :type query_entity_uuid: str
+    :return: list of similar entities
+    :rtype: list
+    """
     query = db_manager.vector_db.get_by_uuid(uuid=[query_entity_uuid])["documents"][0]
 
     results = db_manager.vector_db.query_from_specific_type(target_entity_types, query, n_results=10)
@@ -28,8 +49,18 @@ def query_from_specific_type_uuids(
 
 
 def select_candidate_entities_uuids(threshold: float, similar_entities: dict, src_entity_uuid: str) -> list:
-    "Return a list of the uuids of similar entities within the threshold"
-    "distance from the source entity."
+    """Return a list of the uuids of similar entities within the threshold.
+
+    distance from the source entity.
+    :param threshold: threshold distance
+    :type threshold: float
+    :param similar_entities: similar entities
+    :type similar_entities: dict
+    :param src_entity_uuid: uuid of the source entity
+    :type src_entity_uuid: str
+    :return: list of uuids of similar entities within the threshold distance
+    :rtype: list
+    """
 
     distances = similar_entities["distances"][0]
     entity_uuids = similar_entities["ids"][0]
@@ -53,21 +84,26 @@ def align_source_and_candidates_with_chain(
     align_parser: Type[BaseOutputParser],
     uuid: str,
     candidate_uuids: List[str],
-) -> List[Tuple(int, str)]:
+) -> List[Tuple[int, str]]:
     """use the align_chain to align the source entity and the candidate entities.
 
-    Args:
-        topic (str): The topic of the conversation.
-        db_manager (DBManagerType): The database manager.
-        align_chain (Type[LLMChain]): The align chain.
-        align_parser (Type[BaseOutputParser]): The align parser.
-        uuid (str): The uuid of the source entity.
-        candidate_uuids (List[str]): The uuids of the candidate entities.
-
-    Returns:
-        List[Tuple(int, str)]: A list of tuples, each tuple contains the order of the
-        entity and the entity name. For example, [(0, "entity1"), (1, "entity2")].
+    :param topic: The topic of the conversation
+    :type topic: str
+    :param db_manager: The database manager
+    :type db_manager: DBManagerType
+    :param align_chain: The align chain
+    :type align_chain: Type[LLMChain]
+    :param align_parser: The align parser
+    :type align_parser: Type[BaseOutputParser]
+    :param uuid: The uuid of the source entity
+    :type uuid: str
+    :param candidate_uuids: The uuids of the candidate entities
+    :type candidate_uuids: List[str]
+    :return: A list of tuples, each tuple contains the order of the entity and the entity name.
+        For example, [(0, "entity1"), (1, "entity2")].
+    :rtype: List[Tuple[int, str]]
     """
+
     source_entity_pair = db_manager.vector_db.get_name_description_by_uuid(uuid)
     source_entity_pair_fmt = entities_warpper(source_entity_pair, is_candiate=False)
     target_entity_pairs = db_manager.vector_db.get_name_description_by_uuid(candidate_uuids)

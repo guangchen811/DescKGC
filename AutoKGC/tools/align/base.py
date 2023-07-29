@@ -1,15 +1,21 @@
+from typing import Type
+
 from langchain.chains import LLMChain
+from langchain.llms.base import BaseLLM
 from langchain.prompts import PromptTemplate
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    HumanMessagePromptTemplate,
-    SystemMessagePromptTemplate,
-)
+from langchain.prompts.chat import ChatPromptTemplate, HumanMessagePromptTemplate, SystemMessagePromptTemplate
 
-from .template import ALIGN_INPUT_TEMPLATE, ALIGN_TASK_FORMAT_TEMPLATE
+from .template import ALIGN_INPUT_TEMPLATE, ALIGN_TASK_FORMAT_TEMPLATE, MERGE_INPUT_TEMPLATE, MERGE_TASK_FORMAT_TEMPLATE
 
 
-def init_align_chain(llm):
+def init_align_chain(llm: Type[BaseLLM]) -> Type[LLMChain]:
+    """Initialize the entity alignment chain.
+    the entity alignment chain is used to align the entities with the same meaning.
+    :param llm: the language model
+    :type llm: Type[BaseLLM]
+    :return: the entity alignment chain
+    :rtype: Type[LLMChain]
+    """
     system_message_prompt = SystemMessagePromptTemplate(
         prompt=PromptTemplate(
             template=ALIGN_TASK_FORMAT_TEMPLATE,
@@ -22,22 +28,47 @@ def init_align_chain(llm):
             input_variables=["source_entity", "candidate_entities"],
         )
     )
-    chat_prompt_template = ChatPromptTemplate.from_messages(
-        [system_message_prompt, human_message_prompt]
-    )
-    align_chain = LLMChain(
-        llm=llm, prompt=chat_prompt_template, output_key="entities"
-    )
+    chat_prompt_template = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
+    align_chain = LLMChain(llm=llm, prompt=chat_prompt_template, output_key="entities")
     return align_chain
+
+
+def init_entity_merge_chain(llm: Type[BaseLLM]) -> Type[LLMChain]:
+    """Initialize the entity merge chain.
+    the entity merge chain is used to merge the entities with the same meaning filtered by the entity alignment chain.
+
+    :param llm: the language model
+    :type llm: Type[BaseLLM]
+    :return: the entity merge chain
+    :rtype: Type[LLMChain]
+    """
+    system_message_prompt = SystemMessagePromptTemplate(
+        prompt=PromptTemplate(
+            template=MERGE_TASK_FORMAT_TEMPLATE,
+            input_variables=["topic"],
+        )
+    )
+    human_message_prompt = HumanMessagePromptTemplate(
+        prompt=PromptTemplate(
+            template=MERGE_INPUT_TEMPLATE,
+            input_variables=["entities"],
+        )
+    )
+    chat_prompt_template = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
+    merge_chain = LLMChain(llm=llm, prompt=chat_prompt_template, output_key="new_entity")
+    return merge_chain
 
 
 if __name__ == "__main__":
     from langchain.chat_models import ChatOpenAI
 
     from AutoKGC.tools.align.utils import entities_warpper
+    from AutoKGC.tools.align.parser import EntityMergeOutputParser
 
     llm = ChatOpenAI(temperature=0.3)
     align_chain = init_align_chain(llm)
+    merge_chain = init_entity_merge_chain(llm)
+    merge_parser = EntityMergeOutputParser()
     src_entity = """Complex networks: have attracted a
     "great deal of research interest in the last two decades."""
     candidate_entities = [
@@ -65,3 +96,5 @@ if __name__ == "__main__":
         }
     )
     print(res["entities"])
+    new_entity = merge_chain({"topic": "network science", "entities": res["entities"]})
+    print(merge_parser.parse(new_entity["new_entity"]))

@@ -3,14 +3,11 @@ import argparse
 from langchain.chat_models import ChatOpenAI
 
 from AutoKGC.procedures.align_across_subgraphs.base import (
-    get_entity_type_uuids,
-    query_from_specific_type_uuids,
-    select_candidate_entities_uuids,
-    align_source_and_candidates_with_chain,
-)
+    align_source_and_candidates_with_chain, get_entity_type_uuids,
+    query_from_specific_type_uuids, select_candidate_entities_uuids)
 from AutoKGC.procedures.load_config import load_config
 from AutoKGC.tools.align.base import init_align_chain
-from AutoKGC.tools.align.parser import AlignOutputParser
+from AutoKGC.tools.align.parser import EntityAlignOutputParser
 from AutoKGC.tools.db_manager.base import DBManager
 
 
@@ -19,7 +16,7 @@ def main(entity_types):
     llm = ChatOpenAI(temperature=config["llm"]["temperature"])
     topic = config["topic"]
     align_chain = init_align_chain(llm=llm)
-    align_parser = AlignOutputParser()
+    align_parser = EntityAlignOutputParser()
     entity_type_uuids_dict = get_entity_type_uuids(db_manager, entity_types)
 
     for entity_type, uuids in entity_type_uuids_dict.items():
@@ -36,6 +33,7 @@ def main(entity_types):
                 )
                 for entity in entities:
                     print(entity)
+                    
                     # TODO: complete the following function
                     # db_manager.create_alignment_relationship(
                     #     uuid, entity[0], entity[1]
