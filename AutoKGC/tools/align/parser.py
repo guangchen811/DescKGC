@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Dict, Any
 
 from langchain.schema import BaseOutputParser
 
@@ -37,15 +37,22 @@ class EntityMergeOutputParser(BaseOutputParser):
         return True
 
     def get_format_instructions(self) -> str:
-        return "The result should be formatted as `<name>: <description>`."
+        return "The result should be formatted as `<name>: <description> generalbility: <Ture|False>`."
 
-    def parse(self, text: str) -> Tuple[str, str]:
+    def parse(self, text: str) -> Dict[str, Any]:
         """Parse the output of an LLM call.
 
         :param text: the output of an LLM call
         :type text: str
-        :return: the name and description of the merged entity
-        :rtype: Tuple[str, str]
+        :return: the name
+        :rtype: 
         """
-        name, description = text.split(": ", 1)
-        return name, description
+        name, description_generalbility = text.split(": ", 1)
+        description, generalbility_str = description_generalbility.split(" generalbility: ")
+        if 'true' in generalbility_str.lower():
+            generalbility = True
+        elif 'false' in generalbility_str.lower():
+            generalbility = False
+        else:
+            raise ValueError(f"generalbility_str should be either True or False, but got {generalbility_str}")
+        return {"name": name, "description": description, "general": generalbility}

@@ -3,7 +3,7 @@ from typing import List, Tuple, Type, Dict
 from langchain.chains import LLMChain
 from langchain.schema import BaseOutputParser
 
-from AutoKGC.tools.align.utils import entities_warpper
+from AutoKGC.tools.align.utils import entities_nd_pair_warpper, entities_ndg_pair_warpper
 from AutoKGC.tools.db_manager.type import DBManagerType
 
 
@@ -104,10 +104,10 @@ def align_source_and_candidates_with_chain(
     :rtype: List[Tuple[int, str]]
     """
 
-    source_entity_pair = db_manager.vector_db.get_name_description_by_uuid(uuid)
-    source_entity_pair_fmt = entities_warpper(source_entity_pair, is_candiate=False)
-    target_entity_pairs = db_manager.vector_db.get_name_description_by_uuid(candidate_uuids)
-    target_entity_pairs_fmt = entities_warpper(target_entity_pairs, is_candiate=True)
+    source_entity_pair = db_manager.vector_db.get_name_description_by_uuids(uuid)
+    source_entity_pair_fmt = entities_nd_pair_warpper(source_entity_pair, is_candiate=False)
+    target_entity_pairs = db_manager.vector_db.get_name_description_by_uuids(candidate_uuids)
+    target_entity_pairs_fmt = entities_nd_pair_warpper(target_entity_pairs, is_candiate=True)
     res = align_chain(
         {
             "topic": topic,
@@ -119,14 +119,41 @@ def align_source_and_candidates_with_chain(
     return entities
 
 
-def merge_entities_with_chain(db_manager, topic, merge_chain, merge_parser, uuid, selected_candidate_uuids):
-    name_descriptions_to_merge = db_manager.vector_db.get_name_description_by_uuid(
-                    [uuid] + selected_candidate_uuids
-                )
-    target_entity_pairs_fmt = entities_warpper(name_descriptions_to_merge)
-    res = merge_chain({
-                    "topic": topic,
-                    "entities": target_entity_pairs_fmt,
-                })
-    new_entity = merge_parser.parse(res['new_entity'])
+def merge_entities_with_chain(
+    db_manager: DBManagerType,
+    topic: str,
+    merge_chain: Type[LLMChain],
+    merge_parser: Type[BaseOutputParser],
+    uuid: str,
+    selected_candidate_uuids: List[str],
+) -> Tuple[str, str]:
+    """use the merge_chain to merge the source entity and the candidate entities.
+
+    :param db_manager: The database manager
+    :type db_manager: DBManagerType
+    :param topic: The topic of the knowledge graph
+    :type topic: str
+    :param merge_chain: The merge chain
+    :type merge_chain: Type[LLMChain]
+    :param merge_parser: The merge parser
+    :type merge_parser: Type[BaseOutputParser]
+    :param uuid: The uuid of the source entity
+    :type uuid: str
+    :param selected_candidate_uuids: The uuids of the candidate entities
+    :type selected_candidate_uuids: List[str]
+    :return: The name and description of the new entity
+    :rtype: Tuple[str, str]
+    """
+    # name_descriptions_to_merge = db_manager.vector_db.get_name_description_by_uuids([uuid] + selected_candidate_uuids)
+    metadata_descriptions_to_merge = db_manager.vector_db.get_metadata_description_by_uuids([uuid] + selected_candidate_uuids)
+    ndg_input = [(entity[0]['name'], entity[1], entity[0]['general']) for entity in metadata_descriptions_to_merge]
+    ndg_input_fmt = entities_ndg_pair_warpper(ndg_input)
+    # target_entity_pairs_fmt = entities_nd_pair_warpper(ndg_input_fmt)
+    res = merge_chain(
+        {
+            "topic": topic,
+            "entities": ndg_input_fmt,
+        }
+    )
+    new_entity = merge_parser.parse(res["new_entity"])
     return new_entity

@@ -18,8 +18,10 @@ the candidate entities:
 {candidate_entities}
 your answer:"""
 
-MERGE_TASK_FORMAT_TEMPLATE = """You are a researcher in the field of {topic}. During a knowledge graph construction process, you are asked to merge the entities with the same meaning to reduce the abandoned entities. Each entity contains the name and description in the format of `<name>: <description>`.
-Please read the entities carefully and write a new entity that describes the same concept as the entities you read. The result should be formatted as `<name>: <description>`."""
+MERGE_TASK_FORMAT_TEMPLATE = """You are a researcher in the field of {topic}. During a knowledge graph construction process, you are asked to merge the entities with the same meaning to reduce the abandoned entities.
+Each entity contains the name and description in the format of `<name>: <description> generalbility: <True|False>`. The `generalbility` indicates whether the entity is general or not from previous knowledge graph construction process. You should merge the entities with the same meaning into one entity and rethink the generalbility of the new entity. If the new entity is not general, you should set the `generalbility` to `False` and it will be deleted from the knowledge graph because I only want to keep the domain-specific and well-defined entities.
+Please read the entities carefully and write a new entity that describes the same concept as the entities you read.
+The result should be formatted as `<name>: <description> generalbility: <Ture|False>`."""
 
 MERGE_INPUT_TEMPLATE = """the entities:
 {entities}

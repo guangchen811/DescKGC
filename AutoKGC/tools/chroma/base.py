@@ -42,9 +42,9 @@ class ChromaVectorStore:
             ids=uuid,
         )
 
-    def get_name_description_by_uuid(self, uuid):
+    def get_name_description_by_uuids(self, uuids):
         results = self.collection.get(
-            ids=uuid
+            ids=uuids
         )
         if results["metadatas"] is not None and results["documents"] is not None:
             names = [metadata["name"] for metadata in results["metadatas"]]
@@ -53,6 +53,19 @@ class ChromaVectorStore:
         else:
             raise ValueError("uuid not in vector database.")
         pairs = list(zip(names, descriptions))
+        return pairs
+
+    def get_metadata_description_by_uuids(self, uuids):
+        results = self.collection.get(
+            ids=uuids
+        )
+        if results["metadatas"] is not None and results["documents"] is not None:
+            descriptions = results["documents"]
+            metadatas = results["metadatas"]
+            assert len(metadatas) == len(descriptions)
+        else:
+            raise ValueError("uuid not in vector database.")
+        pairs = list(zip(metadatas, descriptions))
         return pairs
 
     def get_from_specific_source(self, source):

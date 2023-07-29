@@ -13,9 +13,10 @@ from AutoKGC.procedures.load_config import load_config
 from AutoKGC.tools.align.base import init_align_chain, init_entity_merge_chain
 from AutoKGC.tools.align.parser import EntityAlignOutputParser, EntityMergeOutputParser
 from AutoKGC.tools.db_manager.base import DBManager
+from AutoKGC.procedures.align_across_subgraphs.utils import add_one_merged_entity
 
 
-def main(entity_types):
+def main(entity_types, shortenings, metadata_keys, embedding_key):
     db_manager = DBManager(**config["neo4jdb"], **config["chromadb"])
     llm = ChatOpenAI(temperature=config["llm"]["temperature"])
     topic = config["topic"]
@@ -42,8 +43,26 @@ def main(entity_types):
                 new_entity = merge_entities_with_chain(
                     db_manager, topic, merge_chain, merge_parser, uuid, selected_candidate_uuids
                 )
-                # todo: add new entity to the dbs
-            break
+                new_entity["type"] = entity_type
+                entity_shortning = shortenings[entity_type]
+                uuids_to_link = [uuid] + selected_candidate_uuids
+                uuid_ = add_one_merged_entity(
+                    db_manager=db_manager,
+                    id_type="uuid",
+                    id_values=uuids_to_link,
+                    entity=new_entity,
+                    shortning=entity_shortning,
+                )
+                metadata = {metadata_key: new_entity[metadata_key] for metadata_key in metadata_keys}
+                metadata["embedding_source"] = "description"
+                metadata["doc_source_type"] = "generated"
+                db_manager.vector_db.add(
+                    documents=[new_entity[embedding_key]],
+                    metadatas=[metadata],
+                    ids=[uuid_],
+                )
+            else:
+                print("No similar entities found for entity type: ", entity_type)
         break
 
 
@@ -57,4 +76,9 @@ if __name__ == "__main__":
         default=config["entity_alignment"]["entity_types"],
     )
     args = parser.parse_args()
-    main(entity_types=args.entity_types)
+    main(
+        entity_types=args.entity_types,
+        shortenings=config["shortenings"],
+        metadata_keys=config["extractor"]["entity"]["vs_key_info"]["metadata_keys"],
+        embedding_key=config["extractor"]["entity"]["vs_key_info"]["embedding_key"],
+    )
