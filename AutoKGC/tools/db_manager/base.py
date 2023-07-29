@@ -20,14 +20,46 @@ class DBManager:
         collection_name,
         **kwargs,
     ):
-        self.graph_db = Neo4jGraph(url=url, username=username, password=password, **kwargs)
-        self.vector_db = ChromaVectorStore(
+        self.graph_db = self.init_graph_db(url, username, password, kwargs)
+        self.vector_db = self.init_vector_db(chroma_db_impl, persist_directory, collection_name, kwargs)
+        self.update_schema()
+
+    def init_vector_db(self, chroma_db_impl: str, persist_directory: str, collection_name: str, kwargs) -> ChromaVectorStore:
+        """Initialize the vector database.
+        :param chroma_db_impl: the implementation of the vector database.
+        :type chroma_db_impl: str
+        :param persist_directory: the directory to store the vector database.
+        :type persist_directory: str
+        :param collection_name: the name of the collection.
+        :type collection_name: str
+        :param kwargs: the keyword arguments for the vector database.
+        :type kwargs: dict
+        :return: the vector database.
+        :rtype: ChromaVectorStore
+        """
+        vector_db = ChromaVectorStore(
             chroma_db_impl=chroma_db_impl,
             persist_directory=persist_directory,
             collection_name=collection_name,
             **kwargs,
         )
-        self.update_schema()
+        return vector_db
+
+    def init_graph_db(self, url: str, username: str, password: str, kwargs) -> Neo4jGraph:
+        """Initialize the graph database.
+        :param url: the url of the graph database.
+        :type url: str
+        :param username: the username of the graph database.
+        :type username: str
+        :param password: the password of the graph database.
+        :type password: str
+        :param kwargs: the keyword arguments for the graph database.
+        :type kwargs: dict
+        :return: the graph database.
+        :rtype: Neo4jGraph
+        """
+        graph_db = Neo4jGraph(url=url, username=username, password=password, **kwargs)
+        return graph_db
 
     def close_driver(self):
         self.graph_db._driver.close()
