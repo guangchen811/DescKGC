@@ -14,12 +14,12 @@ sys.path.insert(0, os.path.abspath('../../'))
 project = 'AutoKGC'
 copyright = '2023, Hao Chen'
 author = 'Hao Chen'
-release = 'v0.0.2'
+release = 'v0.0.3'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.autodoc']
+extensions = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 autodoc_default_options = {
     # 'members': None,  # don't include class members
     # 'undoc-members': None,  # don't include members without docstrings
@@ -36,3 +36,4 @@ exclude_patterns = []
 
 html_theme = 'furo'
 html_static_path = ['_static']
+html_show_sourcelink = True
