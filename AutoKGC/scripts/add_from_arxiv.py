@@ -6,18 +6,17 @@ from AutoKGC.procedures.load_config import load_config
 from AutoKGC.tools.db_manager.base import DBManager
 
 
-def main():
-    config = load_config()
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--data-path",
-        type=str,
-        default=config["extractor"]["arxiv"]["data_path"],
-    )
+def add_arguments(parser):
+    parser.add_argument("--data-path", type=str)
     parser.add_argument("--file-name", type=str, required=True)
-    args = parser.parse_args()
-    data_path = args.data_path
+
+
+def main(args):
+    config = load_config()
+    if args.data_path is None:
+        data_path = config["extractor"]["arxiv"]["data_path"]
+    else:
+        data_path = args.data_path
     file_name = args.file_name
 
     # Load the json file
@@ -41,4 +40,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    args = parser.parse_args()
+    main(args)

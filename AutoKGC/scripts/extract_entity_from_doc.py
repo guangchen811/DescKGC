@@ -9,13 +9,16 @@ from AutoKGC.tools.db_manager.base import DBManager
 from AutoKGC.tools.extractor.base import init_extract_chain
 
 
-def main():
-    config = load_config()
+def add_arguments(parser):
+    parser.add_argument("--temperature", type=float)
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--temperature", type=float, default=config["llm"]["temperature"])
-    args = parser.parse_args()
-    temperature = args.temperature
+
+def main(args):
+    config = load_config()
+    if args.temperature is None:
+        temperature = config["llm"]["temperature"]
+    else:
+        temperature = args.temperature
     llm = ChatOpenAI(temperature=temperature)
     extract_chain = init_extract_chain(llm)
     db_manager = DBManager(**config["neo4jdb"], **config["chromadb"])
@@ -34,4 +37,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    args = parser.parse_args()
+    main(args)

@@ -16,17 +16,19 @@ from AutoKGC.tools.db_manager.base import DBManager
 from AutoKGC.procedures.align_across_subgraphs.utils import add_one_merged_entity
 
 
-def main():
-    config = load_config()
-
-    parser = argparse.ArgumentParser()
+def add_arguments(parser):
     parser.add_argument(
         "--entity_types",
         type=list,
-        default=config["entity_alignment"]["entity_types"],
     )
-    args = parser.parse_args()
-    entity_types = args.entity_types
+
+
+def main(args):
+    config = load_config()
+    if args.entity_types is None:
+        entity_types = config["entity_alignment"]["entity_types"]
+    else:
+        entity_types = args.entity_types
     shortenings = config["shortenings"]
     metadata_keys = config["extractor"]["entity"]["vs_key_info"]["metadata_keys"]
     embedding_key = config["extractor"]["entity"]["vs_key_info"]["embedding_key"]
@@ -81,4 +83,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    args = parser.parse_args()
+    main(args)

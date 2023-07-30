@@ -4,10 +4,7 @@ from AutoKGC.procedures.load_config import load_config
 from AutoKGC.tools.db_manager.base import DBManager
 
 
-def main():
-    config = load_config()
-
-    parser = argparse.ArgumentParser()
+def add_arguments(parser):
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument(
         "--delete-by-type",
@@ -24,7 +21,10 @@ def main():
         action="store_true",
         help="Show the schema of the database.",
     )
-    args = parser.parse_args()
+
+
+def main(args):
+    config = load_config()
 
     db_manager = DBManager(**config["neo4jdb"], **config["chromadb"])
     node_labels = db_manager.get_node_labels()
@@ -68,4 +68,6 @@ def delete_by_type(db_manager, node_labels):
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    args = parser.parse_args()
+    main(args)
