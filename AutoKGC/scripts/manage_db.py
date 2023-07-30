@@ -4,7 +4,28 @@ from AutoKGC.procedures.load_config import load_config
 from AutoKGC.tools.db_manager.base import DBManager
 
 
-def main(args, config):
+def main():
+    config = load_config()
+
+    parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument(
+        "--delete-by-type",
+        action="store_true",
+        help="Delete nodes by type. You will be asked to enter the type.",
+    )
+    group.add_argument(
+        "--delete-all",
+        action="store_true",
+        help="Delete all nodes. You will be asked to confirm.",
+    )
+    group.add_argument(
+        "--show-schema",
+        action="store_true",
+        help="Show the schema of the database.",
+    )
+    args = parser.parse_args()
+
     db_manager = DBManager(**config["neo4jdb"], **config["chromadb"])
     node_labels = db_manager.get_node_labels()
 
@@ -47,24 +68,4 @@ def delete_by_type(db_manager, node_labels):
 
 
 if __name__ == "__main__":
-    config = load_config()
-
-    parser = argparse.ArgumentParser()
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument(
-        "--delete-by-type",
-        action="store_true",
-        help="Delete nodes by type. You will be asked to enter the type.",
-    )
-    group.add_argument(
-        "--delete-all",
-        action="store_true",
-        help="Delete all nodes. You will be asked to confirm.",
-    )
-    group.add_argument(
-        "--show-schema",
-        action="store_true",
-        help="Show the schema of the database.",
-    )
-    args = parser.parse_args()
-    main(args, config)
+    main()
