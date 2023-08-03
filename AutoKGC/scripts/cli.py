@@ -1,6 +1,8 @@
 import argparse
 
-from AutoKGC.scripts import add_from_arxiv, entity_alignment, extract_entity_from_doc, manage_db, search_from_arxiv
+from AutoKGC.scripts import (add_from_arxiv, entity_alignment,
+                             extract_entity_from_doc, manage_db,
+                             search_from_arxiv)
 
 
 def main():

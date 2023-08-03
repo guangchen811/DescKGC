@@ -3,10 +3,7 @@ from typing import Tuple
 
 from AutoKGC.tools.chroma.base import ChromaVectorStore
 from AutoKGC.tools.neo4j.base import Neo4jGraph
-from AutoKGC.tools.neo4j.cypher_template import (
-    ARXIV_PAPER_INSERT_INSTRUCTION, DELETE_NODES_INSTRUCTION,
-    DETACH_AUTHOR_FROM_PAPER_INSTRUCTION)
-from AutoKGC.tools.neo4j.utils import join_if_list
+from .utils import validate_keys
 
 
 class DBManager:
@@ -68,11 +65,10 @@ class DBManager:
         embedding_key = vs_key_info["embedding_key"]
         metadata_keys = vs_key_info["metadata_keys"]
         paper_keys = arxiv_papers[0].keys()
-        assert all(
-            key in paper_keys for key in [embedding_key, *metadata_keys]
-        ), """KeyError: some keys are not in the paper dict.
-        Please check the vs_key_info in config.yaml"""
+        expected_keys = [embedding_key, *metadata_keys]
+        validate_keys(expected_keys, paper_keys)
         cypher_insturction_and_uuid_list = [self._arxiv_paper_to_cypher(paper, arxiv_prefix) for paper in arxiv_papers]
+
         for (cypher_insturction, uuid_), paper in zip(cypher_insturction_and_uuid_list, arxiv_papers):
             try:
                 self.graph_db.query(cypher_insturction)
@@ -93,8 +89,7 @@ class DBManager:
 
     def _devide_author_from_arxiv_nodes(self) -> None:
         """extract author nodes from arxiv nodes in neo4j database"""
-        cypher_insturction = DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
-        self.graph_db.query(cypher_insturction)
+        self.graph_db._devide_author_from_arxiv_nodes()
         self.update_schema()
 
     def _arxiv_paper_to_cypher(self, arxiv_dict: dict, arxiv_prefix: str) -> Tuple[str, str]:
@@ -103,18 +98,7 @@ class DBManager:
         output: a cypher CREATE instruction
         """
         uuid_ = f"{arxiv_prefix}-{uuid.uuid4()}"
-        cypher_insturction = ARXIV_PAPER_INSERT_INSTRUCTION.format(
-            title=join_if_list(arxiv_dict["title"]),
-            authors=join_if_list(arxiv_dict["authors"]),
-            published=join_if_list(arxiv_dict["published"]),
-            updated_date=join_if_list(arxiv_dict["updated_date"]),
-            summary=join_if_list(arxiv_dict["summary"].replace("\n", " ")),
-            doi=join_if_list(arxiv_dict["doi"]),
-            primary_category=join_if_list(arxiv_dict["primary_category"]),
-            categories=join_if_list(arxiv_dict["categories"]),
-            pdf_url=join_if_list(arxiv_dict["pdf_url"]),
-            uuid=uuid_,
-        )
+        cypher_insturction = self.graph_db._get_arxiv_paper_insert_instruction(arxiv_dict, uuid_)
         return cypher_insturction, uuid_
 
     def show_schema(self) -> None:
@@ -146,8 +130,7 @@ class DBManager:
         delete all nodes of a type.
         TODO: implement delete by attribute
         """
-        cypher_insturction = DELETE_NODES_INSTRUCTION.format(type=type)
-        self.graph_db.query(cypher_insturction)
+        self.graph_db._delete_by_type(type)
         self.update_schema()
 
     def _get_entity_types_with_unique_prop(self, prop_name: str) -> list:

@@ -1,5 +1,11 @@
 from typing import Any, Dict, List
+
 from neo4j import Query
+
+from .cypher_template import (ARXIV_PAPER_INSERT_INSTRUCTION,
+                              DELETE_NODES_INSTRUCTION,
+                              DETACH_AUTHOR_FROM_PAPER_INSTRUCTION)
+from .utils import join_if_list
 
 node_properties_query = Query("""
 CALL apoc.meta.data()
@@ -114,3 +120,25 @@ class Neo4jGraph:
         self.node_properties = [el["output"] for el in node_properties]
         self.rel_properties = [el["output"] for el in relationships_properties]
         self.relationships = [el["output"] for el in relationships]
+
+    def _devide_author_from_arxiv_nodes(self) -> None:
+        cypher_insturction = DETACH_AUTHOR_FROM_PAPER_INSTRUCTION
+        self.query(cypher_insturction)
+
+    def _delete_by_type(self, type: str) -> None:
+        cypher_insturction = DELETE_NODES_INSTRUCTION.format(type=type)
+        self.query(cypher_insturction)
+
+    def _get_arxiv_paper_insert_instruction(self, arxiv_dict, uuid_):
+        return ARXIV_PAPER_INSERT_INSTRUCTION.format(
+            title=join_if_list(arxiv_dict["title"]),
+            authors=join_if_list(arxiv_dict["authors"]),
+            published=join_if_list(arxiv_dict["published"]),
+            updated_date=join_if_list(arxiv_dict["updated_date"]),
+            summary=join_if_list(arxiv_dict["summary"].replace("\n", " ")),
+            doi=join_if_list(arxiv_dict["doi"]),
+            primary_category=join_if_list(arxiv_dict["primary_category"]),
+            categories=join_if_list(arxiv_dict["categories"]),
+            pdf_url=join_if_list(arxiv_dict["pdf_url"]),
+            uuid=uuid_,
+        )
