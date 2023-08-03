@@ -5,7 +5,7 @@ from langchain.chat_models import ChatOpenAI
 from AutoKGC.procedures.extract_and_insert.base import (
     extract_entities_from_paper, get_paper_title_by_field)
 from AutoKGC.procedures.load_config import load_config
-from AutoKGC.tools.db_manager.base import DBManager
+from AutoKGC.tools.db_manager import DBManager
 from AutoKGC.tools.extractor.base import init_extract_chain
 
 
