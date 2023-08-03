@@ -17,6 +17,14 @@ AutoKGC.scripts.add\_from\_arxiv module
    :undoc-members:
    :show-inheritance:
 
+AutoKGC.scripts.cli module
+--------------------------
+
+.. automodule:: AutoKGC.scripts.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 AutoKGC.scripts.entity\_alignment module
 ----------------------------------------
 

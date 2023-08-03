@@ -14,9 +14,8 @@ Contents
 .. toctree:: 
    :maxdepth: 2
    
-   Installation
-   Introduction
-   Usage
+   Installation </installation>
+   Quick Start </quickstart>
    Source code </AutoKGC>
 
 Indices and tables

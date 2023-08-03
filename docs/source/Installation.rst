@@ -29,3 +29,32 @@ After downloading the source code, you can install it by running:
 .. code-block:: bash
 
   pip install .
+
+To test if the installation is successful, you can run:
+
+.. code-block:: bash
+
+  autokgc --help
+
+The output should be like this:
+
+.. code-block:: bash
+
+  usage: autokgc [-h]
+               {manage-db,search-from-arxiv,extract-entity-from-doc,add-from-arxiv,entity-alignment} ...
+
+  AutoKGC CLI
+
+  positional arguments:
+    {manage-db,search-from-arxiv,extract-entity-from-doc,add-from-arxiv,entity-alignment}
+      manage-db           Monitors and manages the database.
+      search-from-arxiv   Search papers from arXiv and dump them as json.
+      extract-entity-from-doc
+                          extract entities from documents in the database.
+      add-from-arxiv      Add papers from local json files to databases.
+      entity-alignment    Align entities in the database.
+
+  optional arguments:
+    -h, --help            show this help message and exit
+
+If you see this output, it means that you have successfully installed AutoKGC. You can now use it to construct your own knowledge graph.
