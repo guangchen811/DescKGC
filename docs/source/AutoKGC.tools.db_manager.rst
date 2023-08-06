@@ -24,3 +24,11 @@ AutoKGC.tools.db\_manager.type module
    :members:
    :undoc-members:
    :show-inheritance:
+
+AutoKGC.tools.db\_manager.utils module
+--------------------------------------
+
+.. automodule:: AutoKGC.tools.db_manager.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

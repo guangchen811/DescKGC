@@ -13,7 +13,8 @@ setup(
         'chroma',
         'neo4j',
         'langchain',
-        'tqdm'
+        'tqdm',
+        'pydantic==1.10.8',
     ],
     entry_points={
         'console_scripts': [

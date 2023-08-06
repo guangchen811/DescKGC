@@ -1,4 +1,7 @@
-def entities_nd_pair_warpper(candidate_entities: list[tuple], is_candiate=True) -> str:
+from typing import List, Tuple
+
+
+def entities_nd_pair_warpper(candidate_entities: List[tuple], is_candiate=True) -> str:
     """Wrap the candidate entities into a string.
     The input is a list of tuples, each tuple contains the name and the description of the entity.
     :param candidate_entities: The candidate entities
@@ -23,7 +26,7 @@ def entities_nd_pair_warpper(candidate_entities: list[tuple], is_candiate=True) 
     return prefix + content[:-2] + suffix
 
 
-def entities_ndg_pair_warpper(candidate_entities: list[tuple[str, str, bool]], is_candidate=True) -> str:
+def entities_ndg_pair_warpper(candidate_entities: List[Tuple[str, str, bool]], is_candidate=True) -> str:
     """Wrap the candidate entities into a string.
     The input is a list of tuples, each tuple contains the name, the description and generalbility of the entity.
     :param candidate_entities: The candidate entities
