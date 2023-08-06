@@ -10,9 +10,7 @@ def extract_entities_from_paper(
     db_manager,
     extract_chain,
 ):
-    entity_list, relation_triple_list = entity_relation_format(
-        paper_id_type, paper_id_value, topic, db_manager, extract_chain
-    )
+    entity_list, relation_triple_list = entity_relation_format(paper_id_type, paper_id_value, topic, db_manager, extract_chain)
     entity_id_dict = {}
     embedding_key = vs_key_info["embedding_key"]
     metadata_keys = vs_key_info["metadata_keys"]
@@ -23,14 +21,9 @@ def extract_entities_from_paper(
     Please check the vs_key_info in config.yaml"""
     for entity in entity_list:
         entity_shortning = shortenings[entity["type"]]
-        entity_uuid = add_one_entity(
-            db_manager, paper_id_type, paper_id_value, entity, entity_shortning
-        )
+        entity_uuid = add_one_entity(db_manager, paper_id_type, paper_id_value, entity, entity_shortning)
         entity_id_dict[entity["name"]] = entity_uuid
-        metadata = {
-            metadata_key: entity[metadata_key]
-            for metadata_key in metadata_keys
-        }
+        metadata = {metadata_key: entity[metadata_key] for metadata_key in metadata_keys}
         metadata["embedding_source"] = "description"
         metadata["doc_source_type"] = "generated"
         db_manager.vector_db.add(
@@ -42,9 +35,7 @@ def extract_entities_from_paper(
         add_one_relation(db_manager, relation_triple, entity_id_dict)
 
 
-def extract_entities_from_papers(
-    id_type, id_value_list, topic, db_manager, extract_chain, config
-):
+def extract_entities_from_papers(id_type, id_value_list, topic, db_manager, extract_chain, config):
     shortenings = config["shortenings"]
     vs_key_info = config["extractor"]["entity"]["vs_key_info"]
     for id_value in id_value_list:
