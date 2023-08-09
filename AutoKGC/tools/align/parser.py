@@ -45,7 +45,7 @@ class EntityMergeOutputParser(BaseOutputParser):
         :param text: the output of an LLM call
         :type text: str
         :return: the name
-        :rtype: 
+        :rtype: str
         """
         name, description_generalbility = text.split(": ", 1)
         description, generalbility_str = description_generalbility.split(" generalbility: ")
