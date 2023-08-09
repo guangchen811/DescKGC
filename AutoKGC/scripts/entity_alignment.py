@@ -9,7 +9,7 @@ from AutoKGC.procedures.align_across_subgraphs.base import (
     select_candidate_entities_uuids,
     merge_entities_with_chain,
 )
-from AutoKGC.procedures.load_config import load_config
+from AutoKGC.procedures.build_config import load_config
 from AutoKGC.tools.align.base import init_align_chain, init_entity_merge_chain
 from AutoKGC.tools.align.parser import EntityAlignOutputParser, EntityMergeOutputParser
 from AutoKGC.tools.db_manager import DBManager

@@ -22,7 +22,7 @@ Submodules
 AutoKGC.procedures.load\_config module
 --------------------------------------
 
-.. automodule:: AutoKGC.procedures.load_config
+.. automodule:: AutoKGC.procedures.build_config
    :members:
    :undoc-members:
    :show-inheritance:

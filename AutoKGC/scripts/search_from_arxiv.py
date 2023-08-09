@@ -2,7 +2,7 @@ import argparse
 
 import arxiv
 
-from AutoKGC.procedures.load_config import load_config
+from AutoKGC.procedures.build_config import load_config
 from AutoKGC.tools.arxiv.base import dump_to_json, response_to_dataclass
 
 

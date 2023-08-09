@@ -7,6 +7,9 @@ setup(
     readme="README.md",
     description='Automatic Knowledge Graph Construction',
     include_package_data=True,
+    package_data={
+        'AutoKGC': ['.kgc_config.yaml']
+    },
     install_requires=[
         'argparse',
         'pyyaml',
