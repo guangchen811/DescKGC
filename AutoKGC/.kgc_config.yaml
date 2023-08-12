@@ -36,4 +36,4 @@ shortenings:
 
 entity_alignment:
   entity_types: [Concept, Model, Dataset]
-  threshold: 0.08
+  threshold: 0.8
