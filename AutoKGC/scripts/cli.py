@@ -1,7 +1,7 @@
 import argparse
 
 from AutoKGC.scripts import (add_from_arxiv, entity_alignment,
-                             extract_entity_from_doc, manage_db,
+                             extract_entity_from_doc, manage_config, manage_db,
                              search_from_arxiv)
 
 
@@ -12,6 +12,10 @@ def main():
     module_manage_db = subparsers.add_parser("manage-db", help="Monitors and manages the database.")
     manage_db.add_arguments(module_manage_db)
     module_manage_db.set_defaults(func=manage_db.main)
+
+    module_manage_config = subparsers.add_parser("manage-config", help="Monitors and manages the config file.")
+    manage_config.add_arguments(module_manage_config)
+    module_manage_config.set_defaults(func=manage_config.main)
 
     module_search_from_arxiv = subparsers.add_parser(
         "search-from-arxiv", help="Search papers from arXiv and dump them as json."
