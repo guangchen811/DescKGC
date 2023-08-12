@@ -34,8 +34,3 @@ class ConfigManager:
         except FileNotFoundError:
             local_config = None
         return local_config
-
-
-if __name__ == "__main__":
-    config_manager = ConfigManager()
-    config_manager.init_local_config()

@@ -1,0 +1,38 @@
+chromadb:
+  chroma_db_impl: duckdb+parquet
+  collection_name: default_collection
+  distance_function: l2
+  persist_directory: ./data/chroma/
+entity_alignment:
+  entity_types:
+  - Concept
+  - Model
+  - Dataset
+  threshold: 0.08
+extractor:
+  arxiv:
+    data_path: ./data/arxiv/
+    vs_key_info:
+      embedding_key: summary
+      metadata_keys:
+      - title
+  entity:
+    vs_key_info:
+      embedding_key: description
+      metadata_keys:
+      - name
+      - general
+      - type
+llm:
+  model_name: gpt-3.5-turbo
+  temperature: 0.3
+neo4jdb:
+  password: 123.x.abc
+  url: bolt://localhost:7687
+  username: neo4j
+shortenings:
+  Concept: c
+  Dataset: d
+  Model: m
+  Paper: p
+topic: network science
