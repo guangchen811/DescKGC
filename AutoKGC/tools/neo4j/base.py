@@ -135,7 +135,7 @@ class Neo4jGraph:
             authors=join_if_list(arxiv_dict["authors"]),
             published=join_if_list(arxiv_dict["published"]),
             updated_date=join_if_list(arxiv_dict["updated_date"]),
-            summary=join_if_list(arxiv_dict["summary"].replace("\n", " ")),
+            summary=join_if_list(arxiv_dict["summary"].replace("\n", " ")).replace('"', '`'),
             doi=join_if_list(arxiv_dict["doi"]),
             primary_category=join_if_list(arxiv_dict["primary_category"]),
             categories=join_if_list(arxiv_dict["categories"]),

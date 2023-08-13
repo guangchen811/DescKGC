@@ -84,7 +84,7 @@ class DBManager:
             except Exception as e:
                 # TODO: make this Exception more specific
                 print(f"arxiv paper insert error: {str(e)}")
-        # self._devide_author_from_arxiv_nodes()
+        self._devide_author_from_arxiv_nodes()
         # self.update_schema()
 
     def _devide_author_from_arxiv_nodes(self) -> None:

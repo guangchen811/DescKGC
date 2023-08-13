@@ -25,10 +25,7 @@ def main(args):
 
     # Initiate a neo4j manager
     db_manager = DBManager(**config["neo4jdb"], **config["chromadb"])
-    # This function will add papers from arxiv to neo4j
-    # and extract authors from the paper.
-    # The author nodes will be connected to the paper nodes
-    # by "WROTE" relationship with a timestamp attribute.
+
     print(f"adding data from {file_path}")
     with open(file_path, "r") as f:
         arxiv_papers = json.load(f)
