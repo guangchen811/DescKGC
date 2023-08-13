@@ -29,10 +29,12 @@ def entity_relation_format(
         entity_list = json.loads(res["entities"])
     except json.decoder.JSONDecodeError as e:
         print(f"Failed to decode JSON string: {str(e)}")
+        return [], []
     try:
         relation_list = convert_to_triples(res["relations"])
     except Exception as e:
         print(f"Failed to decode triples from relations: {str(e)}")
+        return [], []
     return entity_list, relation_list
 
 

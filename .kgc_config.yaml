@@ -8,7 +8,7 @@ entity_alignment:
   - Concept
   - Model
   - Dataset
-  threshold: 0.8
+  threshold: 0.9
 extractor:
   arxiv:
     data_path: ./data/arxiv/

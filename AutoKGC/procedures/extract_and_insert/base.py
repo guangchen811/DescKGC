@@ -11,6 +11,8 @@ def extract_entities_from_paper(
     extract_chain,
 ):
     entity_list, relation_triple_list = entity_relation_format(paper_id_type, paper_id_value, topic, db_manager, extract_chain)
+    if len(entity_list) == 0:
+        return
     entity_id_dict = {}
     embedding_key = vs_key_info["embedding_key"]
     metadata_keys = vs_key_info["metadata_keys"]

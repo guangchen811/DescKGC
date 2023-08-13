@@ -44,42 +44,45 @@ def main(args):
 
     for entity_type, uuids in entity_type_uuids_dict.items():
         for uuid in uuids:
-            similar_entities = query_from_specific_type_uuids(db_manager, [entity_type], uuid)
-            candidate_uuids = select_candidate_entities_uuids(
-                threshold=config["entity_alignment"]["threshold"],
-                similar_entities=similar_entities,
-                src_entity_uuid=uuid,
-            )
-            if len(candidate_uuids) > 0:
-                selected_entities = align_source_and_candidates_with_chain(
-                    topic, db_manager, align_chain, align_parser, uuid, candidate_uuids
+            try:
+                similar_entities = query_from_specific_type_uuids(db_manager, [entity_type], uuid)
+                candidate_uuids = select_candidate_entities_uuids(
+                    threshold=config["entity_alignment"]["threshold"],
+                    similar_entities=similar_entities,
+                    src_entity_uuid=uuid,
                 )
-                selected_entities_ids = [entity[0] - 1 for entity in selected_entities]
-                selected_candidate_uuids = [candidate_uuids[i] for i in selected_entities_ids]
-                new_entity = merge_entities_with_chain(
-                    db_manager, topic, merge_chain, merge_parser, uuid, selected_candidate_uuids
-                )
-                new_entity["type"] = entity_type
-                entity_shortning = shortenings[entity_type]
-                uuids_to_link = [uuid] + selected_candidate_uuids
-                uuid_ = add_one_merged_entity(
-                    db_manager=db_manager,
-                    id_type="uuid",
-                    id_values=uuids_to_link,
-                    entity=new_entity,
-                    shortning=entity_shortning,
-                )
-                metadata = {metadata_key: new_entity[metadata_key] for metadata_key in metadata_keys}
-                metadata["embedding_source"] = "description"
-                metadata["doc_source_type"] = "generated"
-                db_manager.vector_db.add(
-                    documents=[new_entity[embedding_key]],
-                    metadatas=[metadata],
-                    ids=[uuid_],
-                )
-            else:
-                print("No similar entities found for entity type: ", entity_type)
-        break
+                if len(candidate_uuids) > 0:
+                    selected_entities = align_source_and_candidates_with_chain(
+                        topic, db_manager, align_chain, align_parser, uuid, candidate_uuids
+                    )
+                    selected_entities_ids = [entity[0] - 1 for entity in selected_entities]
+                    selected_candidate_uuids = [candidate_uuids[i] for i in selected_entities_ids]
+                    new_entity = merge_entities_with_chain(
+                        db_manager, topic, merge_chain, merge_parser, uuid, selected_candidate_uuids
+                    )
+                    new_entity["type"] = entity_type
+                    entity_shortning = shortenings[entity_type]
+                    uuids_to_link = [uuid] + selected_candidate_uuids
+                    uuid_ = add_one_merged_entity(
+                        db_manager=db_manager,
+                        id_type="uuid",
+                        id_values=uuids_to_link,
+                        entity=new_entity,
+                        shortning=entity_shortning,
+                    )
+                    metadata = {metadata_key: new_entity[metadata_key] for metadata_key in metadata_keys}
+                    metadata["embedding_source"] = "description"
+                    metadata["doc_source_type"] = "generated"
+                    db_manager.vector_db.add(
+                        documents=[new_entity[embedding_key]],
+                        metadatas=[metadata],
+                        ids=[uuid_],
+                    )
+                else:
+                    print("No similar entities found for entity type: ", entity_type)
+            except Exception as e:
+                print(f"Error when aligning entities from {uuid}: {e}")
+                continue
 
 
 if __name__ == "__main__":

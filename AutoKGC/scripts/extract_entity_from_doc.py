@@ -25,15 +25,19 @@ def main(args):
 
     res = get_paper_title_by_field(db_manager, "doi")
     for title in res:
-        extract_entities_from_paper(
-            paper_id_type="title",
-            paper_id_value=title,
-            topic=config["topic"],
-            shortenings=config["shortenings"],
-            vs_key_info=config["extractor"]["entity"]["vs_key_info"],
-            db_manager=db_manager,
-            extract_chain=extract_chain,
-        )
+        try:
+            extract_entities_from_paper(
+                paper_id_type="title",
+                paper_id_value=title,
+                topic=config["topic"],
+                shortenings=config["shortenings"],
+                vs_key_info=config["extractor"]["entity"]["vs_key_info"],
+                db_manager=db_manager,
+                extract_chain=extract_chain,
+            )
+        except Exception as e:
+            print(f"Error when extracting entities from {title}: {e}")
+            continue
 
 
 if __name__ == "__main__":
