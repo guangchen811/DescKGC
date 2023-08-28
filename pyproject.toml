@@ -1,22 +1,25 @@
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
 [tool.poetry]
-name = "AutoKGC"
-version = "0.0.3"
-description = "Automatic Knowledge Graph Construction"
-authors = ["Hao Chen <guangchen811@gmail.com>"]
-license = "MIT"
+name = "autokgc"
+version = "0.1.0"
+description = "AutoKGC is a python package for knowledge graph automically construction."
+authors = ["guangchen <guangchen811@gmail.com>"]
 readme = "README.md"
-include = ["AutoKGC"]
-scripts = { autokgc = "AutoKGC.scripts.cli:main" }
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
-pyyaml = "6.0"
+arxiv = "^1.4.7"
 chromadb = "0.3.26"
-neo4j = "5.7.0"
-langchain = "0.0.234"
+langchain = "^0.0.274"
+pytest = "^7.4.0"
+PyYAML = "^6.0"
 pydantic = "1.10.8"
-arxiv = "1.4.7"
+neo4j = "5.7.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry.plugins."console_scripts"]
+autokgc = "AutoKGC.scripts.cli:main"
