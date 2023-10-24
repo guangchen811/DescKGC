@@ -14,6 +14,7 @@ Contents
 .. toctree:: 
    :maxdepth: 2
    
+   Quick Start </quickstart>
    Installation </installation>
    Source codes </DescKGC>
 
