@@ -4,7 +4,7 @@
 
 This is a package for KG auto construction. To run this project, you should install neo4j==5.7.0 and python>=3.8.
 
-Cause this project is still under development, so there is no guarantee that it will work properly. The temporary document is in [here](http://39.107.102.44:10020).
+Cause this project is still under development, so there is no guarantee that it will work properly. The temporary document is in [here](https://guangchen811.github.io/DescKGC/).
 
 This package provides the following functions:
 
