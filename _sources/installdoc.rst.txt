@@ -57,4 +57,4 @@ The output should be like this:
   optional arguments:
     -h, --help            show this help message and exit
 
-If you see this output, it means that you have successfully installed DescKGC. You can now use it to construct your own knowledge graph.
+If you can see this output, it means that you have successfully installed DescKGC. You can now use it to construct your own knowledge graph.
