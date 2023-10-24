@@ -16,7 +16,7 @@ Contents
    
    Installation </installation>
    Quick Start </quickstart>
-   Source code </DescKGC>
+   Source codes </DescKGC>
 
 Indices and tables
 ==================
