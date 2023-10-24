@@ -15,6 +15,7 @@ Contents
    :maxdepth: 2
    
    Quick Start </quickstart>
+   Test </testdoc>
    Installation </installation>
    Source codes </DescKGC>
 
