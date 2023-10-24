@@ -1,0 +1,609 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 --><title>Index - DescKGC v0.0.3 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">DescKGC v0.0.3 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">DescKGC v0.0.3 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="DescKGC.html">Source codes</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Source codes</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="DescKGC.procedures.html">DescKGC.procedures package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of DescKGC.procedures package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.align_across_subgraphs.html">DescKGC.procedures.align_across_subgraphs package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.build_config.html">DescKGC.procedures.build_config package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.extract_and_insert.html">DescKGC.procedures.extract_and_insert package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.sync_embedding.html">DescKGC.procedures.sync_embedding package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DescKGC.scripts.html">DescKGC.scripts package</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="DescKGC.tools.html">DescKGC.tools package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of DescKGC.tools package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.align.html">DescKGC.tools.align package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.arxiv.html">DescKGC.tools.arxiv package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.chroma.html">DescKGC.tools.chroma package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.config_manager.html">DescKGC.tools.config_manager package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.db_manager.html">DescKGC.tools.db_manager package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.extractor.html">DescKGC.tools.extractor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.neo4j.html">DescKGC.tools.neo4j package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#A"><strong>A</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#J"><strong>J</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a></div>
+</section>
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.procedures.extract_and_insert.html#DescKGC.procedures.extract_and_insert.utils.add_one_entity">add_one_entity() (in module DescKGC.procedures.extract_and_insert.utils)</a>
+</li>
+        <li><a href="DescKGC.procedures.align_across_subgraphs.html#DescKGC.procedures.align_across_subgraphs.utils.add_one_merged_entity">add_one_merged_entity() (in module DescKGC.procedures.align_across_subgraphs.utils)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.procedures.extract_and_insert.html#DescKGC.procedures.extract_and_insert.utils.add_one_relation">add_one_relation() (in module DescKGC.procedures.extract_and_insert.utils)</a>
+</li>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData">AriXivData (class in DescKGC.tools.arxiv.arxiv_data)</a>
+</li>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.authors">authors (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.categories">categories (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.procedures.extract_and_insert.html#DescKGC.procedures.extract_and_insert.utils.convert_to_triples">convert_to_triples() (in module DescKGC.procedures.extract_and_insert.utils)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    DescKGC
+
+        <ul>
+          <li><a href="DescKGC.html#module-DescKGC">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.procedures
+
+        <ul>
+          <li><a href="DescKGC.procedures.html#module-DescKGC.procedures">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.procedures.align_across_subgraphs
+
+        <ul>
+          <li><a href="DescKGC.procedures.align_across_subgraphs.html#module-DescKGC.procedures.align_across_subgraphs">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.procedures.align_across_subgraphs.utils
+
+        <ul>
+          <li><a href="DescKGC.procedures.align_across_subgraphs.html#module-DescKGC.procedures.align_across_subgraphs.utils">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.procedures.extract_and_insert
+
+        <ul>
+          <li><a href="DescKGC.procedures.extract_and_insert.html#module-DescKGC.procedures.extract_and_insert">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.procedures.extract_and_insert.base
+
+        <ul>
+          <li><a href="DescKGC.procedures.extract_and_insert.html#module-DescKGC.procedures.extract_and_insert.base">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.procedures.extract_and_insert.utils
+
+        <ul>
+          <li><a href="DescKGC.procedures.extract_and_insert.html#module-DescKGC.procedures.extract_and_insert.utils">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.procedures.sync_embedding
+
+        <ul>
+          <li><a href="DescKGC.procedures.sync_embedding.html#module-DescKGC.procedures.sync_embedding">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.procedures.sync_embedding.base
+
+        <ul>
+          <li><a href="DescKGC.procedures.sync_embedding.html#module-DescKGC.procedures.sync_embedding.base">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.scripts
+
+        <ul>
+          <li><a href="DescKGC.scripts.html#module-DescKGC.scripts">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools
+
+        <ul>
+          <li><a href="DescKGC.tools.html#module-DescKGC.tools">module</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    DescKGC.tools.align
+
+        <ul>
+          <li><a href="DescKGC.tools.align.html#module-DescKGC.tools.align">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.align.template
+
+        <ul>
+          <li><a href="DescKGC.tools.align.html#module-DescKGC.tools.align.template">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.align.utils
+
+        <ul>
+          <li><a href="DescKGC.tools.align.html#module-DescKGC.tools.align.utils">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.arxiv
+
+        <ul>
+          <li><a href="DescKGC.tools.arxiv.html#module-DescKGC.tools.arxiv">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.arxiv.arxiv_data
+
+        <ul>
+          <li><a href="DescKGC.tools.arxiv.html#module-DescKGC.tools.arxiv.arxiv_data">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.arxiv.base
+
+        <ul>
+          <li><a href="DescKGC.tools.arxiv.html#module-DescKGC.tools.arxiv.base">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.chroma
+
+        <ul>
+          <li><a href="DescKGC.tools.chroma.html#module-DescKGC.tools.chroma">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.neo4j
+
+        <ul>
+          <li><a href="DescKGC.tools.neo4j.html#module-DescKGC.tools.neo4j">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.neo4j.cypher_template
+
+        <ul>
+          <li><a href="DescKGC.tools.neo4j.html#module-DescKGC.tools.neo4j.cypher_template">module</a>
+</li>
+        </ul></li>
+        <li>
+    DescKGC.tools.neo4j.utils
+
+        <ul>
+          <li><a href="DescKGC.tools.neo4j.html#module-DescKGC.tools.neo4j.utils">module</a>
+</li>
+        </ul></li>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.doi">doi (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.base.dump_to_json">dump_to_json() (in module DescKGC.tools.arxiv.base)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.align.html#DescKGC.tools.align.utils.entities_nd_pair_warpper">entities_nd_pair_warpper() (in module DescKGC.tools.align.utils)</a>
+</li>
+        <li><a href="DescKGC.tools.align.html#DescKGC.tools.align.utils.entities_ndg_pair_warpper">entities_ndg_pair_warpper() (in module DescKGC.tools.align.utils)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.procedures.extract_and_insert.html#DescKGC.procedures.extract_and_insert.utils.entity_relation_format">entity_relation_format() (in module DescKGC.procedures.extract_and_insert.utils)</a>
+</li>
+        <li><a href="DescKGC.procedures.extract_and_insert.html#DescKGC.procedures.extract_and_insert.base.extract_entities_from_paper">extract_entities_from_paper() (in module DescKGC.procedures.extract_and_insert.base)</a>
+</li>
+        <li><a href="DescKGC.procedures.extract_and_insert.html#DescKGC.procedures.extract_and_insert.base.extract_entities_from_papers">extract_entities_from_papers() (in module DescKGC.procedures.extract_and_insert.base)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.procedures.sync_embedding.html#DescKGC.procedures.sync_embedding.base.generate_node_id">generate_node_id() (in module DescKGC.procedures.sync_embedding.base)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.procedures.sync_embedding.html#DescKGC.procedures.sync_embedding.base.get_node_prefix">get_node_prefix() (in module DescKGC.procedures.sync_embedding.base)</a>
+</li>
+        <li><a href="DescKGC.procedures.extract_and_insert.html#DescKGC.procedures.extract_and_insert.base.get_paper_title_by_field">get_paper_title_by_field() (in module DescKGC.procedures.extract_and_insert.base)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="J" class="genindex-section">
+  <h2>J</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.neo4j.html#DescKGC.tools.neo4j.utils.join_if_list">join_if_list() (in module DescKGC.tools.neo4j.utils)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    module
+
+        <ul>
+          <li><a href="DescKGC.html#module-DescKGC">DescKGC</a>
+</li>
+          <li><a href="DescKGC.procedures.html#module-DescKGC.procedures">DescKGC.procedures</a>
+</li>
+          <li><a href="DescKGC.procedures.align_across_subgraphs.html#module-DescKGC.procedures.align_across_subgraphs">DescKGC.procedures.align_across_subgraphs</a>
+</li>
+          <li><a href="DescKGC.procedures.align_across_subgraphs.html#module-DescKGC.procedures.align_across_subgraphs.utils">DescKGC.procedures.align_across_subgraphs.utils</a>
+</li>
+          <li><a href="DescKGC.procedures.extract_and_insert.html#module-DescKGC.procedures.extract_and_insert">DescKGC.procedures.extract_and_insert</a>
+</li>
+          <li><a href="DescKGC.procedures.extract_and_insert.html#module-DescKGC.procedures.extract_and_insert.base">DescKGC.procedures.extract_and_insert.base</a>
+</li>
+          <li><a href="DescKGC.procedures.extract_and_insert.html#module-DescKGC.procedures.extract_and_insert.utils">DescKGC.procedures.extract_and_insert.utils</a>
+</li>
+          <li><a href="DescKGC.procedures.sync_embedding.html#module-DescKGC.procedures.sync_embedding">DescKGC.procedures.sync_embedding</a>
+</li>
+          <li><a href="DescKGC.procedures.sync_embedding.html#module-DescKGC.procedures.sync_embedding.base">DescKGC.procedures.sync_embedding.base</a>
+</li>
+          <li><a href="DescKGC.scripts.html#module-DescKGC.scripts">DescKGC.scripts</a>
+</li>
+          <li><a href="DescKGC.tools.html#module-DescKGC.tools">DescKGC.tools</a>
+</li>
+          <li><a href="DescKGC.tools.align.html#module-DescKGC.tools.align">DescKGC.tools.align</a>
+</li>
+          <li><a href="DescKGC.tools.align.html#module-DescKGC.tools.align.template">DescKGC.tools.align.template</a>
+</li>
+          <li><a href="DescKGC.tools.align.html#module-DescKGC.tools.align.utils">DescKGC.tools.align.utils</a>
+</li>
+          <li><a href="DescKGC.tools.arxiv.html#module-DescKGC.tools.arxiv">DescKGC.tools.arxiv</a>
+</li>
+          <li><a href="DescKGC.tools.arxiv.html#module-DescKGC.tools.arxiv.arxiv_data">DescKGC.tools.arxiv.arxiv_data</a>
+</li>
+          <li><a href="DescKGC.tools.arxiv.html#module-DescKGC.tools.arxiv.base">DescKGC.tools.arxiv.base</a>
+</li>
+          <li><a href="DescKGC.tools.chroma.html#module-DescKGC.tools.chroma">DescKGC.tools.chroma</a>
+</li>
+          <li><a href="DescKGC.tools.neo4j.html#module-DescKGC.tools.neo4j">DescKGC.tools.neo4j</a>
+</li>
+          <li><a href="DescKGC.tools.neo4j.html#module-DescKGC.tools.neo4j.cypher_template">DescKGC.tools.neo4j.cypher_template</a>
+</li>
+          <li><a href="DescKGC.tools.neo4j.html#module-DescKGC.tools.neo4j.utils">DescKGC.tools.neo4j.utils</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.pdf_url">pdf_url (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.primary_category">primary_category (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.published">published (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.base.response_to_dataclass">response_to_dataclass() (in module DescKGC.tools.arxiv.base)</a>
+</li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.neo4j.html#DescKGC.tools.neo4j.utils.response_to_json">response_to_json() (in module DescKGC.tools.neo4j.utils)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.summary">summary (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.title">title (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="DescKGC.tools.arxiv.html#DescKGC.tools.arxiv.arxiv_data.AriXivData.updated_date">updated_date (DescKGC.tools.arxiv.arxiv_data.AriXivData attribute)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Hao Chen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=bc6a6d3b"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>
