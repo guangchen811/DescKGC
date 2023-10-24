@@ -15,6 +15,7 @@ Subpackages
    AutoKGC.tools.align
    AutoKGC.tools.arxiv
    AutoKGC.tools.chroma
+   AutoKGC.tools.config_manager
    AutoKGC.tools.db_manager
    AutoKGC.tools.extractor
    AutoKGC.tools.neo4j

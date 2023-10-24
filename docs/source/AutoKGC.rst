@@ -14,5 +14,4 @@ Subpackages
 
    AutoKGC.procedures
    AutoKGC.scripts
-   AutoKGC.tests
    AutoKGC.tools

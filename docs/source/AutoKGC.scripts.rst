@@ -41,6 +41,14 @@ AutoKGC.scripts.extract\_entity\_from\_doc module
    :undoc-members:
    :show-inheritance:
 
+AutoKGC.scripts.manage\_config module
+-------------------------------------
+
+.. automodule:: AutoKGC.scripts.manage_config
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 AutoKGC.scripts.manage\_db module
 ---------------------------------
 
