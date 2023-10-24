@@ -1,0 +1,571 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="DescKGC.tools.db_manager package" href="DescKGC.tools.db_manager.html" /><link rel="prev" title="DescKGC.tools.chroma package" href="DescKGC.tools.chroma.html" />
+
+    <!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+        <title>DescKGC.tools.config_manager package - DescKGC v0.0.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=362ab14a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">DescKGC v0.0.3 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">DescKGC v0.0.3 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="DescKGC.html">Source code</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Source code</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="DescKGC.procedures.html">DescKGC.procedures package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of DescKGC.procedures package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.align_across_subgraphs.html">DescKGC.procedures.align_across_subgraphs package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.build_config.html">DescKGC.procedures.build_config package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.extract_and_insert.html">DescKGC.procedures.extract_and_insert package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.sync_embedding.html">DescKGC.procedures.sync_embedding package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="DescKGC.scripts.html">DescKGC.scripts package</a></li>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="DescKGC.tools.html">DescKGC.tools package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of DescKGC.tools package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.align.html">DescKGC.tools.align package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.arxiv.html">DescKGC.tools.arxiv package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.chroma.html">DescKGC.tools.chroma package</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">DescKGC.tools.config_manager package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.db_manager.html">DescKGC.tools.db_manager package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.extractor.html">DescKGC.tools.extractor package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.neo4j.html">DescKGC.tools.neo4j package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main">
+          <section id="module-DescKGC.tools.config_manager">
+<span id="desckgc-tools-config-manager-package"></span><h1>DescKGC.tools.config_manager package<a class="headerlink" href="#module-DescKGC.tools.config_manager" title="Permalink to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.ConfigManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.</span></span><span class="sig-name descname"><span class="pre">ConfigManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_config_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.kgc_config.yaml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DescKGCConfig(topic='network</span> <span class="pre">science',</span> <span class="pre">neo4jdb=Neo4jDBSettings(url='bolt://localhost:7687',</span> <span class="pre">username='neo4j',</span> <span class="pre">password='123.x.abc'),</span> <span class="pre">chromadb=ChromaDBSettings(chroma_db_impl='duckdb+parquet',</span> <span class="pre">persist_directory='./data/chroma/',</span> <span class="pre">collection_name='default_collection',</span> <span class="pre">distance_function='l2'),</span> <span class="pre">extractor={'arxiv':</span> <span class="pre">ArxivExtractorSettings(data_path='./data/arxiv/',</span> <span class="pre">vs_key_info={'embedding_key':</span> <span class="pre">'summary',</span> <span class="pre">'metadata_keys':</span> <span class="pre">['title']}),</span> <span class="pre">'entity':</span> <span class="pre">EntityExtractorSettings(vs_key_info={'embedding_key':</span> <span class="pre">'description',</span> <span class="pre">'metadata_keys':</span> <span class="pre">['name',</span> <span class="pre">'general',</span> <span class="pre">'type']})},</span> <span class="pre">llm=LLMSettings(model_name='gpt-3.5-turbo',</span> <span class="pre">temperature=0.3),</span> <span class="pre">shortenings=ShorteningsSettings(Paper='p',</span> <span class="pre">Concept='c',</span> <span class="pre">Model='m',</span> <span class="pre">Dataset='d'),</span> <span class="pre">entity_alignment=EntityAlignmentSettings(entity_types=['Concept',</span> <span class="pre">'Model',</span> <span class="pre">'Dataset'],</span> <span class="pre">threshold=0.08))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/base.html#ConfigManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.ConfigManager" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.ConfigManager.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/base.html#ConfigManager.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.ConfigManager.get_config" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.ConfigManager.init_local_config">
+<span class="sig-name descname"><span class="pre">init_local_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/base.html#ConfigManager.init_local_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.ConfigManager.init_local_config" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="module-DescKGC.tools.config_manager.base">
+<span id="desckgc-tools-config-manager-base-module"></span><h2>DescKGC.tools.config_manager.base module<a class="headerlink" href="#module-DescKGC.tools.config_manager.base" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.base.ConfigManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.base.</span></span><span class="sig-name descname"><span class="pre">ConfigManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">local_config_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.kgc_config.yaml'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">DescKGCConfig(topic='network</span> <span class="pre">science',</span> <span class="pre">neo4jdb=Neo4jDBSettings(url='bolt://localhost:7687',</span> <span class="pre">username='neo4j',</span> <span class="pre">password='123.x.abc'),</span> <span class="pre">chromadb=ChromaDBSettings(chroma_db_impl='duckdb+parquet',</span> <span class="pre">persist_directory='./data/chroma/',</span> <span class="pre">collection_name='default_collection',</span> <span class="pre">distance_function='l2'),</span> <span class="pre">extractor={'arxiv':</span> <span class="pre">ArxivExtractorSettings(data_path='./data/arxiv/',</span> <span class="pre">vs_key_info={'embedding_key':</span> <span class="pre">'summary',</span> <span class="pre">'metadata_keys':</span> <span class="pre">['title']}),</span> <span class="pre">'entity':</span> <span class="pre">EntityExtractorSettings(vs_key_info={'embedding_key':</span> <span class="pre">'description',</span> <span class="pre">'metadata_keys':</span> <span class="pre">['name',</span> <span class="pre">'general',</span> <span class="pre">'type']})},</span> <span class="pre">llm=LLMSettings(model_name='gpt-3.5-turbo',</span> <span class="pre">temperature=0.3),</span> <span class="pre">shortenings=ShorteningsSettings(Paper='p',</span> <span class="pre">Concept='c',</span> <span class="pre">Model='m',</span> <span class="pre">Dataset='d'),</span> <span class="pre">entity_alignment=EntityAlignmentSettings(entity_types=['Concept',</span> <span class="pre">'Model',</span> <span class="pre">'Dataset'],</span> <span class="pre">threshold=0.08))</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/base.html#ConfigManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.base.ConfigManager" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.base.ConfigManager.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/base.html#ConfigManager.get_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.base.ConfigManager.get_config" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.base.ConfigManager.init_local_config">
+<span class="sig-name descname"><span class="pre">init_local_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/base.html#ConfigManager.init_local_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.base.ConfigManager.init_local_config" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-DescKGC.tools.config_manager.default_config">
+<span id="desckgc-tools-config-manager-default-config-module"></span><h2>DescKGC.tools.config_manager.default_config module<a class="headerlink" href="#module-DescKGC.tools.config_manager.default_config" title="Permalink to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ArxivExtractorSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.default_config.</span></span><span class="sig-name descname"><span class="pre">ArxivExtractorSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./data/arxiv/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs_key_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'embedding_key':</span> <span class="pre">'summary',</span> <span class="pre">'metadata_keys':</span> <span class="pre">['title']}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/default_config.html#ArxivExtractorSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ArxivExtractorSettings" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ArxivExtractorSettings.data_path">
+<span class="sig-name descname"><span class="pre">data_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ArxivExtractorSettings.data_path" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ArxivExtractorSettings.vs_key_info">
+<span class="sig-name descname"><span class="pre">vs_key_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ArxivExtractorSettings.vs_key_info" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ChromaDBSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.default_config.</span></span><span class="sig-name descname"><span class="pre">ChromaDBSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chroma_db_impl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'duckdb+parquet'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'./data/chroma/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'default_collection'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'l2'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/default_config.html#ChromaDBSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ChromaDBSettings.chroma_db_impl">
+<span class="sig-name descname"><span class="pre">chroma_db_impl</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings.chroma_db_impl" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ChromaDBSettings.collection_name">
+<span class="sig-name descname"><span class="pre">collection_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings.collection_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ChromaDBSettings.distance_function">
+<span class="sig-name descname"><span class="pre">distance_function</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings.distance_function" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ChromaDBSettings.persist_directory">
+<span class="sig-name descname"><span class="pre">persist_directory</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings.persist_directory" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.DescKGCConfig">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.default_config.</span></span><span class="sig-name descname"><span class="pre">DescKGCConfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">topic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'network</span> <span class="pre">science'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">neo4jdb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings" title="DescKGC.tools.config_manager.default_config.Neo4jDBSettings"><span class="pre">Neo4jDBSettings</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">Neo4jDBSettings(url='bolt://localhost:7687',</span> <span class="pre">username='neo4j',</span> <span class="pre">password='123.x.abc')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chromadb</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings" title="DescKGC.tools.config_manager.default_config.ChromaDBSettings"><span class="pre">ChromaDBSettings</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ChromaDBSettings(chroma_db_impl='duckdb+parquet',</span> <span class="pre">persist_directory='./data/chroma/',</span> <span class="pre">collection_name='default_collection',</span> <span class="pre">distance_function='l2')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extractor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'arxiv':</span> <span class="pre">ArxivExtractorSettings(data_path='./data/arxiv/',</span> <span class="pre">vs_key_info={'embedding_key':</span> <span class="pre">'summary',</span> <span class="pre">'metadata_keys':</span> <span class="pre">['title']}),</span> <span class="pre">'entity':</span> <span class="pre">EntityExtractorSettings(vs_key_info={'embedding_key':</span> <span class="pre">'description',</span> <span class="pre">'metadata_keys':</span> <span class="pre">['name',</span> <span class="pre">'general',</span> <span class="pre">'type']})}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">llm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.LLMSettings" title="DescKGC.tools.config_manager.default_config.LLMSettings"><span class="pre">LLMSettings</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">LLMSettings(model_name='gpt-3.5-turbo',</span> <span class="pre">temperature=0.3)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shortenings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings" title="DescKGC.tools.config_manager.default_config.ShorteningsSettings"><span class="pre">ShorteningsSettings</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">ShorteningsSettings(Paper='p',</span> <span class="pre">Concept='c',</span> <span class="pre">Model='m',</span> <span class="pre">Dataset='d')</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_alignment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.EntityAlignmentSettings" title="DescKGC.tools.config_manager.default_config.EntityAlignmentSettings"><span class="pre">EntityAlignmentSettings</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">EntityAlignmentSettings(entity_types=['Concept',</span> <span class="pre">'Model',</span> <span class="pre">'Dataset'],</span> <span class="pre">threshold=0.08)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/default_config.html#DescKGCConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.DescKGCConfig.chromadb">
+<span class="sig-name descname"><span class="pre">chromadb</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings" title="DescKGC.tools.config_manager.default_config.ChromaDBSettings"><span class="pre">ChromaDBSettings</span></a></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.chromadb" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.DescKGCConfig.entity_alignment">
+<span class="sig-name descname"><span class="pre">entity_alignment</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.EntityAlignmentSettings" title="DescKGC.tools.config_manager.default_config.EntityAlignmentSettings"><span class="pre">EntityAlignmentSettings</span></a></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.entity_alignment" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.DescKGCConfig.extractor">
+<span class="sig-name descname"><span class="pre">extractor</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.extractor" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.DescKGCConfig.llm">
+<span class="sig-name descname"><span class="pre">llm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.LLMSettings" title="DescKGC.tools.config_manager.default_config.LLMSettings"><span class="pre">LLMSettings</span></a></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.llm" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.DescKGCConfig.neo4jdb">
+<span class="sig-name descname"><span class="pre">neo4jdb</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings" title="DescKGC.tools.config_manager.default_config.Neo4jDBSettings"><span class="pre">Neo4jDBSettings</span></a></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.neo4jdb" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.DescKGCConfig.shortenings">
+<span class="sig-name descname"><span class="pre">shortenings</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings" title="DescKGC.tools.config_manager.default_config.ShorteningsSettings"><span class="pre">ShorteningsSettings</span></a></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.shortenings" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.DescKGCConfig.topic">
+<span class="sig-name descname"><span class="pre">topic</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.topic" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.EntityAlignmentSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.default_config.</span></span><span class="sig-name descname"><span class="pre">EntityAlignmentSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">['Concept',</span> <span class="pre">'Model',</span> <span class="pre">'Dataset']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.08</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/default_config.html#EntityAlignmentSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.EntityAlignmentSettings" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.EntityAlignmentSettings.entity_types">
+<span class="sig-name descname"><span class="pre">entity_types</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.EntityAlignmentSettings.entity_types" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.EntityAlignmentSettings.threshold">
+<span class="sig-name descname"><span class="pre">threshold</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.EntityAlignmentSettings.threshold" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.EntityExtractorSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.default_config.</span></span><span class="sig-name descname"><span class="pre">EntityExtractorSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vs_key_info</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'embedding_key':</span> <span class="pre">'description',</span> <span class="pre">'metadata_keys':</span> <span class="pre">['name',</span> <span class="pre">'general',</span> <span class="pre">'type']}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/default_config.html#EntityExtractorSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.EntityExtractorSettings" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.EntityExtractorSettings.vs_key_info">
+<span class="sig-name descname"><span class="pre">vs_key_info</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.EntityExtractorSettings.vs_key_info" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.LLMSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.default_config.</span></span><span class="sig-name descname"><span class="pre">LLMSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'gpt-3.5-turbo'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temperature</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/default_config.html#LLMSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.LLMSettings" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.LLMSettings.model_name">
+<span class="sig-name descname"><span class="pre">model_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.LLMSettings.model_name" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.LLMSettings.temperature">
+<span class="sig-name descname"><span class="pre">temperature</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.LLMSettings.temperature" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.Neo4jDBSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.default_config.</span></span><span class="sig-name descname"><span class="pre">Neo4jDBSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'bolt://localhost:7687'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'neo4j'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'123.x.abc'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/default_config.html#Neo4jDBSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.Neo4jDBSettings.password">
+<span class="sig-name descname"><span class="pre">password</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings.password" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.Neo4jDBSettings.url">
+<span class="sig-name descname"><span class="pre">url</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings.url" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.Neo4jDBSettings.username">
+<span class="sig-name descname"><span class="pre">username</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings.username" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ShorteningsSettings">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">DescKGC.tools.config_manager.default_config.</span></span><span class="sig-name descname"><span class="pre">ShorteningsSettings</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Paper</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'p'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Concept</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'c'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'m'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'d'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/config_manager/default_config.html#ShorteningsSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings" title="Permalink to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">BaseModel</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ShorteningsSettings.Concept">
+<span class="sig-name descname"><span class="pre">Concept</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings.Concept" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ShorteningsSettings.Dataset">
+<span class="sig-name descname"><span class="pre">Dataset</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings.Dataset" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ShorteningsSettings.Model">
+<span class="sig-name descname"><span class="pre">Model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings.Model" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="DescKGC.tools.config_manager.default_config.ShorteningsSettings.Paper">
+<span class="sig-name descname"><span class="pre">Paper</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings.Paper" title="Permalink to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="DescKGC.tools.db_manager.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">DescKGC.tools.db_manager package</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="DescKGC.tools.chroma.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">DescKGC.tools.chroma package</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2023, Hao Chen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">DescKGC.tools.config_manager package</a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.ConfigManager"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.ConfigManager.get_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_config()</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.ConfigManager.init_local_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.init_local_config()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-DescKGC.tools.config_manager.base">DescKGC.tools.config_manager.base module</a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.base.ConfigManager"><code class="docutils literal notranslate"><span class="pre">ConfigManager</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.base.ConfigManager.get_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.get_config()</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.base.ConfigManager.init_local_config"><code class="docutils literal notranslate"><span class="pre">ConfigManager.init_local_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-DescKGC.tools.config_manager.default_config">DescKGC.tools.config_manager.default_config module</a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ArxivExtractorSettings"><code class="docutils literal notranslate"><span class="pre">ArxivExtractorSettings</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ArxivExtractorSettings.data_path"><code class="docutils literal notranslate"><span class="pre">ArxivExtractorSettings.data_path</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ArxivExtractorSettings.vs_key_info"><code class="docutils literal notranslate"><span class="pre">ArxivExtractorSettings.vs_key_info</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings"><code class="docutils literal notranslate"><span class="pre">ChromaDBSettings</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings.chroma_db_impl"><code class="docutils literal notranslate"><span class="pre">ChromaDBSettings.chroma_db_impl</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings.collection_name"><code class="docutils literal notranslate"><span class="pre">ChromaDBSettings.collection_name</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings.distance_function"><code class="docutils literal notranslate"><span class="pre">ChromaDBSettings.distance_function</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ChromaDBSettings.persist_directory"><code class="docutils literal notranslate"><span class="pre">ChromaDBSettings.persist_directory</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig"><code class="docutils literal notranslate"><span class="pre">DescKGCConfig</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.chromadb"><code class="docutils literal notranslate"><span class="pre">DescKGCConfig.chromadb</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.entity_alignment"><code class="docutils literal notranslate"><span class="pre">DescKGCConfig.entity_alignment</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.extractor"><code class="docutils literal notranslate"><span class="pre">DescKGCConfig.extractor</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.llm"><code class="docutils literal notranslate"><span class="pre">DescKGCConfig.llm</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.neo4jdb"><code class="docutils literal notranslate"><span class="pre">DescKGCConfig.neo4jdb</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.shortenings"><code class="docutils literal notranslate"><span class="pre">DescKGCConfig.shortenings</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.DescKGCConfig.topic"><code class="docutils literal notranslate"><span class="pre">DescKGCConfig.topic</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.EntityAlignmentSettings"><code class="docutils literal notranslate"><span class="pre">EntityAlignmentSettings</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.EntityAlignmentSettings.entity_types"><code class="docutils literal notranslate"><span class="pre">EntityAlignmentSettings.entity_types</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.EntityAlignmentSettings.threshold"><code class="docutils literal notranslate"><span class="pre">EntityAlignmentSettings.threshold</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.EntityExtractorSettings"><code class="docutils literal notranslate"><span class="pre">EntityExtractorSettings</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.EntityExtractorSettings.vs_key_info"><code class="docutils literal notranslate"><span class="pre">EntityExtractorSettings.vs_key_info</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.LLMSettings"><code class="docutils literal notranslate"><span class="pre">LLMSettings</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.LLMSettings.model_name"><code class="docutils literal notranslate"><span class="pre">LLMSettings.model_name</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.LLMSettings.temperature"><code class="docutils literal notranslate"><span class="pre">LLMSettings.temperature</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings"><code class="docutils literal notranslate"><span class="pre">Neo4jDBSettings</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings.password"><code class="docutils literal notranslate"><span class="pre">Neo4jDBSettings.password</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings.url"><code class="docutils literal notranslate"><span class="pre">Neo4jDBSettings.url</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.Neo4jDBSettings.username"><code class="docutils literal notranslate"><span class="pre">Neo4jDBSettings.username</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings"><code class="docutils literal notranslate"><span class="pre">ShorteningsSettings</span></code></a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings.Concept"><code class="docutils literal notranslate"><span class="pre">ShorteningsSettings.Concept</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings.Dataset"><code class="docutils literal notranslate"><span class="pre">ShorteningsSettings.Dataset</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings.Model"><code class="docutils literal notranslate"><span class="pre">ShorteningsSettings.Model</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.config_manager.default_config.ShorteningsSettings.Paper"><code class="docutils literal notranslate"><span class="pre">ShorteningsSettings.Paper</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c44fde4f"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/scripts/furo.js?v=32e29ea5"></script>
+    </body>
+</html>
