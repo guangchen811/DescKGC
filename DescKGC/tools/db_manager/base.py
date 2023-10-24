@@ -1,8 +1,8 @@
 import uuid
 from typing import Tuple
 
-from AutoKGC.tools.chroma.base import ChromaVectorStore
-from AutoKGC.tools.neo4j.base import Neo4jGraph
+from DescKGC.tools.chroma.base import ChromaVectorStore
+from DescKGC.tools.neo4j.base import Neo4jGraph
 from .utils import validate_keys
 
 

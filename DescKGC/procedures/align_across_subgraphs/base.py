@@ -3,8 +3,8 @@ from typing import List, Tuple, Type, Dict
 from langchain.chains import LLMChain
 from langchain.schema import BaseOutputParser
 
-from AutoKGC.tools.align.utils import entities_nd_pair_warpper, entities_ndg_pair_warpper
-from AutoKGC.tools.db_manager.type import DBManagerType
+from DescKGC.tools.align.utils import entities_nd_pair_warpper, entities_ndg_pair_warpper
+from DescKGC.tools.db_manager.type import DBManagerType
 
 
 def get_entity_type_uuids(db_manager: DBManagerType, entity_types: list) -> Dict:

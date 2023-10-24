@@ -1,7 +1,7 @@
-AutoKGC
+DescKGC
 =======
 
 .. toctree::
    :maxdepth: 4
 
-   AutoKGC
+   DescKGC

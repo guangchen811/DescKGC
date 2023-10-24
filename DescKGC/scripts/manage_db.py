@@ -1,7 +1,7 @@
 import argparse
 
-from AutoKGC.procedures.build_config import load_config
-from AutoKGC.tools.db_manager import DBManager
+from DescKGC.procedures.build_config import load_config
+from DescKGC.tools.db_manager import DBManager
 
 
 def add_arguments(parser):

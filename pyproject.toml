@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "autokgc"
+name = "desckgc"
 version = "0.1.0"
-description = "AutoKGC is a python package for knowledge graph automically construction."
+description = "DescKGC is a python package for knowledge graph automically construction."
 authors = ["guangchen <guangchen811@gmail.com>"]
 readme = "README.md"
 
@@ -22,4 +22,4 @@ build-backend = "poetry.core.masonry.api"
 
 
 [tool.poetry.plugins."console_scripts"]
-autokgc = "AutoKGC.scripts.cli:main"
+desckgc = "DescKGC.scripts.cli:main"

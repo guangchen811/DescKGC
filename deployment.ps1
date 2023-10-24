@@ -1,6 +1,6 @@
-# Change directory to 'docs' folder and generate Sphinx API documentation for AutoKGC
+# Change directory to 'docs' folder and generate Sphinx API documentation for DescKGC
 Set-Location "docs"
-sphinx-apidoc --module-first -f -o source ..\AutoKGC
+sphinx-apidoc --module-first -f -o source ..\DescKGC
 Set-Location ".."
 
 # Change directory to 'docs' folder, clean the previous build, and create HTML documentation

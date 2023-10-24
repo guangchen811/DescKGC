@@ -62,8 +62,8 @@ def init_entity_merge_chain(llm: Type[BaseLLM]) -> Type[LLMChain]:
 if __name__ == "__main__":
     from langchain.chat_models import ChatOpenAI
 
-    from AutoKGC.tools.align.utils import entities_nd_pair_warpper
-    from AutoKGC.tools.align.parser import EntityMergeOutputParser
+    from DescKGC.tools.align.utils import entities_nd_pair_warpper
+    from DescKGC.tools.align.parser import EntityMergeOutputParser
 
     llm = ChatOpenAI(temperature=0.3)
     align_chain = init_align_chain(llm)

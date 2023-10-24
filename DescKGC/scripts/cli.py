@@ -1,12 +1,12 @@
 import argparse
 
-from AutoKGC.scripts import (add_from_arxiv, entity_alignment,
+from DescKGC.scripts import (add_from_arxiv, entity_alignment,
                              extract_entity_from_doc, manage_config, manage_db,
                              search_from_arxiv)
 
 
 def main():
-    parser = argparse.ArgumentParser(description="AutoKGC CLI")
+    parser = argparse.ArgumentParser(description="DescKGC CLI")
     subparsers = parser.add_subparsers(dest="command")
 
     module_manage_db = subparsers.add_parser("manage-db", help="Monitors and manages the database.")

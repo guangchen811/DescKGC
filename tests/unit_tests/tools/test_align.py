@@ -1,4 +1,4 @@
-from AutoKGC.tools.align.utils import entities_nd_pair_warpper
+from DescKGC.tools.align.utils import entities_nd_pair_warpper
 
 
 def test_entities_wrapper_with_candidates():

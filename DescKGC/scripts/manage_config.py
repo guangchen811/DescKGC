@@ -1,4 +1,4 @@
-from AutoKGC.tools.config_manager import ConfigManager
+from DescKGC.tools.config_manager import ConfigManager
 
 
 def add_arguments(parser):

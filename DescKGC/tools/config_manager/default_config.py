@@ -40,7 +40,7 @@ class EntityAlignmentSettings(BaseModel):
     threshold: float = 0.08
 
 
-class AutoKGCConfig(BaseModel):
+class DescKGCConfig(BaseModel):
     topic: str = "network science"
     neo4jdb: Neo4jDBSettings = Neo4jDBSettings()
     chromadb: ChromaDBSettings = ChromaDBSettings()

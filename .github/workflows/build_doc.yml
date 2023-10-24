@@ -21,7 +21,7 @@ jobs:
         pip install furo
     - name: Generate docs
       run: |
-        sphinx-apidoc --module-first -f -o source ./AutoKGC
+        sphinx-apidoc --module-first -f -o source ./DescKGC
     - name: Build docs
       run: |
         cd docs

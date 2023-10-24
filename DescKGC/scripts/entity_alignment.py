@@ -2,18 +2,18 @@ import argparse
 
 from langchain.chat_models import ChatOpenAI
 
-from AutoKGC.procedures.align_across_subgraphs.base import (
+from DescKGC.procedures.align_across_subgraphs.base import (
     align_source_and_candidates_with_chain,
     get_entity_type_uuids,
     query_from_specific_type_uuids,
     select_candidate_entities_uuids,
     merge_entities_with_chain,
 )
-from AutoKGC.procedures.build_config import load_config
-from AutoKGC.tools.align.base import init_align_chain, init_entity_merge_chain
-from AutoKGC.tools.align.parser import EntityAlignOutputParser, EntityMergeOutputParser
-from AutoKGC.tools.db_manager import DBManager
-from AutoKGC.procedures.align_across_subgraphs.utils import add_one_merged_entity
+from DescKGC.procedures.build_config import load_config
+from DescKGC.tools.align.base import init_align_chain, init_entity_merge_chain
+from DescKGC.tools.align.parser import EntityAlignOutputParser, EntityMergeOutputParser
+from DescKGC.tools.db_manager import DBManager
+from DescKGC.procedures.align_across_subgraphs.utils import add_one_merged_entity
 
 
 def add_arguments(parser):

@@ -2,11 +2,11 @@ import argparse
 
 from langchain.chat_models import ChatOpenAI
 
-from AutoKGC.procedures.extract_and_insert.base import (
+from DescKGC.procedures.extract_and_insert.base import (
     extract_entities_from_paper, get_paper_title_by_field)
-from AutoKGC.procedures.build_config import load_config
-from AutoKGC.tools.db_manager import DBManager
-from AutoKGC.tools.extractor.base import init_extract_chain
+from DescKGC.procedures.build_config import load_config
+from DescKGC.tools.db_manager import DBManager
+from DescKGC.tools.extractor.base import init_extract_chain
 
 
 def add_arguments(parser):

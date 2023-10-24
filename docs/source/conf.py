@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.abspath('../../'))
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'AutoKGC'
+project = 'DescKGC'
 copyright = '2023, Hao Chen'
 author = 'Hao Chen'
 release = 'v0.0.3'

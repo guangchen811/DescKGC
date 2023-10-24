@@ -1,22 +1,22 @@
 import yaml
 
-from .default_config import AutoKGCConfig
+from .default_config import DescKGCConfig
 
 
 class ConfigManager:
-    def __init__(self, local_config_path=".kgc_config.yaml", default_config=AutoKGCConfig(), verbose=False):
+    def __init__(self, local_config_path=".kgc_config.yaml", default_config=DescKGCConfig(), verbose=False):
         self.local_config_path = local_config_path
         self.default_config = default_config
 
     def get_config(self):
         local_config = self._get_local_config(self.local_config_path)
-        merged_config = AutoKGCConfig(**local_config)
+        merged_config = DescKGCConfig(**local_config)
         return merged_config.dict()
 
     def _get_local_config(self, local_config_path):
         local_config = self._load_local_config(local_config_path)
         if local_config is None:
-            print("No local config found, use default config. Please run `autokgc config init` to initialize a local config.")
+            print("No local config found, use default config. Please run `desckgc config init` to initialize a local config.")
             exit(1)
         return local_config
 
