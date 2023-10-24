@@ -15,6 +15,7 @@ Contents
    :maxdepth: 2
    
    Installation </installation>
+   Quick Start </quickstart>
    Source codes </DescKGC>
 
 Indices and tables
