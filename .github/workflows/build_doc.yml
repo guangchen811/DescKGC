@@ -28,7 +28,6 @@ jobs:
         make clean
         make html
         cd ..
-    # would be deployed after the repo is public
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v3
       with:
