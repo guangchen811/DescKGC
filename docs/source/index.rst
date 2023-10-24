@@ -15,8 +15,7 @@ Contents
    :maxdepth: 2
    
    Quick Start </quickstart>
-   Test </testdoc>
-   Installation </installation>
+   Installation </installdoc>
    Source codes </DescKGC>
 
 Indices and tables
