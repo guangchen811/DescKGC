@@ -3,10 +3,10 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
-<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="prev" title="DescKGC.tools.extractor package" href="DescKGC.tools.extractor.html" />
 
     <!-- Generated with Sphinx 7.2.6 and Furo 2023.09.10 -->
-        <title>Installation - DescKGC v0.0.3 documentation</title>
+        <title>DescKGC.tools.neo4j package - DescKGC v0.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
@@ -154,9 +154,9 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <ul>
+  <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quick Start</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="DescKGC.html">Source code</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Source code</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="DescKGC.html">Source code</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Source code</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="DescKGC.procedures.html">DescKGC.procedures package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of DescKGC.procedures package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.align_across_subgraphs.html">DescKGC.procedures.align_across_subgraphs package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DescKGC.procedures.build_config.html">DescKGC.procedures.build_config package</a></li>
@@ -165,14 +165,14 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="DescKGC.scripts.html">DescKGC.scripts package</a></li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="DescKGC.tools.html">DescKGC.tools package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of DescKGC.tools package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 current has-children"><a class="reference internal" href="DescKGC.tools.html">DescKGC.tools package</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of DescKGC.tools package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.align.html">DescKGC.tools.align package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.arxiv.html">DescKGC.tools.arxiv package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.chroma.html">DescKGC.tools.chroma package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.config_manager.html">DescKGC.tools.config_manager package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.db_manager.html">DescKGC.tools.db_manager package</a></li>
 <li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.extractor.html">DescKGC.tools.extractor package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="DescKGC.tools.neo4j.html">DescKGC.tools.neo4j package</a></li>
+<li class="toctree-l3 current current-page"><a class="current reference internal" href="#">DescKGC.tools.neo4j package</a></li>
 </ul>
 </li>
 </ul>
@@ -211,56 +211,29 @@
           </label>
         </div>
         <article role="main">
-          <section id="installation">
-<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
-<section id="prerequisites">
-<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
-<p>Before installing DescKGC, you need to install Neo4j first. The following are recommended install methods for different operating systems:</p>
-<ul class="simple">
-<li><p>Debian/Ubuntu: <a class="reference external" href="https://debian.neo4j.com/">https://debian.neo4j.com/</a></p></li>
-<li><p>RedHat/CentOS: <a class="reference external" href="https://neo4j.com/docs/operations-manual/current/installation/linux/rpm/">https://neo4j.com/docs/operations-manual/current/installation/linux/rpm/</a></p></li>
-<li><p>Windows: <a class="reference external" href="https://neo4j.com/docs/operations-manual/current/installation/windows/">https://neo4j.com/docs/operations-manual/current/installation/windows/</a></p></li>
-<li><p>MacOS: <a class="reference external" href="https://neo4j.com/docs/operations-manual/current/installation/osx/">https://neo4j.com/docs/operations-manual/current/installation/osx/</a></p></li>
-<li><p>Docker: <a class="reference external" href="https://neo4j.com/developer/docker-run-neo4j/">https://neo4j.com/developer/docker-run-neo4j/</a></p></li>
-</ul>
-<p>To be noticed, DescKGC is developed and tested on <cite>Neo4j 5.7.0</cite>. It may not work on other versions.</p>
-<p>Besides neo4j itself, you also need to install some neo4j plugins: APOC and GDS. If you are using Neo4j Desktop, you can install them by clicking the <cite>Plugins</cite> button on the left side of the window. If you are using other installation methods, you can install them by following the instructions on the official website:</p>
-<ul class="simple">
-<li><p>APOC: <a class="reference external" href="https://neo4j.com/labs/apoc/5/installation/">https://neo4j.com/labs/apoc/5/installation/</a></p></li>
-<li><p>GDS: <a class="reference external" href="https://neo4j.com/docs/graph-data-science/current/installation/">https://neo4j.com/docs/graph-data-science/current/installation/</a></p></li>
-</ul>
+          <section id="module-DescKGC.tools.neo4j">
+<span id="desckgc-tools-neo4j-package"></span><h1>DescKGC.tools.neo4j package<a class="headerlink" href="#module-DescKGC.tools.neo4j" title="Link to this heading">#</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">#</a></h2>
 </section>
-<section id="install-from-source">
-<h2>Install from Source<a class="headerlink" href="#install-from-source" title="Link to this heading">#</a></h2>
-<p>Because DescKGC is still under development, it is not open to the public yet. If you want to try it, please contact the author for the source code.</p>
-<p>After downloading the source code, you can install it by running:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
-</pre></div>
-</div>
-<p>To test if the installation is successful, you can run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>autokgc<span class="w"> </span>--help
-</pre></div>
-</div>
-<p>The output should be like this:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>usage:<span class="w"> </span>autokgc<span class="w"> </span><span class="o">[</span>-h<span class="o">]</span>
-<span class="w">             </span><span class="o">{</span>manage-db,search-from-arxiv,extract-entity-from-doc,add-from-arxiv,entity-alignment<span class="o">}</span><span class="w"> </span>...
+<section id="desckgc-tools-neo4j-base-module">
+<h2>DescKGC.tools.neo4j.base module<a class="headerlink" href="#desckgc-tools-neo4j-base-module" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-DescKGC.tools.neo4j.cypher_template">
+<span id="desckgc-tools-neo4j-cypher-template-module"></span><h2>DescKGC.tools.neo4j.cypher_template module<a class="headerlink" href="#module-DescKGC.tools.neo4j.cypher_template" title="Link to this heading">#</a></h2>
+</section>
+<section id="module-DescKGC.tools.neo4j.utils">
+<span id="desckgc-tools-neo4j-utils-module"></span><h2>DescKGC.tools.neo4j.utils module<a class="headerlink" href="#module-DescKGC.tools.neo4j.utils" title="Link to this heading">#</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="DescKGC.tools.neo4j.utils.join_if_list">
+<span class="sig-prename descclassname"><span class="pre">DescKGC.tools.neo4j.utils.</span></span><span class="sig-name descname"><span class="pre">join_if_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/DescKGC/tools/neo4j/utils.html#join_if_list"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.neo4j.utils.join_if_list" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
-DescKGC<span class="w"> </span>CLI
+<dl class="py function">
+<dt class="sig sig-object py" id="DescKGC.tools.neo4j.utils.response_to_json">
+<span class="sig-prename descclassname"><span class="pre">DescKGC.tools.neo4j.utils.</span></span><span class="sig-name descname"><span class="pre">response_to_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">search_res</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/DescKGC/tools/neo4j/utils.html#response_to_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#DescKGC.tools.neo4j.utils.response_to_json" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
 
-positional<span class="w"> </span>arguments:
-<span class="w">  </span><span class="o">{</span>manage-db,search-from-arxiv,extract-entity-from-doc,add-from-arxiv,entity-alignment<span class="o">}</span>
-<span class="w">    </span>manage-db<span class="w">           </span>Monitors<span class="w"> </span>and<span class="w"> </span>manages<span class="w"> </span>the<span class="w"> </span>database.
-<span class="w">    </span>search-from-arxiv<span class="w">   </span>Search<span class="w"> </span>papers<span class="w"> </span>from<span class="w"> </span>arXiv<span class="w"> </span>and<span class="w"> </span>dump<span class="w"> </span>them<span class="w"> </span>as<span class="w"> </span>json.
-<span class="w">    </span>extract-entity-from-doc
-<span class="w">                        </span>extract<span class="w"> </span>entities<span class="w"> </span>from<span class="w"> </span>documents<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>database.
-<span class="w">    </span>add-from-arxiv<span class="w">      </span>Add<span class="w"> </span>papers<span class="w"> </span>from<span class="w"> </span><span class="nb">local</span><span class="w"> </span>json<span class="w"> </span>files<span class="w"> </span>to<span class="w"> </span>databases.
-<span class="w">    </span>entity-alignment<span class="w">    </span>Align<span class="w"> </span>entities<span class="w"> </span><span class="k">in</span><span class="w"> </span>the<span class="w"> </span>database.
-
-optional<span class="w"> </span>arguments:
-<span class="w">  </span>-h,<span class="w"> </span>--help<span class="w">            </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span><span class="nb">exit</span>
-</pre></div>
-</div>
-<p>If you see this output, it means that you have successfully installed DescKGC. You can now use it to construct your own knowledge graph.</p>
 </section>
 </section>
 
@@ -270,7 +243,17 @@ optional<span class="w"> </span>arguments:
         
         <div class="related-pages">
           
-          
+          <a class="prev-page" href="DescKGC.tools.extractor.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">DescKGC.tools.extractor package</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -301,9 +284,15 @@ optional<span class="w"> </span>arguments:
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
-<li><a class="reference internal" href="#install-from-source">Install from Source</a></li>
+<li><a class="reference internal" href="#">DescKGC.tools.neo4j package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#desckgc-tools-neo4j-base-module">DescKGC.tools.neo4j.base module</a></li>
+<li><a class="reference internal" href="#module-DescKGC.tools.neo4j.cypher_template">DescKGC.tools.neo4j.cypher_template module</a></li>
+<li><a class="reference internal" href="#module-DescKGC.tools.neo4j.utils">DescKGC.tools.neo4j.utils module</a><ul>
+<li><a class="reference internal" href="#DescKGC.tools.neo4j.utils.join_if_list"><code class="docutils literal notranslate"><span class="pre">join_if_list()</span></code></a></li>
+<li><a class="reference internal" href="#DescKGC.tools.neo4j.utils.response_to_json"><code class="docutils literal notranslate"><span class="pre">response_to_json()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
