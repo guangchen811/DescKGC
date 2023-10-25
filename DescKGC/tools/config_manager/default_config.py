@@ -4,7 +4,7 @@ from pydantic import BaseModel
 class Neo4jDBSettings(BaseModel):
     url: str = "bolt://localhost:7687"
     username: str = "neo4j"
-    password: str = "123.x.abc"
+    password: str = "pleaseletmein"
 
 
 class ChromaDBSettings(BaseModel):
