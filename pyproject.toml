@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "desckgc"
-version = "0.0.6"
+version = "0.0.7"
 description = "DescKGC is a python package for knowledge graph automically construction."
 authors = ["guangchen <guangchen811@gmail.com>"]
 readme = "README.md"
