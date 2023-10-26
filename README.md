@@ -6,4 +6,4 @@
 This is a package for Knowledge Graph Construction. The official document can be found [here](https://guangchen811.github.io/DescKGC/).
 ||
 |--|
-| <img src="./assets/KG_construction.jpg" width="350px"> |
+| <img src="./assets/KG_construction.jpg" width="500px"> |
