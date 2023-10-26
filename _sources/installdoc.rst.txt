@@ -22,13 +22,11 @@ Besides neo4j itself, you also need to install some neo4j plugins: APOC and GDS.
 Install from Source
 -------------------
 
-Because DescKGC is still under development, it is not open to the public yet. If you want to try it, please contact the author for the source code.
-
-After downloading the source code, you can install it by running:
+DescKGC can be installed with pip.
 
 .. code-block:: bash
 
-  pip install .
+  pip install desckgc
 
 To test if the installation is successful, you can run:
 

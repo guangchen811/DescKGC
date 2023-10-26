@@ -216,12 +216,9 @@
 <h1>Quick Start<a class="headerlink" href="#quick-start" title="Link to this heading">#</a></h1>
 <p>DescKGC is a Python package for automatic knowledge graph construction. It provides an end-to-end solution for knowledge graph construction, including data extraction, data cleaning, data alignment, and data storage.</p>
 <figure class="align-default">
-<a class="reference internal image-reference" href="_images/overall_process.png"><img alt="DescKGC overall process" src="_images/overall_process.png" style="width: 85%;" /></a>
+<a class="reference internal image-reference" href="_images/KG_construction.jpg"><img alt="DescKGC overall process" src="_images/KG_construction.jpg" style="width: 80%;" /></a>
 </figure>
 <p>The knowledge graph created by DescKGC is stored in <a class="reference external" href="neo4j.io">Neo4j</a>, the graph database, and <a class="reference external" href="https://www.trychroma.com/">chroma</a>, the vector database. Information between the two databases is linked by the unique identifier of the entity. With the control of the database manager, the user can easily add, delete, and modify the data in the databases. You can find the details in the implementation of <a class="reference internal" href="DescKGC.tools.db_manager.html"><span class="doc">database manager</span></a>.</p>
-<figure class="align-default">
-<a class="reference internal image-reference" href="_images/db_management.png"><img alt="DescKGC database management status" src="_images/db_management.png" style="width: 40%;" /></a>
-</figure>
 <p>To leverage the power of LLM, DescKGC has been integrated with <a class="reference external" href="https://www.langchain.com/">Langchain</a>, a flexible abstractions and extensive toolkit enables developers to harness the power of LLMs. With the help of LLM, DescKGC can automatically extract entities and relations from the text, and then store them in the database.</p>
 <p>Besides, DescKGC also have the ability of entity cleaning (removing unnecessary entities) and entity alignment (aligning entities from different sources with the same meaning).</p>
 <p>The entity cleaning module uses three strategies to remove unnecessary entities:</p>
