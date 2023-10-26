@@ -4,5 +4,6 @@
 [![PyPI Version](https://img.shields.io/pypi/v/desckgc)](https://pypi.org/project/desckgc/)
 
 This is a package for Knowledge Graph Construction. The official document can be found [here](https://guangchen811.github.io/DescKGC/).
-
-![Workflow](./assets/KG_construction.jpg)
+||
+|--|
+| <img src="./assets/KG_construction.jpg" width="350px"> |
