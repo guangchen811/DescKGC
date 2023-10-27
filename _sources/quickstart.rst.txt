@@ -7,7 +7,7 @@ DescKGC is a Python package for automatic knowledge graph construction. It provi
    :width: 70%
    :alt: DescKGC overall process
 
-The knowledge graph created by DescKGC is stored in `Neo4j <neo4j.io>`_, the graph database, and `chroma <https://www.trychroma.com/>`_, the vector database. Information between the two databases is linked by the unique identifier of the entity. With the control of the database manager, the user can easily add, delete, and modify the data in the databases. You can find the details in the implementation of :doc:`database manager </DescKGC.tools.db_manager>`.
+The knowledge graph created by DescKGC is stored in `Neo4j <https://console.neo4j.io>`_, the graph database, and `chroma <https://www.trychroma.com/>`_, the vector database. Information between the two databases is linked by the unique identifier of the entity. With the control of the database manager, the user can easily add, delete, and modify the data in the databases. You can find the details in the implementation of :doc:`database manager </DescKGC.tools.db_manager>`.
 
 To leverage the power of LLM, DescKGC has been integrated with `Langchain <https://www.langchain.com/>`_, a flexible abstractions and extensive toolkit enables developers to harness the power of LLMs. With the help of LLM, DescKGC can automatically extract entities and relations from texts, and then store them in the database.
 
