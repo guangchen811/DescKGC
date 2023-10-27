@@ -1,0 +1,17 @@
+name: base
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pip=23.0.1
+  - python=3.9.16
+  - pip:
+    - arxiv==1.4.7
+    - chromadb==0.3.26
+    - langchain==0.0.234
+    - neo4j==5.7.0
+    - numpy==1.23.5
+    - pandas==1.5.3
+    - pytest==7.3.1
+    - pyyaml==6.0
+    - pydantic==1.10.8
