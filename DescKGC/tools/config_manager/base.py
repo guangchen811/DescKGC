@@ -29,7 +29,7 @@ class ConfigManager:
         if local_config is None:
             print(
                 "No local config found, use default config. "
-                "Please run `desckgc manage_config --init` to initialize a local config."
+                "Please run `desckgc manage-config --init` to initialize a local config."
             )
             exit(1)
         return local_config

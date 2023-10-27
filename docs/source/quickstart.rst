@@ -4,25 +4,174 @@ Quick Start
 DescKGC is a Python package for automatic knowledge graph construction. It provides an end-to-end solution for knowledge graph construction, including data extraction, data cleaning, data alignment, and data storage.
 
 .. figure:: _static/KG_construction.jpg
-   :width: 80%
+   :width: 70%
    :alt: DescKGC overall process
 
 The knowledge graph created by DescKGC is stored in `Neo4j <neo4j.io>`_, the graph database, and `chroma <https://www.trychroma.com/>`_, the vector database. Information between the two databases is linked by the unique identifier of the entity. With the control of the database manager, the user can easily add, delete, and modify the data in the databases. You can find the details in the implementation of :doc:`database manager </DescKGC.tools.db_manager>`.
 
-To leverage the power of LLM, DescKGC has been integrated with `Langchain <https://www.langchain.com/>`_, a flexible abstractions and extensive toolkit enables developers to harness the power of LLMs. With the help of LLM, DescKGC can automatically extract entities and relations from the text, and then store them in the database.
+To leverage the power of LLM, DescKGC has been integrated with `Langchain <https://www.langchain.com/>`_, a flexible abstractions and extensive toolkit enables developers to harness the power of LLMs. With the help of LLM, DescKGC can automatically extract entities and relations from texts, and then store them in the database.
 
-Besides, DescKGC also have the ability of entity cleaning (removing unnecessary entities) and entity alignment (aligning entities from different sources with the same meaning).
+Now, let's start the journey of DescKGC!
 
-The entity cleaning module uses three strategies to remove unnecessary entities: 
+database connection check
+-------------------------
+Before using DescKGC, we need to check the connection of the database. Database related function are implemented as a sub-command of DescKGC, `manage-db`. For more detiails, refer to the :mod:`DescKGC.scripts.manage_db` module.
 
-1. LLM-based method: With the help of LLM, each entity is assigned a label of generalization or specialization. Here, the generalization means that the entity is a general concept which is aceepted by the main stream, and the specialization means that the entity is a specific concept only in some special sources. The details can be found in the :doc:`extraction module </DescKGC.procedures.extract_and_insert>`.
+you can check the connection of the database by running the following command:
 
-2. LM-based method: Compared with the LLM, LM refers to the "small" language model, like BERT. The LM-based method uses the BERT to calculate the similarity between entities. The motivation is that the generalization entities should be able to be found in more sources in the domain, and the specialization entities should be able to be found in some specific sources. The details can be found in the :doc:`entity alignment module </DescKGC.scripts>`. In the next version, it will be isolated from the entity alignment module and become a independent module.
+.. code-block:: bash
 
-3. Word matching method: The word matching method uses the word match to distinguish specialization entities from generalization entities. The motivation is similar as the LM-based method, only using the word match instead of the LM. This method is still under development.
+   $ desckgc manage-db --show-schema
 
-The following figure shows that above two methods lead to similar results and can be used to remove unnecessary entities.
+If the connection is successful, you can see the schema of neo4j database. In the initial state, the schema is empty.
 
-.. figure:: _static/general_test.png
-   :width: 75%
-   :alt: Comparison of LLM-based method and LM-based method
+`manage-db` also provides other functions to manage the database. You can find the details by running :code:`desckgc manage-db -h`.
+
+config initialization
+---------------------
+DescKGC manage the configuration with a YAML file. You can initialize the configuration by running the following command:
+
+.. code-block:: bash
+
+   $ desckgc manage-config --init
+
+This command will create a YAML file named `config.yaml` in the current directory. You can modify the configuration in this file. The following is all paramters with their default values:
+
+.. code-block:: yaml
+
+   # The topic would be used in the LLM prompts to help it understand the context
+   topic: network science
+
+   # Configuration for Neo4j Database
+   neo4jdb:
+      # Connection URL for the Neo4j database
+      url: bolt://localhost:7687
+      # Credentials for accessing the database
+      username: neo4j
+      password: pleaseletmein
+
+   # Configuration for Chroma Database
+   chromadb:
+   # Implementation details for ChromaDB
+      chroma_db_impl: duckdb+parquet
+      # Directory for ChromaDB persistence
+      persist_directory: ./data/chroma/
+      # Name of the collection in ChromaDB
+      collection_name: default_collection
+      # Distance function to use
+      distance_function: l2
+
+   # Extractor Configuration
+   extractor:
+   # Arxiv Data extraction configuration
+      arxiv:
+         data_path: ./data/arxiv/
+         vs_key_info:
+            # Key for embedding extraction
+            embedding_key: summary
+            # Metadata keys to consider
+            metadata_keys:
+            - title
+      # Entity extraction configuration
+      entity:
+         vs_key_info:
+            embedding_key: description
+            metadata_keys:
+            - name
+            - general
+            - type
+
+   # Configuration for the Language Model
+   llm:
+      # Model name to use
+      model_name: gpt-3.5-turbo
+      # Temperature setting for the model's output randomness
+      temperature: 0.3
+
+   # Shortening for different terms
+   shortenings:
+      Paper: p
+      Concept: c
+      Model: m
+      Dataset: d
+
+   # Configuration for Entity Alignment
+   entity_alignment:
+      # Entity types to consider for alignment
+      entity_types:
+         - Concept
+         - Model
+         - Dataset
+      # Alignment threshold
+      threshold: 0.08
+
+text preparation
+----------------
+Before extracting entities and relations from texts, we need to prepare the texts. With the help of arxiv API, desckgc provide an easy way to download the arxiv papers. You can download the papers by running the following command:
+
+.. code-block:: bash
+
+   $ desckgc search-from-arxiv --query "network science" --max-results 10
+   # dumped to ./data/arxiv/ as network_science.json
+
+This command will download the first 10 papers related to "network science" and save them in the `./data/arxiv/` directory (which is the default path, you can change it in config file).
+
+For people who want use there own text, I'll show you the snapshot of the downloaded json file.
+
+.. code-block:: json
+
+   {"title": "Network Analysis ...","authors": ["Yu Lu Liu", "Thomas Jiralerspong"],"published": "2023-10-16 00:41:13+00:00","updated_date": "2023-10-16 00:41:13+00:00","summary": "In recent years, citizen science has become a larger and larger part of the\nscientific community. Its ability to crowd source data and expertise from...","...": "...","pdf_url": "http://arxiv.org/pdf/2310.10693v1"}
+
+
+You can prepare your own text in the same format to fit the following steps.
+
+To insert the downloaded papers into the database, you can run the following command:
+
+.. code-block:: bash
+
+   $ desckgc add-from-arxiv --file-name "network_science"
+   # adding data from data\arxiv\network_science.json
+
+This command will insert the downloaded papers into the database, both in Neo4j and Chroma. You can check the inserted in the databases. In the following version, we will provide a command to check data stored in the database.
+
+Let me show you the snapshot of the inserted data in neo4j database.
+
+.. figure:: _static/db-snapshot-arxiv-insert.png
+   :width: 50%
+   :alt: Snapshot of the inserted data in neo4j database
+
+As you can see, the data is stored in the form of a graph. The nodes represent the entities, and the edges represent the relations between the entities. Currently, the relations are only extracted from the metadata of the papers. In the following version, we will extract relations from the content of the papers.
+
+information extraction
+----------------------
+After preparing the texts, we can extract entities and relations from them. You can run the following command to extract entities and relations from the downloaded papers:
+
+.. code-block:: bash
+
+   $ desckgc extract-from-doc
+
+This command will extract entities and relations from the papers in the database. The related paramters can be found in the extractor setction of the config file.
+
+After extracting entities and relations, you can check the extracted data in the database. The following is the snapshot of the extracted data in neo4j database, which are entities and relations extracted from one paper.
+
+.. figure:: _static/db-snapshot-extract.png
+   :width: 50%
+   :alt: Snapshot of the extracted data in neo4j database
+
+Entity Alignment
+----------------
+After extracting entities and relations from the papers, we can align the entities with the entities in the database. You can run the following command to align the entities:
+
+.. code-block:: bash
+
+   $ desckgc entity-alignment
+
+This command will align the entities in the database with the entities extracted from the papers. The related paramters can be found in the entity_alignment setction of the config file.
+
+After aligning the entities, same entities from different sources will be merged into one entity.
+
+.. figure:: _static/db-snapshot-entity-alignment.png
+   :width: 50%
+   :alt: Snapshot of the aligned data in neo4j database
+
+Until now, we have finished the process of knowledge graph construction. You can check the knowledge graph in the database. Hope you enjoy it!
