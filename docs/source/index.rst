@@ -6,7 +6,7 @@
 Welcome to DescKGC's documentation!
 ===================================
 
-Here you can find the documentation for DescKGC, a tool for automatic knowledge graph construction.
+DescKGC is a Python package for automatic knowledge graph construction. It provides an end-to-end solution for knowledge graph construction, including data extraction, data cleaning, data alignment, and data storage. Hope you enjoy it!
 
 Contents
 --------
