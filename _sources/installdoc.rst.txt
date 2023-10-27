@@ -32,13 +32,13 @@ To test if the installation is successful, you can run:
 
 .. code-block:: bash
 
-  autokgc --help
+  desckgc --help
 
 The output should be like this:
 
 .. code-block:: bash
 
-  usage: autokgc [-h]
+  usage: desckgc [-h]
                {manage-db,search-from-arxiv,extract-entity-from-doc,add-from-arxiv,entity-alignment} ...
 
   DescKGC CLI
